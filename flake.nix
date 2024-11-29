@@ -1,20 +1,16 @@
 {
   description = "A very basic flake";
 
-  #inputs.nixpkgs.url = "github:nixos/nixpkgs/nixos-24.05";
-  #inputs.yandex-browser.url = "github:Teu5us/nix-yandex-browser";
-  #inputs.yandex-browser.inputs.nixpkgs.follows = "nixpkgs";
-  
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-24.05";
 
-    yandex-browser = {
-      url = "github:Teu5us/nix-yandex-browser";
+    home-manager = {
+      url = "github:nix-community/home-manager/release-24.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    home-manager = {
-      url = "github:nix-community/home-manager/release-24.05";
+    yandex-browser = {
+      url = "github:Teu5us/nix-yandex-browser";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
@@ -28,6 +24,7 @@
     
     homeConfigurations.evgeny = home-manager.lib.homeManagerConfiguration {
       pkgs = nixpkgs.legacyPackages."x86_64-linux";
+      extraSpecialArgs.inputs = inputs;
       modules = [./home/home.nix];
     };
   };

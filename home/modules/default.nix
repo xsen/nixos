@@ -1,6 +1,8 @@
 {
     imports = [
 	./git.nix
+	./gtk.nix
+	./packages.nix
     ];
 
   nixpkgs = {
