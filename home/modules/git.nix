@@ -1,5 +1,5 @@
 let
-  userName = "Evgeny Leshchenko";
+  userName = "xsen";
   email = "evgeny.leshchenko@gmail.com";
 in
 {
