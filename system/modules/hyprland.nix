@@ -5,6 +5,7 @@
 	security.pam.services.swaylock = {};
 	security.pam.services.swaylock.fprintAuth = false;
         
+        services.displayManager.sddm.wayland.enable = true;
 	services.xserver.displayManager = {
 		sddm.enable = true;
 		sddm.theme = "${import ./sddm-theme.nix { inherit pkgs; }}";
