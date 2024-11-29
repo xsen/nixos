@@ -1,5 +1,4 @@
-{ config, pkgs, ... }: {
-  
+{ config, pkgs, pkgs-unstable, lib, inputs, ... }:{
   imports = [
     ./modules
   ];
