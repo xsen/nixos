@@ -1,12 +1,6 @@
 {
     imports = [
-        ./git.nix
-        ./gtk.nix
-        ./shell.nix
-        ./config.nix
-        ./packages.nix
-        ./programs.nix
-        ./environment.nix
+	./git.nix
     ];
 
   nixpkgs = {
@@ -15,7 +9,7 @@
       allowUnfreePredicate = (_: true);
 
       permittedInsecurePackages = [
-        "electron-25.9.0" # Obsidian
+        #"electron-25.9.0" # Obsidian
       ];
     };
   };
