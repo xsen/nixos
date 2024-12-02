@@ -8,6 +8,6 @@
     ./nvidia.nix
     ./users.nix
     ./packages.nix
-    ./hyprland.nix
+    ./gui.nix
   ];
 }

@@ -1,6 +1,6 @@
 {
   home.sessionVariables = {
-	     BROWSER = "yandex-browser";
+	     BROWSER = "yandex-browser-stable";
 	     EDITOR = "nvim";
 	     TERMINAL = "kitty";
 	     NIXOS_OZONE_WL = "1";
@@ -15,7 +15,7 @@
 	     #WLR_DRM_DEVICES = "/dev/dri/card0";
 	     WLR_NO_HARDWARE_CURSORS = "1"; 
 	     CLUTTER_BACKEND = "wayland";
-	     WLR_RENDERER = "vulkan";
+	     #WLR_RENDERER = "vulkan";
          XCURSOR_SIZE = "32";
          GTK_THEME="Catppuccin-Macchiato-Compact-Blue-Dark";
 	     XDG_CURRENT_DESKTOP = "Hyprland";
