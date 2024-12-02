@@ -13,6 +13,10 @@
       url = "github:Teu5us/nix-yandex-browser";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    distro-grub-themes = {
+      url = "github:AdisonCavani/distro-grub-themes";
+    };
   };
 
   outputs =
@@ -21,16 +25,35 @@
       nixpkgs,
       home-manager,
       yandex-browser,
+      distro-grub-themes,
     }@inputs:
+    let
+
+      system = "x86_64-linux";
+      host = "nixhome";
+      username = "evgeny";
+
+    in
     {
       nixosConfigurations.nixhome = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        specialArgs.inputs = inputs;
-        modules = [ ./system/configuration.nix ];
+        inherit system;
+
+        specialArgs = {
+          inherit
+            system
+            inputs
+            host
+            username
+            ;
+        };
+        modules = [
+          ./system/configuration.nix
+          distro-grub-themes.nixosModules.${system}.default
+        ];
       };
 
-      homeConfigurations.evgeny = home-manager.lib.homeManagerConfiguration {
-        pkgs = nixpkgs.legacyPackages."x86_64-linux";
+      homeConfigurations."${username}" = home-manager.lib.homeManagerConfiguration {
+        pkgs = nixpkgs.legacyPackages.${system};
         extraSpecialArgs.inputs = inputs;
         modules = [ ./home/home.nix ];
       };

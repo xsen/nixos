@@ -1,9 +1,6 @@
 { ... }:
 {
-  # Set your time zone.
   time.timeZone = "Asia/Yekaterinburg";
-
-  # Select internationalisation properties.
   i18n.defaultLocale = "ru_RU.UTF-8";
 
   i18n.extraLocaleSettings = {
@@ -18,7 +15,6 @@
     LC_TIME = "ru_RU.UTF-8";
   };
 
-  # Configure keymap
   services.xserver.xkb = {
     layout = "us,ru";
     options = "grp:caps_toggle,grp_led:caps";

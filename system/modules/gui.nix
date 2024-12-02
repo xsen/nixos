@@ -64,33 +64,17 @@
     wofi
     waybar
 
-    btop
-    eza
-    fzf
-    gnumake
-    lm_sensors
     libsForQt5.qt5.qtquickcontrols2
     libsForQt5.qt5.qtgraphicaleffects
     libsForQt5.qt5.qtsvg
-    neofetch
-    neovim
-    ripgrep
-    tldr
-    unzip
-    openssl
-    openssl.dev
-    pkg-config
     xfce.thunar
     xdg-desktop-portal-gtk
     xdg-desktop-portal-wlr
-    zip
-    zoxide
 
     polkit
     polkit_gnome
 
-    gnome3.adwaita-icon-theme # default gnome cursors
-    glib
+    gnome3.adwaita-icon-theme
     gsettings-desktop-schemas
     nwg-look
   ];

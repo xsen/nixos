@@ -1,9 +1,4 @@
-{
-  config,
-  inputs,
-  pkgs,
-  ...
-}:
+{ pkgs, ... }:
 {
 
   environment.systemPackages = with pkgs; [
@@ -12,7 +7,28 @@
     nixfmt-rfc-style
     wget
     git
+
     vim
+    neovim
+
+    zip
+    zoxide
+
+    btop
+    eza
+    fzf
+
+    lm_sensors
+
+    ripgrep
+    tldr
+    unzip
+    openssl
+    openssl.dev
+
+    #gnumake
+    glib
+    pkg-config
   ];
 
 }

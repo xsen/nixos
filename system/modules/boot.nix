@@ -1,4 +1,4 @@
-{ config, ... }:
+{ ... }:
 {
   boot.loader = {
     efi.canTouchEfiVariables = true;
@@ -7,5 +7,10 @@
       device = "nodev";
       useOSProber = true;
     };
+  };
+
+  distro-grub-themes = {
+    enable = true;
+    theme = "nixos";
   };
 }
