@@ -1,4 +1,5 @@
-{ ... }: {
+{ ... }:
+{
   # Set your time zone.
   time.timeZone = "Asia/Yekaterinburg";
 
@@ -16,7 +17,7 @@
     LC_TELEPHONE = "ru_RU.UTF-8";
     LC_TIME = "ru_RU.UTF-8";
   };
-  
+
   # Configure keymap
   services.xserver.xkb = {
     layout = "us,ru";

@@ -1,4 +1,5 @@
-{ pkgs, inputs, ... }: {
+{ pkgs, inputs, ... }:
+{
 
   home.packages = [
     inputs.yandex-browser.packages.x86_64-linux.yandex-browser-stable
@@ -10,7 +11,6 @@
 
     pkgs.libreoffice-qt
 
-
     pkgs.steam
     pkgs.steam-run
     (pkgs.lutris.override {
@@ -21,7 +21,6 @@
     })
 
     #pkgs.qbittorrent
-
 
     pkgs.viewnior
     #pkgs-unstable.hyprshot

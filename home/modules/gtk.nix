@@ -4,15 +4,15 @@
     enable = true;
 
     cursorTheme = {
-        name = "Catppuccin-Macchiato-Blue";
-        package = pkgs.catppuccin-cursors.macchiatoBlue;
+      name = "Catppuccin-Macchiato-Blue";
+      package = pkgs.catppuccin-cursors.macchiatoBlue;
     };
 
     theme = {
       name = "Catppuccin-Macchiato-Compact-Blue-dark";
       package = pkgs.catppuccin-gtk.override {
         size = "compact";
-        accents = ["blue"];
+        accents = [ "blue" ];
         variant = "macchiato";
       };
     };
@@ -23,15 +23,15 @@
     };
 
     gtk3.extraConfig = {
-        Settings = ''
-            gtk-application-prefer-dark-theme = 1;
-        '';
+      Settings = ''
+        gtk-application-prefer-dark-theme = 1;
+      '';
     };
 
     gtk4.extraConfig = {
-        Settings = ''
-            gtk-application-prefer-dark-theme = 1;
-            '';
+      Settings = ''
+        gtk-application-prefer-dark-theme = 1;
+      '';
     };
 
   };
