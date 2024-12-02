@@ -14,9 +14,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    distro-grub-themes = {
-      url = "github:AdisonCavani/distro-grub-themes";
-    };
+    catppuccin.url = "github:catppuccin/nix";
   };
 
   outputs =
@@ -25,7 +23,7 @@
       nixpkgs,
       home-manager,
       yandex-browser,
-      distro-grub-themes,
+      catppuccin,
     }@inputs:
     let
 
@@ -48,14 +46,17 @@
         };
         modules = [
           ./system/configuration.nix
-          distro-grub-themes.nixosModules.${system}.default
+          catppuccin.nixosModules.catppuccin
         ];
       };
 
       homeConfigurations."${username}" = home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages.${system};
         extraSpecialArgs.inputs = inputs;
-        modules = [ ./home/home.nix ];
+        modules = [
+          ./home/home.nix
+          catppuccin.homeManagerModules.catppuccin
+        ];
       };
     };
 }

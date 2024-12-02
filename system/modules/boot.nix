@@ -8,9 +8,4 @@
       useOSProber = true;
     };
   };
-
-  distro-grub-themes = {
-    enable = true;
-    theme = "nixos";
-  };
 }

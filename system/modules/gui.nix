@@ -1,14 +1,16 @@
-{ config, pkgs, ... }:
+ {config, pkgs, lib, ... }:
 
 {
+  catppuccin.enable = true;
+
   security.polkit.enable = true;
   security.pam.services.swaylock = { };
   security.pam.services.swaylock.fprintAuth = false;
 
   services.displayManager.sddm = {
     enable = true;
-    theme = "${import ./sddm-theme.nix { inherit pkgs; }}";
     wayland.enable = true;
+    package = pkgs.kdePackages.sddm;
   };
 
   xdg.portal = {
@@ -20,6 +22,7 @@
       pkgs.xdg-desktop-portal-gtk
     ];
   };
+
 
   programs = {
     hyprland = {
@@ -78,5 +81,4 @@
     gsettings-desktop-schemas
     nwg-look
   ];
-
 }
