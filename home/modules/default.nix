@@ -1,7 +1,8 @@
 {
   imports = [
     ./gui.nix
-    ./packagex.nix
+    ./dotfiles.nix
+    ./packages.nix
   ];
 
   nixpkgs = {

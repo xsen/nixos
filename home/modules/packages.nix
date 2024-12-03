@@ -1,15 +1,16 @@
 { pkgs, inputs, ... }:
 {
 
-  home.packages = [
+  home.packages = with pkgs; [
     inputs.yandex-browser.packages.x86_64-linux.yandex-browser-stable
 
-    pkgs.telegram-desktop
-    pkgs.google-chrome
-    pkgs.keepassxc
-    pkgs.obsidian
+    telegram-desktop
+    google-chrome
+    keepassxc
+    obsidian
 
-    pkgs.libreoffice-qt
+    libreoffice-qt
+    yandex-disk
 
     #pkgs.steam
     #pkgs.steam-run
