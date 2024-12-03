@@ -23,7 +23,7 @@
 
     #pkgs.qbittorrent
 
-    pkgs.viewnior
+    viewnior
     #pkgs-unstable.hyprshot
     #pkgs.catppuccin-cursors.macchiatoBlue
     #pkgs.catppuccin-gtk

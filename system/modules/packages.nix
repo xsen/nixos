@@ -6,6 +6,7 @@
     pciutils
     nixfmt-rfc-style
     wget
+    curl
     git
 
     vim

@@ -1,6 +1,7 @@
  {config, pkgs, lib, ... }:
 
 {
+  catppuccin.flavor = "mocha";
   catppuccin.enable = true;
 
   security.polkit.enable = true;
@@ -77,8 +78,9 @@
     polkit
     polkit_gnome
 
-    adwaita-icon-theme
     gsettings-desktop-schemas
     nwg-look
+
+
   ];
 }
