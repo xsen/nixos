@@ -1,10 +1,7 @@
 {
   imports = [
-    ./config.nix
-    ./environment.nix
-    ./git.nix
-    ./gtk.nix
-    ./packages.nix
+    ./gui.nix
+    ./packagex.nix
   ];
 
   nixpkgs = {

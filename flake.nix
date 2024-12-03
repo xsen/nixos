@@ -54,7 +54,7 @@
         pkgs = nixpkgs.legacyPackages.${system};
         extraSpecialArgs.inputs = inputs;
         modules = [
-          ./home/home.nix
+          ./home
           catppuccin.homeManagerModules.catppuccin
         ];
       };

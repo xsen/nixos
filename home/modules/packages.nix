@@ -11,22 +11,22 @@
 
     pkgs.libreoffice-qt
 
-    pkgs.steam
-    pkgs.steam-run
-    (pkgs.lutris.override {
-      extraPkgs = pkgs: [
-        pkgs.wineWowPackages.stable
-        pkgs.winetricks
-      ];
-    })
+    #pkgs.steam
+    #pkgs.steam-run
+    #(pkgs.lutris.override {
+      #extraPkgs = pkgs: [
+        #pkgs.wineWowPackages.stable
+        #pkgs.winetricks
+      #];
+    #})
 
     #pkgs.qbittorrent
 
     pkgs.viewnior
     #pkgs-unstable.hyprshot
-    pkgs.catppuccin-cursors.macchiatoBlue
-    pkgs.catppuccin-gtk
-    pkgs.papirus-folders
+    #pkgs.catppuccin-cursors.macchiatoBlue
+    #pkgs.catppuccin-gtk
+    #pkgs.papirus-folders
   ];
 
 }
