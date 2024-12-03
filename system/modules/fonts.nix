@@ -11,6 +11,7 @@
   fonts.packages = with pkgs; [
     font-awesome
     jetbrains-mono
+    #nerd-fonts.jetrains-mono
 
     (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
   ];

@@ -3,15 +3,15 @@
 
   # Enable OpenGL
   # For Unstable
-  #hardware.graphics = {
-  #enable = true;
-  #};
-  # For 24.05
-  hardware.opengl = {
+  hardware.graphics = {
     enable = true;
-    driSupport = true;
-    driSupport32Bit = true;
   };
+  # For 24.05
+  #hardware.opengl = {
+    #enable = true;
+    #driSupport = true;
+    #driSupport32Bit = true;
+  #};
 
   services.xserver.videoDrivers = [ "nvidia" ];
 

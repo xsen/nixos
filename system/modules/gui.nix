@@ -77,7 +77,7 @@
     polkit
     polkit_gnome
 
-    gnome3.adwaita-icon-theme
+    adwaita-icon-theme
     gsettings-desktop-schemas
     nwg-look
   ];
