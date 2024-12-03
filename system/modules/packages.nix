@@ -1,6 +1,10 @@
 { pkgs, ... }:
 {
 
+  programs = {
+    zsh.enable = true;
+  };
+
   environment.systemPackages = with pkgs; [
     home-manager
     pciutils
@@ -18,6 +22,7 @@
     btop
     eza
     fzf
+    bat
 
     lm_sensors
 

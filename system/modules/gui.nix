@@ -1,4 +1,9 @@
- {config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
 {
   catppuccin.flavor = "mocha";
@@ -23,7 +28,6 @@
       pkgs.xdg-desktop-portal-gtk
     ];
   };
-
 
   programs = {
     hyprland = {
@@ -80,7 +84,6 @@
 
     gsettings-desktop-schemas
     nwg-look
-
 
   ];
 }

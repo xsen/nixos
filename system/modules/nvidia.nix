@@ -1,17 +1,9 @@
 { config, lib, ... }:
 {
 
-  # Enable OpenGL
-  # For Unstable
   hardware.graphics = {
     enable = true;
   };
-  # For 24.05
-  #hardware.opengl = {
-    #enable = true;
-    #driSupport = true;
-    #driSupport32Bit = true;
-  #};
 
   services.xserver.videoDrivers = [ "nvidia" ];
 
@@ -19,13 +11,10 @@
 
     modesetting.enable = true;
     powerManagement.enable = false;
-
     powerManagement.finegrained = false;
 
     open = false;
-
     nvidiaSettings = true;
-
     package = config.boot.kernelPackages.nvidiaPackages.mkDriver {
       version = "555.58";
       sha256_64bit = "sha256-bXvcXkg2kQZuCNKRZM5QoTaTjF4l2TtrsKUvyicj5ew=";

@@ -2,10 +2,10 @@
 {
   imports = [
     ./boot.nix
+    ./locale.nix
     ./fonts.nix
     ./sound.nix
     ./network.nix
-    ./locale.nix
     ./nvidia.nix
     ./users.nix
     ./packages.nix
