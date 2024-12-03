@@ -3,15 +3,16 @@
   pkgs,
   lib,
   inputs,
+  username,
   ...
 }:
 {
   imports = [ ./modules ];
 
   home = {
-    username = "evgeny";
-    homeDirectory = "/home/evgeny";
-    stateVersion = "24.11";
+    inherit username;
+    homeDirectory = "/home/${username}";
+    stateVersion = "24.05";
   };
 
   programs.bash = {

@@ -13,7 +13,7 @@
 
     zip
     zoxide
-
+    neofetch
     btop
     eza
     fzf

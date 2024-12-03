@@ -2,18 +2,15 @@
 
 {
   console = {
-    earlySetup = true;
     font = "cyr-sun16";
-    packages = [ pkgs.terminus_font ];
     useXkbConfig = true;
   };
 
   fonts.packages = with pkgs; [
     font-awesome
     jetbrains-mono
-    #nerd-fonts.jetrains-mono
-
-    (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
+    noto-fonts
+    (nerdfonts.override { fonts = [ "JetBrainsMono"]; })
   ];
 
 }

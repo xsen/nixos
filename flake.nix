@@ -2,6 +2,7 @@
   description = "A very basic flake";
 
   inputs = {
+
     nixpkgs.url = "github:nixos/nixpkgs/nixos-24.11";
 
     home-manager = {
@@ -53,6 +54,7 @@
       homeConfigurations."${username}" = home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages.${system};
         extraSpecialArgs.inputs = inputs;
+        extraSpecialArgs.username = username;
         modules = [
           ./home
           catppuccin.homeManagerModules.catppuccin
