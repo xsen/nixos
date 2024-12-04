@@ -1,9 +1,15 @@
 { pkgs, ... }:
 {
 
-  catppuccin.enable = true;
-  catppuccin.flavor = "macchiato";
-  catppuccin.pointerCursor.enable = true;
+  catppuccin = {
+    enable = true;
+    flavor = "macchiato";
+
+    pointerCursor = {
+      enable = true;
+      accent = "blue";
+    };
+  };
 
   qt = {
     enable = true;
@@ -14,9 +20,11 @@
   gtk = {
     enable = true;
     catppuccin.enable = true;
+    catppuccin.icon.enable = true;
   };
 
   home.packages = with pkgs; [
     hyprcursor
   ];
+
 }
