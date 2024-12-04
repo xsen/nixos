@@ -1,13 +1,15 @@
 {
   home.sessionVariables = {
-
     #HYPRCURSOR_THEME="";
     #HYPRCURSOR_SIZE="32";
 
     BROWSER = "yandex-browser-stable";
     EDITOR = "vim";
     TERMINAL = "kitty";
-    NIXOS_OZONE_WL = "1";
+
+    #ELECTRON_OZONE_PLATFORM_HINT = "auto";
+    #NIXOS_OZONE_WL = "1";
+
     #QT_QPA_PLATFORMTHEME = "kvantum";
     #QT_QPA_PLATFORMTHEME = "gtk3";
     #QT_SCALE_FACTOR = "1";
@@ -30,7 +32,7 @@
     #NIXOS_XDG_OPEN_USE_PORTAL = "1";
     #XDG_CACHE_HOME = "\${HOME}/.cache";
     #XDG_CONFIG_HOME = "\${HOME}/.config";
-    #XDG_BIN_HOME = "\${HOME}/.local/bin";
+    ##XDG_BIN_HOME = "\${HOME}/.local/bin";
     #XDG_DATA_HOME = "\${HOME}/.local/share";
   };
 }

@@ -13,11 +13,14 @@
   security.pam.services.swaylock = { };
   security.pam.services.swaylock.fprintAuth = false;
 
-  services.displayManager = {
-    sddm = {
-      enable = true;
-      wayland.enable = true;
-      package = pkgs.kdePackages.sddm;
+  services = {
+    dbus.enable = true;
+    displayManager = {
+      sddm = {
+        enable = true;
+        wayland.enable = true;
+        package = pkgs.kdePackages.sddm;
+      };
     };
   };
 
@@ -85,6 +88,5 @@
 
     gsettings-desktop-schemas
     nwg-look
-
   ];
 }
