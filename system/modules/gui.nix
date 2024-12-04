@@ -13,10 +13,12 @@
   security.pam.services.swaylock = { };
   security.pam.services.swaylock.fprintAuth = false;
 
-  services.displayManager.sddm = {
-    enable = true;
-    wayland.enable = true;
-    package = pkgs.kdePackages.sddm;
+  services.displayManager = {
+    sddm = {
+      enable = true;
+      wayland.enable = true;
+      package = pkgs.kdePackages.sddm;
+    };
   };
 
   xdg.portal = {
@@ -55,7 +57,6 @@
         TimeoutStopSec = 10;
       };
     };
-    extraConfig = ''DefaultTimeoutStopSec=10s '';
   };
 
   environment.systemPackages = with pkgs; [
