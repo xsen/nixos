@@ -47,7 +47,6 @@ in
 
     kitty = {
       enable = true;
-      catppuccin.enable = true;
     };
   };
 
