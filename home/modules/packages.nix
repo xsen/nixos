@@ -11,8 +11,13 @@ in
       syntaxHighlighting.enable = true;
       oh-my-zsh = {
         enable = true;
-        plugins = [ "git" ];
-        theme = "xiong-chiamiov-plus";
+        theme = "steeef";
+        #theme = "xiong-chiamiov-plus";
+        plugins = [
+          "git"
+          "history"
+          #"wd"
+        ];
       };
       shellAliases = {
         cat = "bat";
@@ -38,6 +43,11 @@ in
         set smarttab
         set softtabstop=2
       '';
+    };
+
+    kitty = {
+      enable = true;
+      catppuccin.enable = true;
     };
   };
 
@@ -66,9 +76,6 @@ in
 
     viewnior
     #pkgs-unstable.hyprshot
-    #pkgs.catppuccin-cursors.macchiatoBlue
-    #pkgs.catppuccin-gtk
-    #pkgs.papirus-folders
   ];
 
 }

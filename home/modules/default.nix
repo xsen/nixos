@@ -1,6 +1,7 @@
 {
   imports = [
     ./gui.nix
+    ./env.nix
     ./dotfiles.nix
     ./packages.nix
   ];

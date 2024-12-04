@@ -6,7 +6,7 @@
 }:
 
 {
-  catppuccin.flavor = "mocha";
+  catppuccin.flavor = "macchiato";
   catppuccin.enable = true;
 
   security.polkit.enable = true;
