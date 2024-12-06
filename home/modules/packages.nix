@@ -11,8 +11,7 @@ in
       syntaxHighlighting.enable = true;
       oh-my-zsh = {
         enable = true;
-        theme = "steeef";
-        #theme = "xiong-chiamiov-plus";
+        theme = "eastwood";
         plugins = [
           "git"
           "history"
