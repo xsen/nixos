@@ -4,6 +4,7 @@
     ./env.nix
     ./dotfiles.nix
     ./packages.nix
+    ./waybar
   ];
 
   nixpkgs = {
