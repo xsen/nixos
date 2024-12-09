@@ -1,5 +1,6 @@
 # Nixified & modified version of https://github.com/JaKooLit/Hyprland-Dots/blob/main/config/waybar/configs/%5BTOP%5D%20Default
-{
+let scriptPath = "/home/evgeny/Code/nixos/xsen/home/modules/waybar/scripts";
+in {
   "hyprland/workspaces" = {
     "active-only" = false;
     "all-outputs" = true;
@@ -123,8 +124,8 @@
     "on-click" = "playerctl previous";
     "on-click-right" = "playerctl next";
     "scroll-step" = 5.0;
-    "on-scroll-up" = "/etc/nixos/settings/waybar/scripts/volume.sh --inc";
-    "on-scroll-down" = "/etc/nixos/settings/waybar/scripts/volume.sh --dec";
+    "on-scroll-up" = "${scriptPath}/volume.sh --inc";
+    "on-scroll-down" = "${scriptPath}/volume.sh --dec";
     "smooth-scrolling-threshold" = 1;
     "player-icons" = {
       "chromium" = "";
@@ -204,10 +205,10 @@
           ];
       };
       "scroll-step" = 5.0;
-      "on-click" = "/etc/nixos/settings/waybar/scripts/volume.sh --toggle";
+      "on-click" = "${scriptPath}/volume.sh --toggle";
       "on-click-right" = "pavucontrol -t 3";
-      "on-scroll-up" = "/etc/nixos/settings/waybar/scripts/volume.sh --inc";
-      "on-scroll-down" = "/etc/nixos/settings/waybar/scripts/volume.sh --dec";
+      "on-scroll-up" = "${scriptPath}/volume.sh --inc";
+      "on-scroll-down" = "${scriptPath}/volume.sh --dec";
       "tooltip-format" = "{icon} {desc} | {volume}%";
       "smooth-scrolling-threshold" = 1;
   };
@@ -215,10 +216,10 @@
       "format" = "{format_source}";
       "format-source" = " {volume}%";
       "format-source-muted" = "";
-      "on-click" = "/etc/nixos/settings/waybar/scripts/volume.sh --toggle-mic";
+      "on-click" = "${scriptPath}/volume.sh --toggle-mic";
       "on-click-right" = "pavucontrol -t 4";
-      "on-scroll-up" = "/etc/nixos/settings/waybar/scripts/volume.sh --mic-inc";
-      "on-scroll-down" = "/etc/nixos/settings/waybar/scripts/volume.sh --mic-dec";
+      "on-scroll-up" = "${scriptPath}/volume.sh --mic-inc";
+      "on-scroll-down" = "${scriptPath}/volume.sh --mic-dec";
       "tooltip-format" = "{source_desc} | {source_volume}%";
       "scroll-step" = 5;
   };
@@ -245,10 +246,10 @@
     "format" = " ";
     "tooltip" = true;
     "on-click" = "pkill rofi || rofi -show drun -modi run;drun;filebrowser;window";
-    "on-click-middle" = "/etc/nixos/settings/waybar/scripts/wallpaper.sh";
+    "on-click-middle" = "${scriptPath}/wallpaper.sh";
   };
   "custom/cava_mviz" = {
-    "exec" = "/etc/nixos/settings/waybar/scripts/cava.sh";
+    "exec" = "${scriptPath}/cava.sh";
     "format" = "{}";
   };
   "custom/swaync" = {
