@@ -8,6 +8,10 @@ in
     #".config/kitty".source = "${configDir}/kitty";
     #".config/neofetch".source = "${configDir}/neofetch";
     ".config/hypr".source = "${configDir}/hypr";
+    ".config/.oh-my-zsh" = {
+      recursive = true;
+      source = "${configDir}/catppuccin-zsh/";
+    };
     #".config/swayidle".source = "${configDir}/swayidle";
     #".config/swaylock".source = "${configDir}/swaylock";
     #".config/wlogout".source = "${configDir}/wlogout";
