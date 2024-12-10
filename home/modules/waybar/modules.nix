@@ -245,8 +245,8 @@ in {
   "custom/menu" = {
     "format" = " ";
     "tooltip" = true;
-    "on-click" = "pkill rofi || rofi -show drun -modi run;drun;filebrowser;window";
-    "on-click-middle" = "${scriptPath}/wallpaper.sh";
+    "on-click" = "pkill rofi || rofi -show drun -modi run;drun;calc;filebrowser;window";
+    #"on-click-middle" = "${scriptPath}/wallpaper.sh";
   };
   "custom/cava_mviz" = {
     "exec" = "${scriptPath}/cava.sh";

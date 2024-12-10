@@ -73,7 +73,9 @@
     swaylock-effects
     wlogout
     wl-clipboard
-    wofi
+    rofi-wayland
+    rofi-calc
+    rofimoji
     waybar
 
     libsForQt5.qt5.qtquickcontrols2
