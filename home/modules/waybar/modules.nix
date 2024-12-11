@@ -243,7 +243,7 @@ in {
     "spacing" = 8;
   };
   "custom/menu" = {
-    "format" = " ";
+    "format" = "󱄅 ";
     "tooltip" = true;
     "on-click" = "pkill rofi || rofi -show drun -modi run;drun;calc;filebrowser;window";
     #"on-click-middle" = "${scriptPath}/wallpaper.sh";

@@ -64,6 +64,7 @@ in
     ticktick
     #anydesk
 
+    nekoray
     libreoffice-qt
     yandex-disk
 
