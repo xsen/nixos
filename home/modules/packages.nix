@@ -62,23 +62,22 @@ in
     keepassxc
     obsidian
     ticktick
-    #anydesk
-
+    anydesk
     nekoray
+    discord
     libreoffice-qt
     yandex-disk
 
-    #pkgs.steam
-    #pkgs.steam-run
+    steam
+    steam-run
     #(pkgs.lutris.override {
-    #extraPkgs = pkgs: [
-    #pkgs.wineWowPackages.stable
-    #pkgs.winetricks
-    #];
+      #extraPkgs = pkgs: [
+        #pkgs.wineWowPackages.stable
+        #pkgs.winetricks
+      #];
     #})
 
-    #pkgs.qbittorrent
-
+    qbittorrent
     viewnior
     #pkgs-unstable.hyprshot
   ];
