@@ -19,15 +19,14 @@
       defaultSession = "hyprland";
       sddm = {
         enable = true;
+        autoNumlock = true;
         wayland.enable = true;
         package = pkgs.kdePackages.sddm;
       };
     };
   };
-
   xdg.portal = {
     enable = true;
-    wlr.enable = false;
     xdgOpenUsePortal = false;
     extraPortals = [
       pkgs.xdg-desktop-portal-hyprland
@@ -49,6 +48,8 @@
 
   environment.systemPackages = with pkgs; [
     hyprpaper
+    hyprcursor
+    xorg.xsetroot # to fix cursor in xwayland apps @see https://github.com/hyprwm/Hyprland/issues/7335
     kitty
     libnotify
     mako
@@ -67,8 +68,8 @@
     libsForQt5.qt5.qtgraphicaleffects
     libsForQt5.qt5.qtsvg
     xfce.thunar
+    xdg-desktop-portal-hyprland
     xdg-desktop-portal-gtk
-    xdg-desktop-portal-wlr
 
     polkit
     lxqt.lxqt-policykit
