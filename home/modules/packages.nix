@@ -67,15 +67,16 @@ in
     discord
     libreoffice-qt
     yandex-disk
-
+    jetbrains-toolbox
     steam
     steam-run
-    #(pkgs.lutris.override {
-      #extraPkgs = pkgs: [
-        #pkgs.wineWowPackages.stable
-        #pkgs.winetricks
-      #];
-    #})
+
+    (lutris.override {
+      extraPkgs = pkgs: [
+        wineWowPackages.stable
+        winetricks
+      ];
+    })
 
     qbittorrent
     viewnior
