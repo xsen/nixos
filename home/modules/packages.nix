@@ -1,8 +1,17 @@
-{ pkgs, inputs, ... }:
+{
+  username,
+  pkgs,
+  inputs,
+  ...
+}:
 let
-  nixFlakePath = "/home/evgeny/Code/nixos/xsen";
+  nixFlakePath = "/home/${username}/Code/nixos/xsen";
 in
 {
+
+  home.sessionPath = [
+    "/home/${username}/.local/share/JetBrains/Toolbox/scripts"
+  ];
 
   programs = {
     zsh = {
