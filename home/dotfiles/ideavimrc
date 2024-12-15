@@ -15,6 +15,10 @@ set visualbell
 " Clipboard Integration
 set clipboard+=unnamed
 
+" IdeaVimExtension
+" let rime_ascii = 1
+set keep-english-in-normal
+
 " Leader Key
 let mapleader="\<space>"
 
@@ -36,6 +40,7 @@ set commentary
 set ReplaceWithRegister
 set surround
 set nerdtree
+
 
 " Searching Plugins
 set sneak
@@ -122,7 +127,8 @@ nmap <C-S-m> <Action>(ToolWindowsGroup)
 " Clear Search Highlighitng
 "nnoremap <C-[> :noh<return>
 nmap <leader>nh :noh<return>
-
+let g:WhichKeyDesc_n = "<leader>n for noh"
+let g:WhichKeyDesc_n_noh = "<leader>nh :noh command"
 
 "" ========================================================
 "" Leader Commands
