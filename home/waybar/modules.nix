@@ -1,5 +1,5 @@
 # Nixified & modified version of https://github.com/JaKooLit/Hyprland-Dots/blob/main/config/waybar/configs/%5BTOP%5D%20Default
-let scriptPath = "/home/evgeny/Code/nixos/xsen/home/modules/waybar/scripts";
+let scriptPath = "/home/evgeny/Code/nixos/xsen/home/waybar/scripts";
 in {
   "hyprland/workspaces" = {
     "active-only" = false;

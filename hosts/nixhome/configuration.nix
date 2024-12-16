@@ -3,6 +3,7 @@
 {
   imports = [
     ./hardware-configuration.nix
+    ../../modules/polkit.nix
     ../../modules/nix-ld.nix
   ];
 
@@ -118,7 +119,6 @@
 
   security = {
     rtkit.enable = true;
-    polkit.enable = true;
     pam.services.swaylock = { };
     pam.services.swaylock.fprintAuth = false;
   };
