@@ -144,7 +144,7 @@
   };
 
   catppuccin.enable = true;
-  catppuccin.flavor = "macchiato";
+  catppuccin.flavor = "mocha";
 
   time.timeZone = "Asia/Yekaterinburg";
 

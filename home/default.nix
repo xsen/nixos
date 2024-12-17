@@ -22,11 +22,17 @@ in
 
   catppuccin = {
     enable = true;
-    flavor = "macchiato";
+    flavor = "mocha";
 
     pointerCursor = {
       enable = true;
-      accent = "blue";
+      #accent = "blue";
+    };
+  };
+
+  services = {
+    mako = {
+      enable = true;
     };
   };
 
@@ -145,7 +151,7 @@ in
       };
       initExtra = ''
         ZSH_THEME="catppuccin";
-        CATPPUCCIN_FLAVOR="macchiato";
+        CATPPUCCIN_FLAVOR="mocha";
         source ~/.config/.oh-my-zsh/catppuccin.zsh-theme;
       '';
       shellAliases = {
