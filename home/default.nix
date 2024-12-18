@@ -49,6 +49,7 @@ in
   };
 
   programs = {
+    btop.enable = true;
     kitty = {
       enable = true;
       font = {
@@ -89,53 +90,6 @@ in
         pkgs.rofi-calc
       ];
     };
-  };
-
-  home = {
-    sessionPath = [
-      "/home/${username}/.local/share/JetBrains/Toolbox/scripts"
-    ];
-    sessionVariables = {
-      BROWSER = "yandex-browser-stable";
-      EDITOR = "vim";
-      TERMINAL = "kitty";
-    };
-    file = {
-      ".ideavimrc".source = "${configDir}/ideavimrc";
-      ".config/hypr".source = "${configDir}/hypr";
-      ".config/.oh-my-zsh" = {
-        recursive = true;
-        source = "${configDir}/catppuccin-zsh/";
-      };
-    };
-
-    packages = with pkgs; [
-      inputs.yandex-browser.packages.x86_64-linux.yandex-browser-stable
-      telegram-desktop
-      google-chrome
-      keepassxc
-      obsidian
-      ticktick
-      anydesk
-      nekoray
-      discord
-      libreoffice-qt
-      yandex-disk
-      jetbrains-toolbox
-      steam
-      steam-run
-      (lutris.override {
-        extraPkgs = pkgs: [
-          wineWowPackages.stable
-          winetricks
-        ];
-      })
-      qbittorrent
-      viewnior
-    ];
-  };
-
-  programs = {
     zsh = {
       enable = true;
       enableCompletion = true;
@@ -182,4 +136,49 @@ in
     };
   };
 
+  home = {
+    sessionPath = [
+      "/home/${username}/.local/share/JetBrains/Toolbox/scripts"
+    ];
+    sessionVariables = {
+      BROWSER = "yandex-browser-stable";
+      EDITOR = "vim";
+      TERMINAL = "kitty";
+    };
+    file = {
+      ".ideavimrc".source = "${configDir}/ideavimrc";
+      ".config/hypr".source = "${configDir}/hypr";
+      ".config/.oh-my-zsh" = {
+        recursive = true;
+        source = "${configDir}/catppuccin-zsh/";
+      };
+    };
+
+    packages = with pkgs; [
+      inputs.yandex-browser.packages.x86_64-linux.yandex-browser-stable
+      rofi-calc
+      rofimoji
+      telegram-desktop
+      google-chrome
+      keepassxc
+      obsidian
+      ticktick
+      anydesk
+      nekoray
+      discord
+      libreoffice-qt
+      yandex-disk
+      jetbrains-toolbox
+      steam
+      steam-run
+      (lutris.override {
+        extraPkgs = pkgs: [
+          wineWowPackages.stable
+          winetricks
+        ];
+      })
+      qbittorrent
+      viewnior
+    ];
+  };
 }
