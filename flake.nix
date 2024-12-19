@@ -31,7 +31,7 @@
       catppuccin,
     }@inputs:
     let
-      host = "nixhome";
+      host = "nix-desktop";
       system = "x86_64-linux";
       username = "evgeny";
     in
