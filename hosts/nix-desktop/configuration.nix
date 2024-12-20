@@ -42,8 +42,10 @@
       };
     };
 
-    initrd.kernelModules = [ "nvidia_drm" ];
+    initrd.kernelModules = [ "nvidia" "nvidia_drm" ];
+    extraModulePackages = [ config.boot.kernelPackages.nvidia_x11 ];
   };
+
 
   hardware = {
     bluetooth.enable = true;
@@ -56,7 +58,7 @@
 
     nvidia = {
       modesetting.enable = true;
-      powerManagement.enable = false;
+      powerManagement.enable = true;
       powerManagement.finegrained = false;
       open = false;
       nvidiaSettings = true;
@@ -190,7 +192,7 @@
     xdgOpenUsePortal = false;
     extraPortals = [
       pkgs.xdg-desktop-portal-hyprland
-      pkgs.xdg-desktop-portal-gtk
+      #pkgs.xdg-desktop-portal-gtk
     ];
   };
 

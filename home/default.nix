@@ -157,6 +157,8 @@ in
     packages = with pkgs; [
       inputs.yandex-browser.packages.x86_64-linux.yandex-browser-stable
       hyprshot
+      hyprlock
+      hypridle
       satty
       rofi-calc
       rofimoji
