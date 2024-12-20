@@ -67,12 +67,10 @@
   };
 
   services = {
-    #dbus.enable = true;
     flatpak.enable = true;
     journald.extraConfig = "SystemMaxUse=1G";
 
     displayManager = {
-      defaultSession = "hyprland";
       sddm = {
         enable = true;
         autoNumlock = true;
@@ -204,6 +202,7 @@
       xwayland = {
         enable = true;
       };
+      withUWSM = true;
       portalPackage = pkgs.xdg-desktop-portal-hyprland;
     };
   };

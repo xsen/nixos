@@ -20,6 +20,8 @@ in
     };
   };
 
+  wayland.windowManager.hyprland.systemd.enable = false;
+
   catppuccin = {
     enable = true;
     flavor = "mocha";
