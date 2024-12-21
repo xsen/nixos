@@ -30,7 +30,7 @@
   modules-right = [
     "network#speed"
     "custom/separator#dot-line"
-    "custom/swaync"
+    #"custom/swaync"
     "tray"
     "mpris"
     "custom/separator#dot-line"
