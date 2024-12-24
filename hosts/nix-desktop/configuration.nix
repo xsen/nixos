@@ -5,6 +5,7 @@
     ./hardware-configuration.nix
     ../../modules/polkit.nix
     ../../modules/nix-ld.nix
+    ../../modules/virtualisation.nix
   ];
 
   nix = {
@@ -100,14 +101,8 @@
     };
   };
 
-  systemd.user.extraConfig = ''
-    DefaultEnvironment="PATH=/run/current-system/sw/bin"
-  '';
-
   security = {
     rtkit.enable = true;
-    pam.services.swaylock = { };
-    pam.services.swaylock.fprintAuth = false;
   };
 
   environment.variables = {
@@ -165,6 +160,7 @@
     description = "Evgeny";
     shell = pkgs.zsh;
     extraGroups = [
+      "docker"
       "networkmanager"
       "wheel"
     ];
@@ -189,15 +185,6 @@
     (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
   ];
 
-  xdg.portal = {
-    enable = true;
-    xdgOpenUsePortal = false;
-    extraPortals = [
-      pkgs.xdg-desktop-portal-hyprland
-      #pkgs.xdg-desktop-portal-gtk
-    ];
-  };
-
   programs = {
     zsh.enable = true;
 
@@ -207,7 +194,6 @@
         enable = true;
       };
       withUWSM = true;
-      portalPackage = pkgs.xdg-desktop-portal-hyprland;
     };
   };
 
@@ -222,6 +208,7 @@
     neovim
     zip
     zoxide
+    yazi
     neofetch
     eza
     fzf
@@ -234,8 +221,6 @@
     openssl.dev
     glib
     pkg-config
-    blueberry
-    hyprcursor
     xorg.xsetroot # to fix cursor in xwayland apps @see https://github.com/hyprwm/Hyprland/issues/7335
     kitty
     libnotify
@@ -245,21 +230,11 @@
     libsForQt5.qt5.qtquickcontrols2
     libsForQt5.qt5.qtgraphicaleffects
     libsForQt5.qt5.qtsvg
-    xdg-desktop-portal-hyprland
-    xdg-desktop-portal-gtk
     polkit
     lxqt.lxqt-policykit
 
-    hyprpaper
-    swayidle
-    swaylock-effects
-    wlogout
     wl-clipboard
-    waybar
     xfce.thunar
-
-    gsettings-desktop-schemas
-    nwg-look
   ];
 
   system.stateVersion = "24.05";

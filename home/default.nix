@@ -157,7 +157,10 @@ in
     };
 
     packages = with pkgs; [
-      inputs.yandex-browser.packages.x86_64-linux.yandex-browser-stable
+      inputs.yandex-browser.packages.${pkgs.system}.yandex-browser-stable
+      waybar
+      hyprpaper
+      hyprcursor
       hyprshot
       hyprlock
       hypridle
@@ -166,10 +169,10 @@ in
       rofimoji
       telegram-desktop
       google-chrome
+      blueberry
       keepassxc
       obsidian
       ticktick
-      anydesk
       nekoray
       discord
       libreoffice-qt
