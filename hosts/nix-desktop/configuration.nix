@@ -1,4 +1,11 @@
-{ username, host, pkgs, inputs, config, ... }:
+{
+  username,
+  host,
+  pkgs,
+  inputs,
+  config,
+  ...
+}:
 
 {
   imports = [
@@ -43,10 +50,12 @@
       };
     };
 
-    initrd.kernelModules = [ "nvidia" "nvidia_drm" ];
+    initrd.kernelModules = [
+      "nvidia"
+      "nvidia_drm"
+    ];
     extraModulePackages = [ config.boot.kernelPackages.nvidia_x11 ];
   };
-
 
   hardware = {
     bluetooth.enable = true;
@@ -55,10 +64,10 @@
     graphics = {
       enable = true;
       enable32Bit = true;
-         extraPackages = with pkgs; [
-           nvidia-vaapi-driver
-           libvdpau-va-gl
-         ];
+      extraPackages = with pkgs; [
+        nvidia-vaapi-driver
+        libvdpau-va-gl
+      ];
     };
 
     nvidia = {
@@ -105,9 +114,12 @@
     rtkit.enable = true;
   };
 
-  environment.variables = {
-    __GLX_VENDOR_LIBRARY_NAME = "nvidia";
-    LIBVA_DRIVER_NAME = "nvidia";
+  environment = {
+    sessionVariables.NIXOS_OZONE_WL = "1";
+    variables = {
+      __GLX_VENDOR_LIBRARY_NAME = "nvidia";
+      LIBVA_DRIVER_NAME = "nvidia";
+    };
   };
 
   networking = {

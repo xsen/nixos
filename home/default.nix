@@ -72,8 +72,9 @@ in
 
     rofi = {
       enable = true;
+      package = pkgs.rofi-wayland;
       extraConfig = {
-        modi = "run,calc,drun,window";
+        modi = "run,calc,drun,window,emoji:rofimoji";
         icon-theme = "Oranchelo";
         show-icons = true;
         drun-display-format = "{icon} {name}";
@@ -87,9 +88,9 @@ in
         sidebar-mode = true;
         location = 0;
       };
-      plugins = [
-        pkgs.rofimoji
-        pkgs.rofi-calc
+      plugins = with pkgs; [
+        rofimoji
+        (rofi-calc.override { rofi-unwrapped = rofi-wayland-unwrapped; })
       ];
     };
     zsh = {
@@ -146,6 +147,7 @@ in
       BROWSER = "yandex-browser-stable";
       EDITOR = "vim";
       TERMINAL = "kitty";
+      NIXOS_OZONE_WL = "1";
     };
     file = {
       ".ideavimrc".source = "${configDir}/ideavimrc";
@@ -165,8 +167,8 @@ in
       hyprlock
       hypridle
       satty
-      rofi-calc
       rofimoji
+      rofi-calc
       telegram-desktop
       google-chrome
       blueberry
