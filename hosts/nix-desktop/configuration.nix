@@ -53,8 +53,8 @@
     initrd.kernelModules = [
       "nvidia"
       "nvidia_drm"
+      "nvidia_modeset"
     ];
-    extraModulePackages = [ config.boot.kernelPackages.nvidia_x11 ];
   };
 
   hardware = {
@@ -76,7 +76,7 @@
       powerManagement.finegrained = false;
       open = false;
       nvidiaSettings = true;
-      package = config.boot.kernelPackages.nvidiaPackages.beta;
+      package = config.boot.kernelPackages.nvidiaPackages.production;
     };
   };
 

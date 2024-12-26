@@ -19,14 +19,18 @@ in
       allowUnfreePredicate = (_: true);
     };
   };
-
   wayland.windowManager.hyprland.systemd.enable = false;
 
   catppuccin = {
     enable = true;
     flavor = "mocha";
 
-    pointerCursor = {
+    gtk = {
+      enable = true;
+      icon.enable = true;
+    };
+
+    cursors = {
       enable = true;
       accent = "blue";
     };
@@ -46,8 +50,6 @@ in
 
   gtk = {
     enable = true;
-    catppuccin.enable = true;
-    catppuccin.icon.enable = true;
   };
 
   programs = {
