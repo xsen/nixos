@@ -1,4 +1,5 @@
 {
+  lib,
   username,
   host,
   pkgs,
@@ -50,10 +51,13 @@
       };
     };
 
+    blacklistedKernelModules = [ "nouveau" ];
+    kernelParams = [ "nvidia-drm.modeset=1" "nvidia-drm.fbdev=1" ];
     initrd.kernelModules = [
       "nvidia"
-      "nvidia_drm"
       "nvidia_modeset"
+      "nvidia_uvm"
+      "nvidia_drm"
     ];
   };
 
@@ -65,6 +69,7 @@
       enable = true;
       enable32Bit = true;
       extraPackages = with pkgs; [
+        vaapiVdpau
         nvidia-vaapi-driver
         libvdpau-va-gl
       ];
@@ -76,7 +81,15 @@
       powerManagement.finegrained = false;
       open = false;
       nvidiaSettings = true;
-      package = config.boot.kernelPackages.nvidiaPackages.production;
+      package = config.boot.kernelPackages.nvidiaPackages.stable;
+#      package = config.boot.kernelPackages.nvidiaPackages.mkDriver {
+#        version = "550.142";
+#        sha256_64bit = "sha256-bdVJivBLQtlSU7Zre9oVCeAbAk0s10WYPU3Sn+sXkqE=";
+#        sha256_aarch64 = "sha256-bdVJivBLQtlSU7Zre9oVCeAbAk0s10WYPU3Sn+sXkqE=";
+#        openSha256 = "sha256-ZpuVZybW6CFN/gz9rx+UJvQ715FZnAOYfHn5jt5Z2C8=";
+#        settingsSha256 = "sha256-ZpuVZybW6CFN/gz9rx+UJvQ715FZnAOYfHn5jt5Z2C8=";
+#        persistencedSha256 = lib.fakeSha256;
+#      };
     };
   };
 
@@ -115,10 +128,8 @@
   };
 
   environment = {
-    sessionVariables.NIXOS_OZONE_WL = "1";
-    variables = {
-      __GLX_VENDOR_LIBRARY_NAME = "nvidia";
-      LIBVA_DRIVER_NAME = "nvidia";
+    sessionVariables = {
+      NIXOS_OZONE_WL = "1";
     };
   };
 

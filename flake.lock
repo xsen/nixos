@@ -15,6 +15,22 @@
         "type": "github"
       }
     },
+    "flake-compat": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1733328505,
+        "narHash": "sha256-NeCCThCEP3eCl2l/+27kNNK7QrwZB1IJCrXfrbv5oqU=",
+        "owner": "edolstra",
+        "repo": "flake-compat",
+        "rev": "ff81ac966bb2cae68946d5ed5fc4994f96d0ffec",
+        "type": "github"
+      },
+      "original": {
+        "owner": "edolstra",
+        "repo": "flake-compat",
+        "type": "github"
+      }
+    },
     "home-manager": {
       "inputs": {
         "nixpkgs": [
@@ -83,21 +99,22 @@
     },
     "yandex-browser": {
       "inputs": {
+        "flake-compat": "flake-compat",
         "nixpkgs": [
           "nixpkgs"
         ]
       },
       "locked": {
-        "lastModified": 1734514214,
-        "narHash": "sha256-3dWZRtyJ9ibwDzRRnXVTWfzIXAa1r8bx6Ewz8iNmdHg=",
-        "owner": "Teu5us",
-        "repo": "nix-yandex-browser",
-        "rev": "09fa3d3cd3c00ca22039c1090c00cbb7e86d3908",
+        "lastModified": 1735238021,
+        "narHash": "sha256-9xs0EX85zjmO2V8glyDNXWFmxuBOCZc2zkour6tcEpQ=",
+        "owner": "miuirussia",
+        "repo": "yandex-browser.nix",
+        "rev": "35a0e26ca9a77d5209e54711af72d9b45069a3d1",
         "type": "github"
       },
       "original": {
-        "owner": "Teu5us",
-        "repo": "nix-yandex-browser",
+        "owner": "miuirussia",
+        "repo": "yandex-browser.nix",
         "type": "github"
       }
     }

@@ -145,12 +145,6 @@ in
     sessionPath = [
       "/home/${username}/.local/share/JetBrains/Toolbox/scripts"
     ];
-    sessionVariables = {
-      BROWSER = "yandex-browser-stable";
-      EDITOR = "vim";
-      TERMINAL = "kitty";
-      NIXOS_OZONE_WL = "1";
-    };
     file = {
       ".ideavimrc".source = "${configDir}/ideavimrc";
       ".config/hypr".source = "${configDir}/hypr";
@@ -158,6 +152,30 @@ in
         recursive = true;
         source = "${configDir}/catppuccin-zsh/";
       };
+      ".nv/nvidia-application-profiles-rc".text = ''
+      {
+        "rules": [
+         {
+           "pattern": {
+             "feature": "dso",
+             "matches": "libGL.so.1"
+           },
+           "profile": "openGL_fix"
+         }
+        ],
+        "profiles": [
+         {
+           "name": "openGL_fix",
+           "settings": [
+             {
+               "key": "GLThreadedOptimizations",
+               "value": false
+             }
+           ]
+         }
+        ]
+      }
+      '';
     };
 
     packages = with pkgs; [
