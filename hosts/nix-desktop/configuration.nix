@@ -52,13 +52,18 @@
     };
 
     blacklistedKernelModules = [ "nouveau" ];
-    kernelParams = [ "nvidia-drm.modeset=1" "nvidia-drm.fbdev=1" ];
+    kernelParams = [
+      "nvidia-drm.modeset=1"
+      "nvidia-drm.fbdev=1"
+      "nvidia.NVreg_OpenRmEnableUnsupportedGpus=1"
+    ];
     initrd.kernelModules = [
       "nvidia"
       "nvidia_modeset"
       "nvidia_uvm"
       "nvidia_drm"
     ];
+    extraModulePackages = [ config.boot.kernelPackages.nvidia_x11 ];
   };
 
   hardware = {
@@ -81,6 +86,8 @@
       powerManagement.finegrained = false;
       open = false;
       nvidiaSettings = true;
+      forceFullCompositionPipeline = true;
+
       package = config.boot.kernelPackages.nvidiaPackages.stable;
 #      package = config.boot.kernelPackages.nvidiaPackages.mkDriver {
 #        version = "550.142";
