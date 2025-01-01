@@ -155,6 +155,7 @@ in
     };
 
     packages = with pkgs; [
+      yandex-music
       inputs.yandex-browser.packages.${pkgs.system}.yandex-browser-stable
       waybar
       hyprpaper

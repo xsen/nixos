@@ -7,7 +7,7 @@
   ...
 }:
 {
-  imports = [ ../../home ];
+  imports = [ ../../home/home.nix ];
 
   home = {
     inherit username;
