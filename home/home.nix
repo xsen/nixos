@@ -177,8 +177,10 @@ in
       libreoffice-qt
       yandex-disk
       jetbrains-toolbox
+      code-cursor
       steam
       steam-run
+      haruna
       (lutris.override {
         extraPkgs = pkgs: [
           wineWowPackages.stable

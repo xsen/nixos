@@ -68,15 +68,18 @@
 
   hardware = {
     bluetooth.enable = true;
-    pulseaudio.enable = false;
 
     graphics = {
       enable = true;
       enable32Bit = true;
       extraPackages = with pkgs; [
         vaapiVdpau
-        nvidia-vaapi-driver
+        libvdpau
         libvdpau-va-gl
+        nvidia-vaapi-driver
+        vdpauinfo
+        libva
+        libva-utils
       ];
     };
 
@@ -102,6 +105,7 @@
 
   services = {
     flatpak.enable = true;
+    pulseaudio.enable = false;
     journald.extraConfig = "SystemMaxUse=1G";
 
     displayManager = {
@@ -209,10 +213,9 @@
 
   fonts.packages = with pkgs; [
     font-awesome
-    jetbrains-mono
     terminus_font
+    nerd-fonts.jetbrains-mono
     noto-fonts
-    (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
   ];
 
   programs = {
@@ -255,17 +258,13 @@
     kitty
     libnotify
     qt5.qtwayland
+    qt6.full
     qt6.qtwayland
-
-    libsForQt5.qt5.qtquickcontrols2
-    libsForQt5.qt5.qtgraphicaleffects
-    libsForQt5.qt5.qtsvg
     polkit
     lxqt.lxqt-policykit
 
     wl-clipboard
     xfce.thunar
   ];
-
   system.stateVersion = "24.05";
 }
