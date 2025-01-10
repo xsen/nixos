@@ -19,6 +19,7 @@ in
       allowUnfreePredicate = (_: true);
     };
   };
+
   wayland.windowManager.hyprland.systemd.enable = false;
 
   catppuccin = {
@@ -53,7 +54,10 @@ in
   };
 
   programs = {
-    btop.enable = true;
+    btop = {
+      enable = true;
+      package = pkgs.btop.override { cudaSupport = true; } ;
+    };
     kitty = {
       enable = true;
       font = {
@@ -67,7 +71,6 @@ in
       };
       shellIntegration.enableZshIntegration = true;
     };
-
     waybar = {
       enable = true;
     };

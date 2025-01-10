@@ -51,7 +51,6 @@
       };
     };
 
-    blacklistedKernelModules = [ "nouveau" ];
     kernelParams = [
       "nvidia-drm.modeset=1"
       "nvidia-drm.fbdev=1"
@@ -63,7 +62,6 @@
       "nvidia_uvm"
       "nvidia_drm"
     ];
-    extraModulePackages = [ config.boot.kernelPackages.nvidia_x11 ];
   };
 
   hardware = {
@@ -91,15 +89,7 @@
       nvidiaSettings = true;
       forceFullCompositionPipeline = true;
 
-      package = config.boot.kernelPackages.nvidiaPackages.stable;
-#      package = config.boot.kernelPackages.nvidiaPackages.mkDriver {
-#        version = "550.142";
-#        sha256_64bit = "sha256-bdVJivBLQtlSU7Zre9oVCeAbAk0s10WYPU3Sn+sXkqE=";
-#        sha256_aarch64 = "sha256-bdVJivBLQtlSU7Zre9oVCeAbAk0s10WYPU3Sn+sXkqE=";
-#        openSha256 = "sha256-ZpuVZybW6CFN/gz9rx+UJvQ715FZnAOYfHn5jt5Z2C8=";
-#        settingsSha256 = "sha256-ZpuVZybW6CFN/gz9rx+UJvQ715FZnAOYfHn5jt5Z2C8=";
-#        persistencedSha256 = lib.fakeSha256;
-#      };
+      package = config.boot.kernelPackages.nvidiaPackages.beta;
     };
   };
 
@@ -136,12 +126,6 @@
 
   security = {
     rtkit.enable = true;
-  };
-
-  environment = {
-    sessionVariables = {
-      NIXOS_OZONE_WL = "1";
-    };
   };
 
   networking = {
@@ -223,48 +207,54 @@
 
     hyprland = {
       enable = true;
-      xwayland = {
-        enable = true;
-      };
       withUWSM = true;
+      xwayland.enable = true;
     };
   };
 
-  environment.systemPackages = with pkgs; [
-    home-manager
-    pciutils
-    nixfmt-rfc-style
-    wget
-    curl
-    git
-    vim
-    neovim
-    zip
-    zoxide
-    yazi
-    neofetch
-    eza
-    fzf
-    bat
-    lm_sensors
-    ripgrep
-    tldr
-    unzip
-    openssl
-    openssl.dev
-    glib
-    pkg-config
-    xorg.xsetroot # to fix cursor in xwayland apps @see https://github.com/hyprwm/Hyprland/issues/7335
-    kitty
-    libnotify
-    qt5.qtwayland
-    qt6.full
-    qt6.qtwayland
-    polkit
-    lxqt.lxqt-policykit
+  environment = {
+    sessionVariables = {
+      NIXOS_OZONE_WL = "1";
+    };
 
-    wl-clipboard
-    xfce.thunar
-  ];
+    systemPackages = with pkgs; [
+      home-manager
+      pciutils
+      nixfmt-rfc-style
+      wget
+      curl
+      git
+      vim
+      neovim
+      zip
+      zoxide
+      yazi
+      neofetch
+      eza
+      fzf
+      bat
+      lm_sensors
+      ripgrep
+      tldr
+      unzip
+      openssl
+      openssl.dev
+      glib
+      pkg-config
+      xorg.xsetroot # to fix cursor in xwayland apps @see https://github.com/hyprwm/Hyprland/issues/7335
+      kitty
+      libnotify
+      qt5.full
+      qt6.full
+      #    qt5.qtwayland
+      #    qt6.qtwayland
+      polkit
+      lxqt.lxqt-policykit
+
+      wl-clipboard
+      xfce.thunar
+    ];
+  };
+
   system.stateVersion = "24.05";
 }

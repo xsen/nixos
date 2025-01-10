@@ -17,7 +17,7 @@ set clipboard+=unnamed
 
 " IdeaVimExtension
 " let rime_ascii = 1
-set keep-english-in-normal
+" set keep-english-in-normal
 
 " Leader Key
 let mapleader="\<space>"
