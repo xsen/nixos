@@ -50,7 +50,7 @@
         useOSProber = true;
       };
     };
-
+    kernelPackages = pkgs.linuxPackages_latest;
     kernelParams = [
       "nvidia-drm.modeset=1"
       "nvidia-drm.fbdev=1"
@@ -66,7 +66,6 @@
 
   hardware = {
     bluetooth.enable = true;
-
     graphics = {
       enable = true;
       enable32Bit = true;
@@ -241,7 +240,7 @@
       openssl.dev
       glib
       pkg-config
-      xorg.xsetroot # to fix cursor in xwayland apps @see https://github.com/hyprwm/Hyprland/issues/7335
+      #xorg.xsetroot # to fix cursor in xwayland apps @see https://github.com/hyprwm/Hyprland/issues/7335
       kitty
       libnotify
       qt5.full

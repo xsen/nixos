@@ -40,6 +40,8 @@ in
   services = {
     mako = {
       enable = true;
+      padding = "20";
+      defaultTimeout = 10000;
     };
   };
 
@@ -71,10 +73,6 @@ in
       };
       shellIntegration.enableZshIntegration = true;
     };
-    waybar = {
-      enable = true;
-    };
-
     rofi = {
       enable = true;
       package = pkgs.rofi-wayland;
@@ -126,6 +124,7 @@ in
         nx-rebuild = "sudo nixos-rebuild switch --flake ${nixFlakePath} && home-manager switch --flake ${nixFlakePath}";
         nx-flake = "sudo nixos-rebuild switch --flake ${nixFlakePath}";
         nx-home = "home-manager switch --flake ${nixFlakePath}";
+        sail = "sh $([ -f sail ] && echo sail || echo vendor/bin/sail)";
       };
     };
 
@@ -160,7 +159,6 @@ in
     packages = with pkgs; [
       yandex-music
       inputs.yandex-browser.packages.${pkgs.system}.yandex-browser-stable
-      waybar
       hyprpaper
       hyprcursor
       hyprshot

@@ -13,7 +13,7 @@ set hlsearch
 set visualbell
 
 " Clipboard Integration
-set clipboard+=unnamed
+set clipboard=unnamedplus
 
 " IdeaVimExtension
 " let rime_ascii = 1
