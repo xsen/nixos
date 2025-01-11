@@ -1,6 +1,8 @@
 # Nixified & modified version of https://github.com/JaKooLit/Hyprland-Dots/blob/main/config/waybar/configs/%5BTOP%5D%20Default
-let scriptPath = "/home/evgeny/Code/nixos/xsen/home/waybar/scripts";
-in {
+let
+  scriptPath = "/home/evgeny/Code/nixos/xsen/home/waybar/scripts";
+in
+{
   "hyprland/workspaces" = {
     "active-only" = false;
     "all-outputs" = true;
@@ -146,97 +148,97 @@ in {
     "max-length" = 30;
   };
   "network" = {
-      "format" = "{ifname}";
-      "format-wifi" = "{icon}";
-      "format-ethernet" = "󰌘";
-      "format-disconnected" = "󰌙";
-      "tooltip-format" = "{ipaddr}  {bandwidthUpBytes}  {bandwidthDownBytes}";
-      "format-linked" = "󰈁 {ifname} (No IP)";
-      "tooltip-format-wifi" = "{essid} {icon} {signalStrength}%";
-      "tooltip-format-ethernet" = "{ifname} 󰌘";
-      "tooltip-format-disconnected" = "󰌙 Disconnected";
-      "max-length" = 50;
-      "format-icons" = [
-          "󰤯"
-          "󰤟"
-          "󰤢"
-          "󰤥"
-          "󰤨"
-      ];
+    "format" = "{ifname}";
+    "format-wifi" = "{icon}";
+    "format-ethernet" = "󰌘";
+    "format-disconnected" = "󰌙";
+    "tooltip-format" = "{ipaddr}  {bandwidthUpBytes}  {bandwidthDownBytes}";
+    "format-linked" = "󰈁 {ifname} (No IP)";
+    "tooltip-format-wifi" = "{essid} {icon} {signalStrength}%";
+    "tooltip-format-ethernet" = "{ifname} 󰌘";
+    "tooltip-format-disconnected" = "󰌙 Disconnected";
+    "max-length" = 50;
+    "format-icons" = [
+      "󰤯"
+      "󰤟"
+      "󰤢"
+      "󰤥"
+      "󰤨"
+    ];
   };
   "network#speed" = {
-      "interval" = 1;
-      "format" = "{ifname}";
-      "format-wifi" = "{icon}  {bandwidthUpBytes}  {bandwidthDownBytes}";
-      "format-ethernet" = "󰌘   {bandwidthUpBytes}  {bandwidthDownBytes}";
-      "format-disconnected" = "󰌙";
-      "tooltip-format" = "{ipaddr}";
-      "format-linked" = "󰈁 {ifname} (No IP)";
-      "tooltip-format-wifi" = "{essid} {icon} {signalStrength}%";
-      "tooltip-format-ethernet" = "{ifname} 󰌘";
-      "tooltip-format-disconnected" = "󰌙 Disconnected";
-      "max-length" = 50;
-      "format-icons" = [
-          "󰤯"
-          "󰤟"
-          "󰤢"
-          "󰤥"
-          "󰤨"
-      ];
+    "interval" = 1;
+    "format" = "{ifname}";
+    "format-wifi" = "{icon}  {bandwidthUpBytes}  {bandwidthDownBytes}";
+    "format-ethernet" = "󰌘   {bandwidthUpBytes}  {bandwidthDownBytes}";
+    "format-disconnected" = "󰌙";
+    "tooltip-format" = "{ipaddr}";
+    "format-linked" = "󰈁 {ifname} (No IP)";
+    "tooltip-format-wifi" = "{essid} {icon} {signalStrength}%";
+    "tooltip-format-ethernet" = "{ifname} 󰌘";
+    "tooltip-format-disconnected" = "󰌙 Disconnected";
+    "max-length" = 50;
+    "format-icons" = [
+      "󰤯"
+      "󰤟"
+      "󰤢"
+      "󰤥"
+      "󰤨"
+    ];
   };
   "pulseaudio" = {
-      "format" = "{icon} {volume}%";
-      "format-muted" = "󰖁";
-      "format-icons" = {
-          "headphone" = "";
-          "hands-free" = "";
-          "headset" = "";
-          "phone" = "";
-          "portable" = "";
-          "car" = "";
-          "default" = [
-            ""
-            ""
-            "󰕾"
-            ""
-          ];
-          "ignored-sinks" = [
-            "Easy Effects Sink"
-          ];
-      };
-      "scroll-step" = 5.0;
-      "on-click" = "${scriptPath}/volume.sh --toggle";
-      "on-click-right" = "pavucontrol -t 3";
-      "on-scroll-up" = "${scriptPath}/volume.sh --inc";
-      "on-scroll-down" = "${scriptPath}/volume.sh --dec";
-      "tooltip-format" = "{icon} {desc} | {volume}%";
-      "smooth-scrolling-threshold" = 1;
+    "format" = "{icon} {volume}%";
+    "format-muted" = "󰖁";
+    "format-icons" = {
+      "headphone" = "";
+      "hands-free" = "";
+      "headset" = "";
+      "phone" = "";
+      "portable" = "";
+      "car" = "";
+      "default" = [
+        ""
+        ""
+        "󰕾"
+        ""
+      ];
+      "ignored-sinks" = [
+        "Easy Effects Sink"
+      ];
+    };
+    "scroll-step" = 5.0;
+    "on-click" = "${scriptPath}/volume.sh --toggle";
+    "on-click-right" = "pavucontrol -t 3";
+    "on-scroll-up" = "${scriptPath}/volume.sh --inc";
+    "on-scroll-down" = "${scriptPath}/volume.sh --dec";
+    "tooltip-format" = "{icon} {desc} | {volume}%";
+    "smooth-scrolling-threshold" = 1;
   };
   "pulseaudio#microphone" = {
-      "format" = "{format_source}";
-      "format-source" = " {volume}%";
-      "format-source-muted" = "";
-      "on-click" = "${scriptPath}/volume.sh --toggle-mic";
-      "on-click-right" = "pavucontrol -t 4";
-      "on-scroll-up" = "${scriptPath}/volume.sh --mic-inc";
-      "on-scroll-down" = "${scriptPath}/volume.sh --mic-dec";
-      "tooltip-format" = "{source_desc} | {source_volume}%";
-      "scroll-step" = 5;
+    "format" = "{format_source}";
+    "format-source" = " {volume}%";
+    "format-source-muted" = "";
+    "on-click" = "${scriptPath}/volume.sh --toggle-mic";
+    "on-click-right" = "pavucontrol -t 4";
+    "on-scroll-up" = "${scriptPath}/volume.sh --mic-inc";
+    "on-scroll-down" = "${scriptPath}/volume.sh --mic-dec";
+    "tooltip-format" = "{source_desc} | {source_volume}%";
+    "scroll-step" = 5;
   };
   "temperature" = {
-      "interval" = 10;
-      "tooltip" = true;
-      "hwmon-path" = [
-        "/sys/class/hwmon/hwmon1/temp1_input"
-        "/sys/class/thermal/thermal_zone0/temp"
-      ];
-      "critical-threshold" = 82;
-      "format-critical" = "{temperatureC}°C {icon}";
-      "format" = "{temperatureC}°C {icon}";
-      "format-icons" = [
-        "󰈸"
-      ];
-      "on-click-right" = "wezterm -e nvtop sh -c 'nvtop'";
+    "interval" = 10;
+    "tooltip" = true;
+    "hwmon-path" = [
+      "/sys/class/hwmon/hwmon1/temp1_input"
+      "/sys/class/thermal/thermal_zone0/temp"
+    ];
+    "critical-threshold" = 82;
+    "format-critical" = "{temperatureC}°C {icon}";
+    "format" = "{temperatureC}°C {icon}";
+    "format-icons" = [
+      "󰈸"
+    ];
+    "on-click-right" = "wezterm -e nvtop sh -c 'nvtop'";
   };
   "tray" = {
     "icon-size" = 15;

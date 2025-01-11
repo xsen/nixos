@@ -39,7 +39,12 @@
       nixosConfigurations."${host}" = nixpkgs.lib.nixosSystem {
         inherit system;
         specialArgs = {
-          inherit system inputs host username;
+          inherit
+            system
+            inputs
+            host
+            username
+            ;
         };
         modules = [
           nix-ld.nixosModules.nix-ld
@@ -51,7 +56,12 @@
       homeConfigurations."${username}" = home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages.${system};
         extraSpecialArgs = {
-          inherit system inputs host username;
+          inherit
+            system
+            inputs
+            host
+            username
+            ;
         };
         modules = [
           catppuccin.homeManagerModules.catppuccin

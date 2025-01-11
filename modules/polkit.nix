@@ -1,4 +1,5 @@
-{ username, ...}: {
+{ username, ... }:
+{
   security.polkit = {
     enable = true;
     extraConfig = ''

@@ -14,6 +14,7 @@
     ../../modules/polkit.nix
     ../../modules/nix-ld.nix
     ../../modules/virtualisation.nix
+    ../../modules/games.nix
   ];
 
   nix = {
@@ -177,7 +178,6 @@
     description = "Evgeny";
     shell = pkgs.zsh;
     extraGroups = [
-      "docker"
       "networkmanager"
       "wheel"
     ];
