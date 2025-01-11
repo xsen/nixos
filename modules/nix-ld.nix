@@ -1,4 +1,4 @@
-{ pkgs, ...}: {
+{ pkgs, ... }: {
   programs.nix-ld.dev.enable = true;
   programs.nix-ld.dev.libraries = with pkgs; [
     SDL
