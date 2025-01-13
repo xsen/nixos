@@ -149,6 +149,7 @@ in
     ];
     file = {
       ".ideavimrc".source = "${configDir}/ideavimrc";
+      ".local/share/applications/startup.desktop".source = "${configDir}/startup.desktop";
       ".config/hypr".source = "${configDir}/hypr";
       ".config/.oh-my-zsh" = {
         recursive = true;
