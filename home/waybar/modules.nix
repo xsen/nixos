@@ -12,11 +12,11 @@ in
     "on-scroll-up" = "hyprctl dispatch workspace e+1";
     "on-scroll-down" = "hyprctl dispatch workspace e-1";
     "persistent-workspaces" = {
-      "1" = [];
-      "2" = [];
-      "3" = [];
-      "4" = [];
-      "5" = [];
+      "1" = [ ];
+      "2" = [ ];
+      "3" = [ ];
+      "4" = [ ];
+      "5" = [ ];
     };
     "format-icons" = {
       "active" = "";
@@ -32,11 +32,11 @@ in
     on-scroll-down = "hyprctl dispatch workspace e-1";
     show-special = false;
     persistent-workspaces = {
-      "1" = [];
-      "2" = [];
-      "3" = [];
-      "4" = [];
-      "5" = [];
+      "1" = [ ];
+      "2" = [ ];
+      "3" = [ ];
+      "4" = [ ];
+      "5" = [ ];
     };
     "format-icons" = {
       "active" = " 󰮯 ";

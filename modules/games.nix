@@ -8,6 +8,8 @@
     KERNEL=="cpu_dma_latency", GROUP="gamemode"
   '';
 
+  programs.nix-ld.dev.libraries = pkgs.steam-run.args.multiPkgs pkgs;
+
   programs = {
     gamemode.enable = true;
     gamescope.enable = true;

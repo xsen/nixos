@@ -178,11 +178,14 @@ in
       discord
       libreoffice-qt
       yandex-disk
-      jetbrains-toolbox
-      code-cursor
       haruna
       qbittorrent
       viewnior
+
+      jetbrains-toolbox
+      jetbrains.jdk
+      code-cursor
+      vscode
     ];
   };
 }
