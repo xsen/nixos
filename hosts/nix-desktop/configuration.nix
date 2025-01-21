@@ -49,9 +49,15 @@
         efiSupport = true;
         device = "nodev";
         useOSProber = true;
+
+        gfxmodeEfi = "3440x1440x32";
+        extraConfig = "set gfxpayload=keep";
       };
     };
+
     kernelPackages = pkgs.linuxPackages_latest;
+    kernelParams = [ "video=3440x1440@144" ];
+
     initrd.kernelModules = [
       "nvidia"
       "nvidia_drm"
@@ -63,7 +69,7 @@
     graphics = {
       enable = true;
       enable32Bit = true;
-     extraPackages = with pkgs; [
+      extraPackages = with pkgs; [
         vaapiVdpau
         libvdpau
         libvdpau-va-gl
@@ -96,6 +102,7 @@
         enable = true;
         autoNumlock = true;
         wayland.enable = true;
+        enableHidpi = true;
         package = pkgs.kdePackages.sddm;
       };
     };
