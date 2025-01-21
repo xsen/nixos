@@ -13,7 +13,7 @@
     ./hardware-configuration.nix
     ../../modules/polkit.nix
     ../../modules/nix-ld.nix
-    ../../modules/virtualisation.nix
+    ../../modules/dev.nix
     ../../modules/games.nix
   ];
 
@@ -52,15 +52,8 @@
       };
     };
     kernelPackages = pkgs.linuxPackages_latest;
-    kernelParams = [
-      "nvidia-drm.modeset=1"
-      "nvidia-drm.fbdev=1"
-      "nvidia.NVreg_OpenRmEnableUnsupportedGpus=1"
-    ];
     initrd.kernelModules = [
       "nvidia"
-      "nvidia_modeset"
-      "nvidia_uvm"
       "nvidia_drm"
     ];
   };
@@ -70,7 +63,7 @@
     graphics = {
       enable = true;
       enable32Bit = true;
-      extraPackages = with pkgs; [
+     extraPackages = with pkgs; [
         vaapiVdpau
         libvdpau
         libvdpau-va-gl
@@ -89,7 +82,7 @@
       nvidiaSettings = true;
       forceFullCompositionPipeline = true;
 
-      package = config.boot.kernelPackages.nvidiaPackages.beta;
+      package = config.boot.kernelPackages.nvidiaPackages.latest;
     };
   };
 

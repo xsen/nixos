@@ -5,6 +5,11 @@
     "docker"
   ];
 
+  services.ollama = {
+    enable = true;
+    acceleration = "cuda";
+  };
+
   virtualisation = {
     docker = {
       enable = true;
