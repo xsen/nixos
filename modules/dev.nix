@@ -19,4 +19,17 @@
       };
     };
   };
+
+  environment.systemPackages = with pkgs; [
+    glib
+    pkg-config
+    openssl
+    openssl.dev
+
+    neovim
+    jetbrains-toolbox
+    jetbrains.jdk
+    code-cursor
+    vscode
+  ];
 }

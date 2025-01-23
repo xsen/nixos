@@ -181,11 +181,6 @@ in
       haruna
       qbittorrent
       viewnior
-
-      jetbrains-toolbox
-      jetbrains.jdk
-      code-cursor
-      vscode
     ];
   };
 }

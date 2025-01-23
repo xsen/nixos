@@ -208,7 +208,20 @@
       enable = true;
       withUWSM = true;
       xwayland.enable = true;
+      portalPackage = pkgs.xdg-desktop-portal-hyprland;
     };
+  };
+
+  xdg.portal = {
+    enable = true;
+    wlr.enable = false;
+    extraPortals = [
+      pkgs.xdg-desktop-portal-gtk
+    ];
+    configPackages = [
+      pkgs.xdg-desktop-portal-gtk
+      pkgs.xdg-desktop-portal
+    ];
   };
 
   environment = {
@@ -224,7 +237,6 @@
       curl
       git
       vim
-      neovim
       zip
       zoxide
       yazi
@@ -236,17 +248,13 @@
       ripgrep
       tldr
       unzip
-      openssl
-      openssl.dev
-      glib
-      pkg-config
       #xorg.xsetroot # to fix cursor in xwayland apps @see https://github.com/hyprwm/Hyprland/issues/7335
       kitty
       libnotify
       qt5.full
       qt6.full
-      #    qt5.qtwayland
-      #    qt6.qtwayland
+      #qt5.qtwayland
+      #qt6.qtwayland
       polkit
       lxqt.lxqt-policykit
 
