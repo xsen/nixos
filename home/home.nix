@@ -40,6 +40,7 @@ in
   services = {
     mako = {
       enable = true;
+      width  = 600;
       padding = "20";
       defaultTimeout = 10000;
     };
