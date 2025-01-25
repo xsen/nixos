@@ -64,7 +64,7 @@ in
     kitty = {
       enable = true;
       font = {
-        name = "Jetbrains Mono Nerd Font";
+        name = "JetBrainsMono Nerd Font";
         size = 14;
       };
       settings = {
@@ -161,8 +161,9 @@ in
     packages = with pkgs; [
       yandex-music
       inputs.yandex-browser.packages.${pkgs.system}.yandex-browser-stable
-      hyprpaper
       hyprcursor
+      hyprsunset
+      hyprpaper
       hyprshot
       hyprlock
       hypridle

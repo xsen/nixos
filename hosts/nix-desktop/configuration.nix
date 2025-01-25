@@ -246,9 +246,6 @@
       qt6.full
       #qt5.qtwayland
       #qt6.qtwayland
-      polkit
-      lxqt.lxqt-policykit
-
       wl-clipboard
       xfce.thunar
     ];

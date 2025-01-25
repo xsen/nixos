@@ -15,7 +15,7 @@ in
 {
   programs.waybar = {
     enable = true;
-    style = readFile ./waybar.css;
+   style = readFile ./waybar.css;
     settings = [
       (base // modules)
     ];

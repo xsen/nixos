@@ -1,4 +1,3 @@
-# Nixified & modified version of https://github.com/JaKooLit/Hyprland-Dots/blob/main/config/waybar/configs/%5BTOP%5D%20Default
 let
   scriptPath = "/home/evgeny/Code/nixos/xsen/home/waybar/scripts";
 in
@@ -28,8 +27,8 @@ in
     all-outputs = true;
     format = "{icon}";
     on-click = "activate";
-    on-scroll-up = "hyprctl dispatch workspace e+1";
-    on-scroll-down = "hyprctl dispatch workspace e-1";
+    on-scroll-up = "hyprctl dispatch workspace e-1";
+    on-scroll-down = "hyprctl dispatch workspace e+1";
     show-special = false;
     persistent-workspaces = {
       "1" = [ ];
@@ -69,8 +68,8 @@ in
   };
   "clock" = {
     "interval" = 1;
-    "format" = " {:%H:%M:%S}";
-    "format-alt" = " {:%H:%M   %Y; %d %B; %A}";
+    "format" = "{:%H\n%M}";
+    "format-alt" = " {:%H:%M:%S  %Y; %d %B; %A}";
     "tooltip-format" = "<tt><small>{calendar}</small></tt>";
     "calendar" = {
       "mode" = "year";
@@ -87,7 +86,8 @@ in
     };
   };
   "cpu" = {
-    "format" = "{usage}% 󰍛";
+    "format" = "󰍛\n{usage}%";
+    "justify" = "center";
     "interval" = 1;
     "format-alt-click" = "click";
     "format-alt" = "{icon0}{icon1}{icon2}{icon3} {usage:>2}% 󰍛";
@@ -106,13 +106,15 @@ in
   "disk" = {
     "interval" = 30;
     "path" = "/";
-    "format" = "{percentage_used}% 󰋊";
+    "justify" = "center";
+    "format" = "󰋊\n{percentage_used}%";
     "tooltip-format" = "{used} used out of {total} on {path} ({percentage_used}%)";
   };
   "memory" = {
     "interval" = 10;
-    "format" = "{used:0.1f}G 󰾆";
-    "format-alt" = "{percentage}% 󰾆";
+    "format" = "󰾆 \n{percentage}%";
+    "justify" = "center";
+    "format-alt" = "󰾆 {used:0.1f}G";
     "format-alt-click" = "click";
     "tooltip" = true;
     "tooltip-format" = "{used:0.1f}GB/{total:0.1f}G";
@@ -187,7 +189,8 @@ in
     ];
   };
   "pulseaudio" = {
-    "format" = "{icon} {volume}%";
+    "format" = "{icon}\n{volume}%";
+    "justify" = "center";
     "format-muted" = "󰖁";
     "format-icons" = {
       "headphone" = "";
@@ -216,7 +219,8 @@ in
   };
   "pulseaudio#microphone" = {
     "format" = "{format_source}";
-    "format-source" = " {volume}%";
+    "justify" = "center";
+    "format-source" = "\n{volume}%";
     "format-source-muted" = "";
     "on-click" = "${scriptPath}/volume.sh --toggle-mic";
     "on-click-right" = "pavucontrol -t 4";
@@ -233,16 +237,20 @@ in
       "/sys/class/thermal/thermal_zone0/temp"
     ];
     "critical-threshold" = 82;
-    "format-critical" = "{temperatureC}°C {icon}";
-    "format" = "{temperatureC}°C {icon}";
+    "justify" = "center";
+    "format-critical" = "{icon} {temperatureC}°";
+    "format" = "{icon}\n{temperatureC}°";
     "format-icons" = [
       "󰈸"
     ];
     "on-click-right" = "wezterm -e nvtop sh -c 'nvtop'";
   };
   "tray" = {
-    "icon-size" = 15;
+    "icon-size" = 20;
     "spacing" = 8;
+  };
+  "hyprland/language" = {
+    "format" = "{short}";
   };
   "custom/menu" = {
     "format" = "󱄅 ";
@@ -273,6 +281,15 @@ in
     "on-click" = "sleep 0.1 && swaync-client -t -sw";
     "on-click-right" = "swaync-client -d -sw";
     "escape" = true;
+  };
+  "custom/separator#hr" = {
+    #    "format" = "󱋰";
+    #    "format" = "󰇘";
+    #    "format" = "󰇘󰇘󰇘󰇘";
+    #"format" = "-----";
+    "format" = "---";
+    "interval" = "once";
+    "tooltip" = false;
   };
   "custom/separator#dot" = {
     "format" = "";

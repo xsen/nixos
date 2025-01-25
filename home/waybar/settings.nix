@@ -1,41 +1,44 @@
 {
   layer = "top";
-  exclusive = true;
-  passthrough = false;
-  position = "top";
-  spacing = 3;
+  position = "right";
   fixed-center = true;
-  ipc = true;
-  margin-top = 3;
-  margin-left = 8;
-  margin-right = 8;
+  reload_style_on_change = true;
+  margin = "4px, 4px, 4px, 4px";
   modules-left = [
-    "hyprland/workspaces#pacman"
-    "custom/separator#dot-line"
+    "custom/separator#hr"
     "cpu"
-    "custom/separator#dot-line"
+    "custom/separator#hr"
     "temperature"
-    "custom/separator#dot-line"
+    "custom/separator#hr"
+    #    "network#speed"
     "memory"
-    "custom/separator#dot-line"
-    "hyprland/language"
+    "custom/separator#hr"
+    "disk"
+    "custom/separator#hr"
   ];
   modules-center = [
-    "clock"
-    "custom/separator#dot-line"
-    "custom/menu"
-    "custom/separator#dot-line"
-    "custom/cava_mviz"
+    #    "mpris"
+#    "hyprland/window"
+    "custom/separator#hr"
+    "hyprland/workspaces#pacman"
+    "custom/separator#hr"
+    "hyprland/language"
+    "custom/separator#hr"
+    #    "custom/separator#dot-line"
+    #    "custom/menu"
+    #    "custom/separator#dot-line"
+    #    "custom/cava_mviz"
   ];
   modules-right = [
-    "network#speed"
-    "custom/separator#dot-line"
+    "custom/separator#hr"
     #"custom/swaync"
     "tray"
-    "mpris"
-    "custom/separator#dot-line"
+    "custom/separator#hr"
     "pulseaudio"
-    "custom/separator#dot-line"
+    "custom/separator#hr"
     "pulseaudio#microphone"
+    "custom/separator#hr"
+    "clock"
+    "custom/separator#hr"
   ];
 }
