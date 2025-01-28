@@ -1,5 +1,5 @@
 let
-  scriptPath = "/home/evgeny/Code/nixos/xsen/home/waybar/scripts";
+  scriptPath = "~/.config/waybar/scripts";
 in
 {
   "hyprland/workspaces" = {
@@ -84,6 +84,13 @@ in
         "today" = "<span color='#ff6699'><b><u>{}</u></b></span>";
       };
     };
+  };
+  "custom/gpu" = {
+    "exec" = "${scriptPath}/gpu.sh";
+    "format" = "󰻑\n{}";
+    "interval" = 2;
+    "justify" = "center";
+    "return-type" = "json";
   };
   "cpu" = {
     "format" = "󰍛\n{usage}%";

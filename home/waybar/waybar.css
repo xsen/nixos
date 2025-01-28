@@ -2,7 +2,6 @@
     font-family: "JetBrainsMono Nerd Font";
     font-weight: bold;
     min-height: 0;
-    /* set font-size to 100% if font scaling is set to 1.00 using nwg-look */
     font-size: 1.00em;
     font-feature-settings: '"zero", "ss01", "ss02", "ss03", "ss04", "ss05", "cv31"';
 }
@@ -22,7 +21,6 @@ window#waybar.hidden {
     background: none;
 }
 
-/* This section can be use if you want to separate waybar modules */
 .modules-left,
 .modules-center,
 .modules-right {
@@ -90,6 +88,7 @@ window#waybar.hidden {
 }
 
 #cpu,
+#custom-gpu,
 #disk,
 #memory,
 #battery,

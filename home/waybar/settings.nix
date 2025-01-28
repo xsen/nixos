@@ -6,6 +6,8 @@
   margin = "4px, 4px, 4px, 4px";
   modules-left = [
     "custom/separator#hr"
+    "custom/gpu"
+    "custom/separator#hr"
     "cpu"
     "custom/separator#hr"
     "temperature"

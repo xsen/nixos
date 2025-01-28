@@ -5,7 +5,6 @@
   ...
 }:
 let
-  configDir = ./dotfiles;
   nixFlakePath = "/home/${username}/Code/nixos/xsen";
 in
 {
@@ -149,12 +148,12 @@ in
       "/home/${username}/.local/share/JetBrains/Toolbox/scripts"
     ];
     file = {
-      ".ideavimrc".source = "${configDir}/ideavimrc";
-      ".local/share/applications/startup.desktop".source = "${configDir}/startup.desktop";
-      ".config/hypr".source = "${configDir}/hypr";
+      ".ideavimrc".source = ./ideavimrc;
+      ".config/hypr".source = ./hypr;
+      ".local/share/applications/startup.desktop".source = ./startup.desktop;
       ".config/.oh-my-zsh" = {
         recursive = true;
-        source = "${configDir}/catppuccin-zsh/";
+        source = ./catppuccin-zsh;
       };
     };
 

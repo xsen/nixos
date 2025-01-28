@@ -15,13 +15,16 @@ in
 {
   programs.waybar = {
     enable = true;
-   style = readFile ./waybar.css;
+    style = readFile ./waybar.css;
     settings = [
       (base // modules)
     ];
   };
 
-  # Used by waybar
+  home.file = {
+    ".config/waybar/scripts".source = ./scripts;
+  };
+
   home.packages = with pkgs; [
     playerctl
     pamixer
