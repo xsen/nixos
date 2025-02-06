@@ -15,6 +15,7 @@
     ../../modules/nix-ld.nix
     ../../modules/dev.nix
     ../../modules/games.nix
+    ../../modules/hosts.nix
   ];
 
   nix = {
@@ -88,7 +89,15 @@
       nvidiaSettings = true;
       forceFullCompositionPipeline = true;
 
-      package = config.boot.kernelPackages.nvidiaPackages.latest;
+      #package = config.boot.kernelPackages.nvidiaPackages.latest;
+      package = config.boot.kernelPackages.nvidiaPackages.mkDriver {
+        version = "570.86.16";
+        sha256_64bit = "sha256-RWPqS7ZUJH9JEAWlfHLGdqrNlavhaR1xMyzs8lJhy9U=";
+        sha256_aarch64 = "sha256-RWPqS7ZUJH9JEAWlfHLGdqrNlavhaR1xMyzs8lJhy9U=";
+        openSha256 = "sha256-ZpuVZybW6CFN/gz9rx+UJvQ715FZnAOYfHn5jt5Z2C8=";
+        settingsSha256 = "sha256-ZpuVZybW6CFN/gz9rx+UJvQ715FZnAOYfHn5jt5Z2C8=";
+        persistencedSha256 = lib.fakeSha256;
+      };
     };
   };
 
