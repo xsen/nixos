@@ -65,7 +65,7 @@
         };
         modules = [
           catppuccin.homeManagerModules.catppuccin
-          ./hosts/${host}/home.nix
+          ./hosts/${host}/home-manager.nix
         ];
       };
     };

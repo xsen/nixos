@@ -4,12 +4,10 @@
   inputs,
   ...
 }:
-let
-  nixFlakePath = "/home/${username}/Code/nixos/xsen";
-in
 {
   imports = [
     ./waybar
+    ./zsh.nix
   ];
 
   nixpkgs = {
@@ -39,7 +37,7 @@ in
   services = {
     mako = {
       enable = true;
-      width  = 600;
+      width = 600;
       padding = "20";
       defaultTimeout = 10000;
     };
@@ -96,38 +94,6 @@ in
         (rofi-calc.override { rofi-unwrapped = rofi-wayland-unwrapped; })
       ];
     };
-    zsh = {
-      enable = true;
-      enableCompletion = true;
-      autosuggestion.enable = true;
-      syntaxHighlighting.enable = true;
-      oh-my-zsh = {
-        enable = true;
-        plugins = [
-          "git"
-          "history"
-          #"wd"
-        ];
-      };
-      initExtra = ''
-        ZSH_THEME="catppuccin";
-        CATPPUCCIN_FLAVOR="mocha";
-        source ~/.config/.oh-my-zsh/catppuccin.zsh-theme;
-      '';
-      shellAliases = {
-        cat = "bat";
-        ls = "eza --icons=always";
-        nx-clean = ''
-          sudo nix-collect-garbage -d
-          home-manager expire-generations "now"
-        '';
-        nx-rebuild = "sudo nixos-rebuild switch --flake ${nixFlakePath} && home-manager switch --flake ${nixFlakePath}";
-        nx-flake = "sudo nixos-rebuild switch --flake ${nixFlakePath}";
-        nx-home = "home-manager switch --flake ${nixFlakePath}";
-        sail = "sh $([ -f sail ] && echo sail || echo vendor/bin/sail)";
-      };
-    };
-
     vim = {
       enable = true;
       settings = {
@@ -150,11 +116,8 @@ in
     file = {
       ".ideavimrc".source = ./ideavimrc;
       ".config/hypr".source = ./hypr;
-      ".local/share/applications/startup.desktop".source = ./startup.desktop;
-      ".config/.oh-my-zsh" = {
-        recursive = true;
-        source = ./catppuccin-zsh;
-      };
+      ".local/share/applications/startup.desktop".source = ./startup/startup.desktop;
+      ".scripts/startup.sh".source = ./startup/startup.sh;
     };
 
     packages = with pkgs; [
