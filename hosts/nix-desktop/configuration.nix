@@ -15,7 +15,6 @@
     ../../modules/nix-ld.nix
     ../../modules/dev.nix
     ../../modules/games.nix
-    ../../modules/hosts.nix
   ];
 
   nix = {
@@ -238,6 +237,7 @@
       git
       vim
       zip
+      p7zip
       zoxide
       yazi
       neofetch

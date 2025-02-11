@@ -7,8 +7,9 @@
 </p>
 
 ### Setup
+ - generate hardware-configuration.nix ``
  - update nixFlakePath in home/zsh.nix
- - exec `git update-index --skip-worktree modules/hosts.nix`
+ - exec `git update-index --skip-worktree modules/dev-hosts.nix`
  - 
 ### todo
 - write readme.md
