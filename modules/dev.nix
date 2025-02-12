@@ -3,6 +3,7 @@ let
   vHosts = import ./dev-hosts.nix;
 in
 {
+  #security.pki.certificateFiles = [ /home/${username}/.local/share/mkcert/rootCA.pem ];
   users.users."${username}".extraGroups = [
     "docker"
   ];
@@ -46,6 +47,8 @@ in
     pkg-config
     openssl
     openssl.dev
+    lazygit
+    lazydocker
     #    (alpaca.override {
     #      ollama = ollama-cuda;
     #    })

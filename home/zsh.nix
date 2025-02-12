@@ -16,6 +16,7 @@ in
       syntaxHighlighting.enable = true;
       initExtra = ''
         eval "$(starship init zsh)"
+        bindkey "''${key[Up]}" up-line-or-search
       '';
       shellAliases = {
         cat = "bat";
