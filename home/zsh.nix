@@ -1,11 +1,11 @@
 {
-  username,
   pkgs,
+  config,
   inputs,
   ...
 }:
 let
-  nixFlakePath = "/home/${username}/Code/nixos/xsen";
+  nixFlakePath = "${config.home.homeDirectory}/Code/nixos/xsen";
 in
 {
   programs = {

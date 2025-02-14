@@ -1,5 +1,4 @@
 {
-  username,
   pkgs,
   inputs,
   ...
@@ -111,10 +110,12 @@
 
   home = {
     sessionPath = [
-      "/home/${username}/.local/share/JetBrains/Toolbox/scripts"
+      "$HOME/.npm-packages"
+      "$HOME/.local/share/JetBrains/Toolbox/scripts"
     ];
     file = {
       ".ideavimrc".source = ./ideavimrc;
+      ".npmrc".source = ./npmrc;
       ".config/hypr".source = ./hypr;
       ".local/share/applications/startup.desktop".source = ./startup/startup.desktop;
       ".scripts/startup.sh".source = ./startup/startup.sh;
