@@ -30,6 +30,6 @@ in
     pamixer
     cava
     nvtopPackages.full
-    pavucontrol # Audio control
+    pavucontrol
   ];
 }

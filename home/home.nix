@@ -146,6 +146,7 @@
       haruna
       qbittorrent
       viewnior
+      jq
     ];
   };
 }

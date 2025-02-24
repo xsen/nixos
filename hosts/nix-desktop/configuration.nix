@@ -145,6 +145,9 @@
     firewall = {
       enable = true;
       checkReversePath = false;
+      allowedTCPPorts = [
+        9003
+      ];
     };
   };
 
@@ -207,20 +210,7 @@
       enable = true;
       withUWSM = true;
       xwayland.enable = true;
-      portalPackage = pkgs.xdg-desktop-portal-hyprland;
     };
-  };
-
-  xdg.portal = {
-    enable = true;
-    wlr.enable = false;
-    extraPortals = [
-      pkgs.xdg-desktop-portal-gtk
-    ];
-    configPackages = [
-      pkgs.xdg-desktop-portal-gtk
-      pkgs.xdg-desktop-portal
-    ];
   };
 
   environment = {
@@ -248,13 +238,10 @@
       ripgrep
       tldr
       unzip
-      #xorg.xsetroot # to fix cursor in xwayland apps @see https://github.com/hyprwm/Hyprland/issues/7335
       kitty
       libnotify
       qt5.full
       qt6.full
-      #qt5.qtwayland
-      #qt6.qtwayland
       wl-clipboard
       xfce.thunar
     ];

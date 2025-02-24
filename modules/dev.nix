@@ -3,7 +3,6 @@ let
   vHosts = import ./dev-hosts.nix;
 in
 {
-  #security.pki.certificateFiles = [ /home/${username}/.local/share/mkcert/rootCA.pem ];
   users.users."${username}".extraGroups = [
     "docker"
   ];
@@ -11,10 +10,6 @@ in
   virtualisation = {
     docker = {
       enable = true;
-      rootless = {
-        enable = true;
-        setSocketVariable = true;
-      };
     };
   };
 
@@ -49,9 +44,6 @@ in
     openssl.dev
     lazygit
     lazydocker
-    #    (alpaca.override {
-    #      ollama = ollama-cuda;
-    #    })
     neovim
     jetbrains-toolbox
     jetbrains.jdk
