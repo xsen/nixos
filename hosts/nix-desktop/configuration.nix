@@ -40,8 +40,6 @@
     };
   };
 
-  nixpkgs.config.allowUnfree = true;
-
   boot = {
     loader = {
       efi.canTouchEfiVariables = true;
@@ -215,10 +213,11 @@
 
   environment = {
     sessionVariables = {
-      NIXOS_OZONE_WL = "1";
+#      NIXOS_OZONE_WL = "1";
     };
 
     systemPackages = with pkgs; [
+      nixgl.auto.nixGLDefault
       home-manager
       pciutils
       nixfmt-rfc-style

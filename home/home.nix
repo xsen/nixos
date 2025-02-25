@@ -123,7 +123,7 @@
 
     packages = with pkgs; [
       yandex-music
-      inputs.yandex-browser.packages.${pkgs.system}.yandex-browser-stable
+      yandex-browser-stable
       hyprcursor
       hyprsunset
       hyprpaper

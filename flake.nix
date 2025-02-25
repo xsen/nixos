@@ -2,6 +2,7 @@
   description = "Не надо дядя";
 
   inputs = {
+    nixgl.url = "github:nix-community/nixGL";
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     catppuccin.url = "github:catppuccin/nix";
 
@@ -24,20 +25,33 @@
   outputs =
     {
       self,
-      nixpkgs,
+      nixgl,
       nix-ld,
+      nixpkgs,
+      catppuccin,
       home-manager,
       yandex-browser,
-      catppuccin,
     }@inputs:
     let
       host = "nix-desktop";
       system = "x86_64-linux";
       username = "evgeny";
+
+      pkgsConfig = {
+        inherit system;
+        config = {
+          allowUnfree = true;
+        };
+        overlays = [
+          inputs.nixgl.overlay
+          (final: prev: {
+            yandex-browser-stable = inputs.yandex-browser.packages.${prev.system}.yandex-browser-stable;
+          })
+        ];
+      };
     in
     {
       nixosConfigurations."${host}" = nixpkgs.lib.nixosSystem {
-        inherit system;
         specialArgs = {
           inherit
             system
@@ -47,6 +61,7 @@
             ;
         };
         modules = [
+          { nixpkgs.pkgs = import nixpkgs pkgsConfig; }
           nix-ld.nixosModules.nix-ld
           catppuccin.nixosModules.catppuccin
           ./hosts/${host}/configuration.nix
@@ -54,7 +69,7 @@
       };
 
       homeConfigurations."${username}" = home-manager.lib.homeManagerConfiguration {
-        pkgs = nixpkgs.legacyPackages.${system};
+        pkgs = import nixpkgs pkgsConfig;
         extraSpecialArgs = {
           inherit
             system
