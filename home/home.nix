@@ -123,7 +123,17 @@
 
     packages = with pkgs; [
       yandex-music
-      yandex-browser-stable
+      (yandex-browser-stable.overrideAttrs (old: {
+        installPhase =
+          builtins.replaceStrings
+            [
+              "--gl=egl-angle --angle=opengl --use-angle=vulkan --enable-features=Vulkan,VulkanFromANGLE,DefaultANGLEVulkan,VaapiVideoDecoder,VaapiVideoEncoder,UseMultiPlaneFormatForHardwareVideo"
+            ]
+            [
+              "--enable-features=VaapiVideoDecoder,VaapiVideoEncoder"
+            ]
+            old.installPhase;
+      }))
       hyprcursor
       hyprsunset
       hyprpaper

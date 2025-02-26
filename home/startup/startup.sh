@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
-nixGL yandex-browser-stable --profile-directory='Profile 1' &
-nixGL yandex-browser-stable --profile-directory='Profile 2' &
 #yandex-browser-stable --profile-directory='Profile 1' &
 #yandex-browser-stable --profile-directory='Profile 2' &
-obsidian &
+nixGL yandex-browser-stable --profile-directory='Profile 1' &
+nixGL yandex-browser-stable --profile-directory='Profile 2' &
+obsidian --disable-gpu-compositing &
+discord --disable-gpu-compositing &
 ticktick &
-discord &
 yandex-music &
 telegram-desktop
