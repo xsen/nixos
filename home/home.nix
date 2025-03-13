@@ -109,6 +109,11 @@
   };
 
   home = {
+    sessionVariables = {
+      EDITOR = "vim";
+      BROWSER = "yandex-browser-stable";
+      TERMINAL = "kitty";
+    };
     sessionPath = [
       "$HOME/.npm-packages"
       "$HOME/.local/share/JetBrains/Toolbox/scripts"
@@ -122,6 +127,8 @@
     };
 
     packages = with pkgs; [
+      libva-utils
+      vulkan-tools
       yandex-music
       (yandex-browser-stable.overrideAttrs (old: {
         installPhase =
@@ -133,6 +140,9 @@
               "--enable-features=VaapiVideoDecoder,VaapiVideoEncoder"
             ]
             old.installPhase;
+      }))
+      (obsidian.override (old: {
+        commandLineArgs = "--disable-gpu-compositing";
       }))
       hyprcursor
       hyprsunset
@@ -147,7 +157,6 @@
       google-chrome
       blueberry
       keepassxc
-      obsidian
       ticktick
       nekoray
       discord

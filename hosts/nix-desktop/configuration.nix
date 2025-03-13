@@ -88,9 +88,9 @@
 
       #package = config.boot.kernelPackages.nvidiaPackages.latest;
       package = config.boot.kernelPackages.nvidiaPackages.mkDriver {
-        version = "570.86.16";
-        sha256_64bit = "sha256-RWPqS7ZUJH9JEAWlfHLGdqrNlavhaR1xMyzs8lJhy9U=";
-        sha256_aarch64 = "sha256-RWPqS7ZUJH9JEAWlfHLGdqrNlavhaR1xMyzs8lJhy9U=";
+        version = "570.124.04";
+        sha256_64bit = "sha256-G3hqS3Ei18QhbFiuQAdoik93jBlsFI2RkWOBXuENU8Q=";
+        sha256_aarch64 = "sha256-G3hqS3Ei18QhbFiuQAdoik93jBlsFI2RkWOBXuENU8Q=";
         openSha256 = "sha256-ZpuVZybW6CFN/gz9rx+UJvQ715FZnAOYfHn5jt5Z2C8=";
         settingsSha256 = "sha256-ZpuVZybW6CFN/gz9rx+UJvQ715FZnAOYfHn5jt5Z2C8=";
         persistencedSha256 = lib.fakeSha256;
@@ -212,6 +212,9 @@
   };
 
   environment = {
+    variables = {
+      EDITOR = "vim";
+    };
     sessionVariables = {
 #      NIXOS_OZONE_WL = "1";
     };
