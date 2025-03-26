@@ -161,7 +161,41 @@
       nekoray
       discord
       libreoffice-qt
-      yandex-disk
+      # todo: hotfix
+      (yandex-disk.overrideAttrs (
+        final: old:
+        with pkgs;
+        let
+          p = {
+            arch = "x86_64";
+            gcclib = "${lib.getLib pkgs.stdenv.cc.cc}/lib";
+            sha256 = "sha256-HH/pLZmDr6m/B3e6MHafDGnNWR83oR2y1ijVMR/LOF0=";
+            webarchive = "20220519080155";
+          };
+        in
+        {
+          src = fetchurl {
+            urls = [
+              "https://repo.yandex.ru/yandex-disk/rpm/stable/${p.arch}/${final.pname}-${final.version}-1.fedora.${p.arch}.rpm"
+              "https://web.archive.org/web/${p.webarchive}/https://repo.yandex.ru/yandex-disk/rpm/stable/${p.arch}/${final.pname}-${final.version}-1.fedora.${p.arch}.rpm"
+            ];
+            sha256 = p.sha256;
+          };
+          buildInputs = [
+            zlib
+            stdenv.cc.cc
+          ];
+          builder = writeText "builder.sh" (
+            (builtins.readFile old.builder)
+            + ''
+              ${patchelf}/bin/patchelf \
+                --set-rpath "${zlib.out}/lib:${p.gcclib}" \
+                $out/bin/yandex-disk
+            ''
+          );
+        }
+      ))
+#      yandex-disk
       haruna
       qbittorrent
       viewnior

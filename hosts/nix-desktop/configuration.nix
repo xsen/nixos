@@ -223,7 +223,7 @@
     };
     sessionVariables = {
       NIXOS_OZONE_WL = "1";
-      LD_LIBRARY_PATH = "/run/opengl-driver/lib:/run/opengl-driver-32/lib";
+#      LD_LIBRARY_PATH = "/run/opengl-driver/lib:/run/opengl-driver-32/lib";
     };
 
     systemPackages = with pkgs; [
