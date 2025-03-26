@@ -160,13 +160,15 @@ let g:WhichKeyDesc_info_show_usages = "<leader>iu Usages"
 let g:WhichKeyDesc_info_method_hierarchy = "<leader>im Method Hierarchy"
 
 " collapse
-nmap zz <Action>(ExpandCollapseToggleAction)
-nmap za <Action>(CollapseAllRegions)
-nmap zA <Action>(ExpandAllRegions)
-let g:WhichKeyDesc_expand = "<leader>z Expand or Collapse actions"
-let g:WhichKeyDesc_expand_toggle = "<leader>zz Toggle action, expand or collapse"
-let g:WhichKeyDesc_expand_toggle_collapse = "<leader>za Collapse all regions"
-let g:WhichKeyDesc_expand_toggle_expand= "<leader>zA Expand all regions"
+nmap zO <Action>(ExpandRegionRecursively)
+nmap zC <Action>(CollapseAllRegions)
+
+let g:WhichKeyDesc_z = "z Expand or Collapse actions"
+let g:WhichKeyDesc_z_toggle = "za Expand or Collapse actions"
+let g:WhichKeyDesc_z_collapse = "zc Collapse actions"
+let g:WhichKeyDesc_z_collapse_recursively = "zC Collapse recursively actions"
+let g:WhichKeyDesc_z_expand = "zo Expand actions"
+let g:WhichKeyDesc_z_expand_recursively = "zO Expand recursively actions"
 
 " Window splits
 nmap <leader>wv <action>(SplitVertically)

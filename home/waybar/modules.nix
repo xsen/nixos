@@ -69,7 +69,7 @@ in
   "clock" = {
     "interval" = 1;
     "format" = "{:%H\n%M}";
-    "format-alt" = " {:%H:%M:%S  %Y; %d %B; %A}";
+#    "format-alt" = " {:%H:%M:%S \n %Y\n %d %B \n %A}";
     "tooltip-format" = "<tt><small>{calendar}</small></tt>";
     "calendar" = {
       "mode" = "year";

@@ -5,14 +5,11 @@
     nixgl.url = "github:nix-community/nixGL";
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     catppuccin.url = "github:catppuccin/nix";
+    yandex-music.url = "github:cucumber-sp/yandex-music-linux";
+    yandex-browser.url = "github:miuirussia/yandex-browser.nix";
 
     home-manager = {
       url = "github:nix-community/home-manager/master";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    yandex-browser = {
-      url = "github:miuirussia/yandex-browser.nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -30,6 +27,7 @@
       nixpkgs,
       catppuccin,
       home-manager,
+      yandex-music,
       yandex-browser,
     }@inputs:
     let
@@ -81,6 +79,7 @@
         modules = [
           catppuccin.homeManagerModules.catppuccin
           ./hosts/${host}/home-manager.nix
+          yandex-music.homeManagerModules.default
         ];
       };
     };

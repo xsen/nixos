@@ -53,12 +53,18 @@
       };
     };
 
+    blacklistedKernelModules = [ "nouveau" ];
     kernelPackages = pkgs.linuxPackages_latest;
-    kernelParams = [ "video=3440x1440@144" ];
-
+    kernelParams = [
+      "video=3440x1440@144"
+      "nvidia.NVreg_EnableGpuFirmware=0"
+      "nvidia.NVreg_PreserveVideoMemoryAllocations=1"
+      "nvidia-drm.modeset=1"
+    ];
     initrd.kernelModules = [
       "nvidia"
       "nvidia_drm"
+      "nvidia_uvm"
     ];
   };
 
@@ -216,7 +222,8 @@
       EDITOR = "vim";
     };
     sessionVariables = {
-#      NIXOS_OZONE_WL = "1";
+      NIXOS_OZONE_WL = "1";
+      LD_LIBRARY_PATH = "/run/opengl-driver/lib:/run/opengl-driver-32/lib";
     };
 
     systemPackages = with pkgs; [
