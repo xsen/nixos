@@ -130,17 +130,7 @@
       libva-utils
       vulkan-tools
       yandex-music
-      (yandex-browser-stable.overrideAttrs (old: {
-        installPhase =
-          builtins.replaceStrings
-            [
-              "--gl=egl-angle --angle=opengl --use-angle=vulkan --enable-features=Vulkan,VulkanFromANGLE,DefaultANGLEVulkan,VaapiVideoDecoder,VaapiVideoEncoder,UseMultiPlaneFormatForHardwareVideo"
-            ]
-            [
-              "--enable-features=VaapiVideoDecoder,VaapiVideoEncoder"
-            ]
-            old.installPhase;
-      }))
+      yandex-browser-stable
       (obsidian.override (old: {
         commandLineArgs = "--disable-gpu-compositing";
       }))

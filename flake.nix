@@ -2,11 +2,10 @@
   description = "Не надо дядя";
 
   inputs = {
-    nixgl.url = "github:nix-community/nixGL";
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     catppuccin.url = "github:catppuccin/nix";
     yandex-music.url = "github:cucumber-sp/yandex-music-linux";
-    yandex-browser.url = "github:miuirussia/yandex-browser.nix";
+    yandex-browser.url = "github:xsen/yandex-browser.nix";
 
     home-manager = {
       url = "github:nix-community/home-manager/master";
@@ -22,7 +21,6 @@
   outputs =
     {
       self,
-      nixgl,
       nix-ld,
       nixpkgs,
       catppuccin,
@@ -41,7 +39,6 @@
           allowUnfree = true;
         };
         overlays = [
-          inputs.nixgl.overlay
           (final: prev: {
             yandex-browser-stable = inputs.yandex-browser.packages.${prev.system}.yandex-browser-stable;
           })
