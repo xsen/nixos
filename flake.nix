@@ -5,7 +5,7 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     catppuccin.url = "github:catppuccin/nix";
     yandex-music.url = "github:cucumber-sp/yandex-music-linux";
-    yandex-browser.url = "github:xsen/yandex-browser.nix";
+    yandex-browser.url = "github:miuirussia/yandex-browser.nix";
 
     home-manager = {
       url = "github:nix-community/home-manager/master";
@@ -37,6 +37,9 @@
         inherit system;
         config = {
           allowUnfree = true;
+          permittedInsecurePackages = [
+            "SDL_ttf-2.0.11"
+          ];
         };
         overlays = [
           (final: prev: {

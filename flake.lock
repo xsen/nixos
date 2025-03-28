@@ -58,11 +58,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1742996658,
-        "narHash": "sha256-snxgTLVq6ooaD3W3mPHu7LVWpoZKczhxHAUZy2ea4oA=",
+        "lastModified": 1743136572,
+        "narHash": "sha256-uwaVrKgi6g1TUq56247j6QvvFtYHloCkjCrEpGBvV54=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "693840c01b9bef9e54100239cef937e53d4661bf",
+        "rev": "1efd2503172016a6742c87b47b43ca2c8145607d",
         "type": "github"
       },
       "original": {
@@ -187,15 +187,15 @@
         "nixpkgs": "nixpkgs_3"
       },
       "locked": {
-        "lastModified": 1743073893,
+        "lastModified": 1743093880,
         "narHash": "sha256-nKmee1sJz0VdgjPyn4Seu7XXRvh+1ZkPgBvjsaywCpo=",
-        "owner": "xsen",
+        "owner": "miuirussia",
         "repo": "yandex-browser.nix",
-        "rev": "734f4bf1ebcb2c156062758dfcdce46390d5961e",
+        "rev": "4578099af74f533bb9e0ed323c380d84a7a169dc",
         "type": "github"
       },
       "original": {
-        "owner": "xsen",
+        "owner": "miuirussia",
         "repo": "yandex-browser.nix",
         "type": "github"
       }
@@ -207,11 +207,11 @@
         "ymExe": "ymExe"
       },
       "locked": {
-        "lastModified": 1743036348,
-        "narHash": "sha256-xQ3rsNHtCMsO9iFZpwhZCYF3JuxGqPtMmhSkzOZSrgI=",
+        "lastModified": 1743122736,
+        "narHash": "sha256-qv/GFlxstkvQUhChBW9HBAra2h9QxLBb+iKciA6QvmY=",
         "owner": "cucumber-sp",
         "repo": "yandex-music-linux",
-        "rev": "7736f7df8687195235a7360311a2a4265ae3da2b",
+        "rev": "430325bfde5e6d0391805df602959582d10529be",
         "type": "github"
       },
       "original": {
