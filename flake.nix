@@ -77,7 +77,7 @@
             ;
         };
         modules = [
-          catppuccin.homeManagerModules.catppuccin
+          catppuccin.homeModules.catppuccin
           ./hosts/${host}/home-manager.nix
           yandex-music.homeManagerModules.default
         ];
