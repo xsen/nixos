@@ -21,14 +21,11 @@ in
       virtualHosts = vHosts.virtualHosts;
     };
     open-webui = {
-      enable = false;
+      enable = true;
     };
     ollama = {
-      enable = false;
+      enable = true;
       acceleration = "cuda";
-      environmentVariables = {
-        OLLAMA_LLM_LIBRARY = "cuda";
-      };
     };
   };
 

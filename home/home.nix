@@ -36,9 +36,11 @@
   services = {
     mako = {
       enable = true;
-      width = 600;
-      padding = "20";
-      defaultTimeout = 10000;
+      settings = {
+        width = 600;
+        padding = "20";
+        default-timeout = 10000;
+      };
     };
   };
 

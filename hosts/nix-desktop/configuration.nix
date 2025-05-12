@@ -94,9 +94,9 @@
 
       #package = config.boot.kernelPackages.nvidiaPackages.latest;
       package = config.boot.kernelPackages.nvidiaPackages.mkDriver {
-        version = "570.133.07";
-        sha256_64bit = "sha256-LUPmTFgb5e9VTemIixqpADfvbUX1QoTT2dztwI3E3CY=";
-        sha256_aarch64 = "sha256-LUPmTFgb5e9VTemIixqpADfvbUX1QoTT2dztwI3E3CY=";
+        version = "570.144";
+        sha256_64bit = "sha256-wLjX7PLiC4N2dnS6uP7k0TI9xVWAJ02Ok0Y16JVfO+Y=";
+        sha256_aarch64 = "sha256-wLjX7PLiC4N2dnS6uP7k0TI9xVWAJ02Ok0Y16JVfO+Y=";
         openSha256 = "sha256-ZpuVZybW6CFN/gz9rx+UJvQ715FZnAOYfHn5jt5Z2C8=";
         settingsSha256 = "sha256-ZpuVZybW6CFN/gz9rx+UJvQ715FZnAOYfHn5jt5Z2C8=";
         persistencedSha256 = lib.fakeSha256;
@@ -138,6 +138,14 @@
 
   security = {
     rtkit.enable = true;
+    wrappers = {
+      nekobox_core = {
+        source = "${pkgs.nekoray.passthru.nekobox-core}/bin/nekobox_core";
+        owner = "root";
+        group = "root";
+        setuid = true;
+      };
+    };
   };
 
   networking = {
@@ -223,7 +231,6 @@
     };
     sessionVariables = {
       NIXOS_OZONE_WL = "1";
-#      LD_LIBRARY_PATH = "/run/opengl-driver/lib:/run/opengl-driver-32/lib";
     };
 
     systemPackages = with pkgs; [
@@ -242,6 +249,7 @@
       eza
       fzf
       bat
+      libcap
       lm_sensors
       ripgrep
       tldr

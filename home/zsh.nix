@@ -14,7 +14,7 @@ in
       enableCompletion = true;
       autosuggestion.enable = true;
       syntaxHighlighting.enable = true;
-      initExtra = ''
+      initContent = ''
         eval "$(starship init zsh)"
         bindkey "''${key[Up]}" up-line-or-search
       '';

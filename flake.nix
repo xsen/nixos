@@ -4,7 +4,7 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     catppuccin.url = "github:catppuccin/nix";
-    yandex-music.url = "github:cucumber-sp/yandex-music-linux";
+#    yandex-music.url = "github:cucumber-sp/yandex-music-linux";
     yandex-browser.url = "github:miuirussia/yandex-browser.nix";
 
     home-manager = {
@@ -25,7 +25,7 @@
       nixpkgs,
       catppuccin,
       home-manager,
-      yandex-music,
+#      yandex-music,
       yandex-browser,
     }@inputs:
     let
@@ -42,6 +42,7 @@
           ];
         };
         overlays = [
+          (import ./overlays/nekoray.nix)
           (final: prev: {
             yandex-browser-stable = inputs.yandex-browser.packages.${prev.system}.yandex-browser-stable;
           })
@@ -79,7 +80,7 @@
         modules = [
           catppuccin.homeModules.catppuccin
           ./hosts/${host}/home-manager.nix
-          yandex-music.homeManagerModules.default
+#          yandex-music.homeManagerModules.default
         ];
       };
     };
