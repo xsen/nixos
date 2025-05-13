@@ -3,8 +3,8 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    catppuccin.url = "github:catppuccin/nix";
-#    yandex-music.url = "github:cucumber-sp/yandex-music-linux";
+    catppuccin.url = "github:catppuccin/nix/main";
+    #    yandex-music.url = "github:cucumber-sp/yandex-music-linux";
     yandex-browser.url = "github:miuirussia/yandex-browser.nix";
 
     home-manager = {
@@ -25,7 +25,7 @@
       nixpkgs,
       catppuccin,
       home-manager,
-#      yandex-music,
+      #      yandex-music,
       yandex-browser,
     }@inputs:
     let
@@ -33,20 +33,14 @@
       system = "x86_64-linux";
       username = "evgeny";
 
-      pkgsConfig = {
+      pkgs = import nixpkgs {
         inherit system;
         config = {
           allowUnfree = true;
-          permittedInsecurePackages = [
-            "SDL_ttf-2.0.11"
-          ];
+          permittedInsecurePackages = [ "SDL_ttf-2.0.11" ];
         };
         overlays = [
-          (import ./overlays/nekoray.nix)
-          (import ./overlays/discord.nix)
-          (final: prev: {
-            yandex-browser-stable = inputs.yandex-browser.packages.${prev.system}.yandex-browser-stable;
-          })
+         (import ./overlays.nix { inherit inputs; })
         ];
       };
     in
@@ -61,15 +55,18 @@
             ;
         };
         modules = [
-          { nixpkgs.pkgs = import nixpkgs pkgsConfig; }
           nix-ld.nixosModules.nix-ld
+          home-manager.nixosModules.home-manager
           catppuccin.nixosModules.catppuccin
           ./hosts/${host}/configuration.nix
+          {
+            nixpkgs.pkgs = pkgs;
+          }
         ];
       };
 
       homeConfigurations."${username}" = home-manager.lib.homeManagerConfiguration {
-        pkgs = import nixpkgs pkgsConfig;
+        inherit pkgs;
         extraSpecialArgs = {
           inherit
             system
@@ -81,7 +78,7 @@
         modules = [
           catppuccin.homeModules.catppuccin
           ./hosts/${host}/home-manager.nix
-#          yandex-music.homeManagerModules.default
+          #          yandex-music.homeManagerModules.default
         ];
       };
     };

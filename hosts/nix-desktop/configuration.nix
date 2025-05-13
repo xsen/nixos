@@ -15,6 +15,7 @@
     ../../modules/nix-ld.nix
     ../../modules/dev.nix
     ../../modules/games.nix
+    ../../modules/packages.nix
   ];
 
   nix = {
@@ -163,9 +164,6 @@
     };
   };
 
-  catppuccin.enable = true;
-  catppuccin.flavor = "mocha";
-
   time.timeZone = "Asia/Yekaterinburg";
 
   i18n = {
@@ -215,14 +213,9 @@
     noto-fonts
   ];
 
-  programs = {
-    zsh.enable = true;
-
-    hyprland = {
-      enable = true;
-      withUWSM = true;
-      xwayland.enable = true;
-    };
+  catppuccin = {
+    enable = true;
+    flavor = "mocha";
   };
 
   environment = {
@@ -232,35 +225,6 @@
     sessionVariables = {
       NIXOS_OZONE_WL = "1";
     };
-
-    systemPackages = with pkgs; [
-      home-manager
-      pciutils
-      nixfmt-rfc-style
-      wget
-      curl
-      git
-      vim
-      zip
-      p7zip
-      zoxide
-      yazi
-      neofetch
-      eza
-      fzf
-      bat
-      libcap
-      lm_sensors
-      ripgrep
-      tldr
-      unzip
-      kitty
-      libnotify
-      qt5.full
-      qt6.full
-      wl-clipboard
-      xfce.thunar
-    ];
   };
 
   system.stateVersion = "24.05";
