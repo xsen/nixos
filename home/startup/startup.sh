@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 yandex-browser-stable --profile-directory='Profile 1' &
-discord --disable-gpu-compositing &
+discord &
 plexamp &
 telegram-desktop &
 yandex-browser-stable --profile-directory='Profile 2' &

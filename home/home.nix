@@ -122,6 +122,7 @@
     ];
     file = {
       ".ideavimrc".source = ./ideavimrc;
+      ".config/satty/config.toml".source = ./satty.toml; # ver 0.18.0 bugs https://github.com/gabm/Satty/issues/170
       ".npmrc".source = ./npmrc;
       ".config/hypr".source = ./hypr;
       ".local/share/applications/startup.desktop".source = ./startup/startup.desktop;
