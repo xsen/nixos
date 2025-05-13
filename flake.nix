@@ -43,6 +43,7 @@
         };
         overlays = [
           (import ./overlays/nekoray.nix)
+          (import ./overlays/discord.nix)
           (final: prev: {
             yandex-browser-stable = inputs.yandex-browser.packages.${prev.system}.yandex-browser-stable;
           })
