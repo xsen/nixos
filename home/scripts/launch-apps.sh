@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/sh
 yandex-browser-stable --profile-directory='Profile 1' &
 discord &
 plexamp &

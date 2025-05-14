@@ -1,19 +1,14 @@
 {
+  lib,
   pkgs,
   inputs,
+  config,
   ...
 }:
 {
   imports = [
     ./packages.nix
   ];
-
-  nixpkgs = {
-    config = {
-      allowUnfree = true;
-      allowUnfreePredicate = (_: true);
-    };
-  };
 
   wayland.windowManager.hyprland.systemd.enable = false;
 
@@ -54,22 +49,52 @@
   };
 
   home = {
+    activation = {
+      setupWallpapers = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+        mkdir -p ~/.wallpapers
+
+        if [ ! -f ~/.wallpapers/default.png ]; then
+          cp --no-clobber "${./wallpaper-default.png}" ~/.wallpapers/default.png
+        fi
+
+        if [ ! -e ~/.wallpapers/current.png ]; then
+          ln -sf "${./wallpaper-default.png}" ~/.wallpapers/current.png
+        fi
+      '';
+    };
     sessionVariables = {
       EDITOR = "vim";
       BROWSER = "yandex-browser-stable";
       TERMINAL = "kitty";
+      NH_OS_FLAKE = "$HOME/.nix-config";
     };
     sessionPath = [
+      "$HOME/.scripts"
       "$HOME/.npm-packages"
       "$HOME/.local/share/JetBrains/Toolbox/scripts"
     ];
     file = {
-      ".ideavimrc".source = ./ideavimrc;
-      ".config/satty/config.toml".source = ./satty.toml; # ver 0.18.0 bugs https://github.com/gabm/Satty/issues/170
       ".npmrc".source = ./npmrc;
+      ".ideavimrc".source = ./ideavimrc;
       ".config/hypr".source = ./hypr;
-      ".local/share/applications/startup.desktop".source = ./startup/startup.desktop;
-      ".scripts/startup.sh".source = ./startup/startup.sh;
+      ".config/satty/config.toml".source = ./satty.toml; # ver 0.18.0 bugs https://github.com/gabm/Satty/issues/170
+      ".scripts/launch-apps" = {
+        source = ./scripts/launch-apps.sh;
+        executable = true;
+      };
+      ".scripts/change-wallpaper" = {
+        source = ./scripts/change-wallpaper.sh;
+        executable = true;
+      };
+      ".local/share/applications/launch-apps.desktop".text = ''
+        [Desktop Entry]
+        Version=1.0
+        Type=Application
+        Name=Launch Apps
+        Comment=Launches common applications
+        Exec=${config.home.homeDirectory}/.scripts/launch-apps
+        StartupNotify=false
+      '';
     };
   };
 }

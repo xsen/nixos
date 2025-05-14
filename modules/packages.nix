@@ -63,6 +63,7 @@
     qbittorrent
     viewnior
     jq
+    nh
     plex-desktop
     (plexamp.overrideAttrs (old: {
       nativeBuildInputs = (old.nativeBuildInputs or [ ]) ++ [ makeWrapper ];

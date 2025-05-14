@@ -4,9 +4,6 @@
   inputs,
   ...
 }:
-let
-  nixFlakePath = "${config.home.homeDirectory}/Code/nixos/xsen";
-in
 {
   programs = {
     zsh = {
@@ -19,15 +16,12 @@ in
         bindkey "''${key[Up]}" up-line-or-search
       '';
       shellAliases = {
-        cat = "bat";
+        #cat = "bat";
         ls = "eza --icons=always";
-        nx-clean = ''
-          sudo nix-collect-garbage -d
-          home-manager expire-generations "now"
-        '';
-        nx-rebuild = "sudo nixos-rebuild switch --flake ${nixFlakePath} && home-manager switch --flake ${nixFlakePath}";
-        nx-flake = "sudo nixos-rebuild switch --flake ${nixFlakePath}";
-        nx-home = "home-manager switch --flake ${nixFlakePath}";
+        nh-clean = "nh clean all";
+        nh-all = "nh os switch && nh home switch";
+        nh-os = "nh os switch";
+        nh-home = "nh home switch";
         sail = "sh $([ -f sail ] && echo sail || echo vendor/bin/sail)";
       };
     };

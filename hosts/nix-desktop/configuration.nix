@@ -19,12 +19,6 @@
   ];
 
   nix = {
-    gc = {
-      automatic = false;
-      dates = "weekly";
-      options = "--delete-older-than 7d";
-    };
-
     settings = {
       experimental-features = [
         "flakes"
@@ -148,6 +142,20 @@
       };
     };
   };
+  systemd.services.sddm-wallpaper = {
+    description = "Update SDDM wallpaper";
+    script = ''
+      mkdir -p /background
+      chmod 755 /background
+      if [ -f "/home/${username}/.wallpapers/current.png" ]; then
+        cp -f "/home/${username}/.wallpapers/current.png" "/background/current.png"
+      else
+        echo "Warning: Source wallpaper not found!" >&2
+      fi
+    '';
+    serviceConfig.Type = "oneshot";
+    wantedBy = [ "display-manager.service" ];
+  };
 
   networking = {
     hostName = host;
@@ -216,6 +224,12 @@
   catppuccin = {
     enable = true;
     flavor = "mocha";
+
+    sddm = {
+      fontSize = "20";
+      background = "/background/current.png";
+      font = "JetBrainsMono Nerd Font";
+    };
   };
 
   environment = {
