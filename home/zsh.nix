@@ -2,6 +2,7 @@
   pkgs,
   config,
   inputs,
+  lib,
   ...
 }:
 {
@@ -27,8 +28,19 @@
     };
     starship = {
       enable = true;
+      enableZshIntegration = true;
       settings = {
-        format = "[](fg:surface0)[󱄅](bg:surface0 fg:blue)$username[ ](fg:surface0 bg:surface1)$directory[ ](fg:surface1 bg:surface2)$git_branch$git_status[ ](fg:surface2 bg:surface0)[$c$rust$golang$nodejs$php$java$kotlin$haskell$python$docker_context](bg:surface0)$time[](fg:surface0)$line_break$character";
+        format = lib.concatStrings [
+          "[](fg:surface0)"
+          "[󱄅](bg:surface0 fg:blue)$username"
+          "[ ](fg:surface0 bg:surface1)"
+          "$directory"
+          "[ ](fg:surface1 bg:surface2)$git_branch$git_status"
+          "[ ](fg:surface2 bg:surface0)"
+          "[$c$rust$golang$nodejs$php$java$kotlin$haskell$python$docker_context](bg:surface0)"
+          "$time"
+          "[](fg:surface0)$line_break$character"
+        ];
         username = {
           show_always = true;
           style_user = "bg:surface0 fg:green";

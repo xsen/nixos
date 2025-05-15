@@ -25,7 +25,7 @@ window#waybar.hidden {
 .modules-center,
 .modules-right {
     padding: 2px;
-    background: rgba(30,30,48, 0.9);
+    background: rgba(30,30,48, 0.7);
     border: 2px solid @overlay0;
     border-radius: 4px;
 }

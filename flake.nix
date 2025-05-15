@@ -4,7 +4,7 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     catppuccin.url = "github:catppuccin/nix/main";
-    #    yandex-music.url = "github:cucumber-sp/yandex-music-linux";
+    spicetify-nix.url = "github:Gerg-L/spicetify-nix";
     yandex-browser.url = "github:miuirussia/yandex-browser.nix";
 
     home-manager = {
@@ -25,7 +25,7 @@
       nixpkgs,
       catppuccin,
       home-manager,
-      #      yandex-music,
+      spicetify-nix,
       yandex-browser,
     }@inputs:
     let
@@ -40,7 +40,7 @@
           permittedInsecurePackages = [ "SDL_ttf-2.0.11" ];
         };
         overlays = [
-         (import ./overlays.nix { inherit inputs; })
+          (import ./overlays.nix { inherit inputs; })
         ];
       };
     in
@@ -77,6 +77,7 @@
         };
         modules = [
           catppuccin.homeModules.catppuccin
+          spicetify-nix.homeManagerModules.spicetify
           ./hosts/${host}/home-manager.nix
           #          yandex-music.homeManagerModules.default
         ];

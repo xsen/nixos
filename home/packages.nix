@@ -1,4 +1,7 @@
-{ pkgs, ... }:
+{ pkgs, inputs, ... }:
+let
+  spicePkgs = inputs.spicetify-nix.legacyPackages.${pkgs.stdenv.system};
+in
 {
 
   imports = [
@@ -7,6 +10,17 @@
     ./zsh.nix
   ];
   programs = {
+    spicetify = {
+      enable = true;
+      wayland = false;
+      windowManagerPatch = true;
+      enabledExtensions = with spicePkgs.extensions; [
+        adblockify
+        shuffle
+      ];
+      theme = spicePkgs.themes.catppuccin;
+      colorScheme = "mocha";
+    };
     btop = {
       enable = true;
       package = pkgs.btop.override { cudaSupport = true; };
@@ -19,7 +33,6 @@
       };
       settings = {
         confirm_os_window_close = 0;
-        background_opacity = 0.8;
         window_padding_width = 8;
       };
       shellIntegration.enableZshIntegration = true;
