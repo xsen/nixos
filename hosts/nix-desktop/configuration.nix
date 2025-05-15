@@ -169,6 +169,10 @@
       allowedTCPPorts = [
         9003
       ];
+
+      trustedInterfaces = [
+        "br-*"
+      ];
     };
   };
 
