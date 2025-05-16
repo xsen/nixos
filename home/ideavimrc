@@ -1,7 +1,7 @@
 "" ========================================================
 "" Base Settings
 "" ========================================================
-set scrolloff=10
+set scrolloff=6
 set history=1000
 set number relativenumber
 set showmode
@@ -11,6 +11,9 @@ set ignorecase
 set incsearch
 set hlsearch
 set visualbell
+
+set selectmode=key
+set keymodel+=startsel,stopsel,stopselect
 
 " Clipboard Integration
 set clipboard=unnamedplus

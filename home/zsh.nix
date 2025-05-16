@@ -7,6 +7,7 @@
 }:
 {
   programs = {
+    hstr.enable = true;
     zsh = {
       enable = true;
       enableCompletion = true;
@@ -24,6 +25,11 @@
         nh-os = "nh os switch";
         nh-home = "nh home switch";
         sail = "sh $([ -f sail ] && echo sail || echo vendor/bin/sail)";
+      };
+      history = {
+        size = 1000000;
+        save = 1000000;
+        ignoreSpace = true;
       };
     };
     starship = {
@@ -123,12 +129,12 @@
         };
         character = {
           disabled = false;
-          success_symbol = "[](bold fg:green)";
-          error_symbol = "[](bold fg:red)";
-          vimcmd_symbol = "[](bold fg:green)";
+          success_symbol = "[](bold fg:green)";
+          error_symbol = "[](bold fg:red)";
+          vimcmd_symbol = "[](bold fg:green)";
           vimcmd_replace_one_symbol = "[](bold fg:pink)";
-          vimcmd_replace_symbol = "[](bold fg:pink)";
-          vimcmd_visual_symbol = "[](bold fg:yellow)";
+          #          vimcmd_replace_symbol = "[](bold fg:pink)";
+          #          vimcmd_visual_symbol = "[](bold fg:yellow)";
         };
       };
     };

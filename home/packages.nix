@@ -1,4 +1,9 @@
-{ pkgs, inputs, ... }:
+{
+  lib,
+  pkgs,
+  inputs,
+  ...
+}:
 let
   spicePkgs = inputs.spicetify-nix.legacyPackages.${pkgs.stdenv.system};
 in
@@ -6,7 +11,7 @@ in
 
   imports = [
     ./waybar
-    ./rofi.nix
+    ./rofi
     ./zsh.nix
   ];
   programs = {
@@ -27,15 +32,23 @@ in
     };
     kitty = {
       enable = true;
+      shellIntegration.enableZshIntegration = true;
+
       font = {
         name = "JetBrainsMono Nerd Font";
         size = 14;
       };
+
       settings = {
         confirm_os_window_close = 0;
         window_padding_width = 8;
       };
-      shellIntegration.enableZshIntegration = true;
+
+      keybindings = {
+        "ctrl+c" = "copy_and_clear_or_interrupt";
+        "ctrl+v" = "paste_from_clipboard";
+        "ctrl+shift+c" = "send_text all \\x03";
+      };
     };
     vim = {
       enable = true;

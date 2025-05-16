@@ -54,11 +54,11 @@
         mkdir -p ~/.wallpapers
 
         if [ ! -f ~/.wallpapers/default.png ]; then
-          cp --no-clobber "${./wallpaper-default.png}" ~/.wallpapers/default.png
+          cp --no-clobber "${./images/wallpaper-default.png}" ~/.wallpapers/default.png
         fi
 
         if [ ! -e ~/.wallpapers/current.png ]; then
-          ln -sf "${./wallpaper-default.png}" ~/.wallpapers/current.png
+          ln -sf "${./images/wallpaper-default.png}" ~/.wallpapers/current.png
         fi
       '';
     };
@@ -86,12 +86,15 @@
         source = ./scripts/change-wallpaper.sh;
         executable = true;
       };
+
+      ".local/share/icons/start-apps-icon.png".source = ./images/start-apps-icon.png;
       ".local/share/applications/launch-apps.desktop".text = ''
         [Desktop Entry]
         Version=1.0
         Type=Application
         Name=Launch Apps
         Comment=Launches common applications
+        Icon=${config.home.homeDirectory}/.local/share/icons/start-apps-icon.png
         Exec=${config.home.homeDirectory}/.scripts/launch-apps
         StartupNotify=false
       '';
