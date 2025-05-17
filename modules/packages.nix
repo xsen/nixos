@@ -39,7 +39,6 @@
     libva-utils
     vulkan-tools
     yandex-disk
-    yandex-music
     yandex-browser-stable
     hyprcursor
     hyprsunset
