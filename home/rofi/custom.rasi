@@ -7,7 +7,7 @@
 
 /* General element states - mapping original logic to Catppuccin */
 * {
-  active-background:              @mauve;
+  active-background:              @lavender;
   active-foreground:              @crust;
   normal-background:              @base;
   normal-foreground:              @text;
@@ -21,23 +21,23 @@
   alternate-urgent-background:    @maroon;
   alternate-urgent-foreground:    @crust;
 
-  selected-active-background:     @pink;
+  selected-active-background:     @lavender;
   selected-active-foreground:     @crust;
-  selected-normal-background:     @pink;
+  selected-normal-background:     @lavender;
   selected-normal-foreground:     @crust;
   selected-urgent-background:     @flamingo;
   selected-urgent-foreground:     @crust;
 
   background-color:               transparent;
   foreground:                     @text;
-  border-color:                   @mauve;
+  border-color:                   @lavender;
 }
 
 /*****----- Global Properties (Original Aliases Mapped to Catppuccin) -----*****/
 * {
     background-alt:              @surface0;
-    selected:                    @pink;
-    active:                      @mauve;
+    selected:                    @lavender;
+    active:                      @lavender;
     urgent:                      @red;
 }
 
@@ -108,7 +108,7 @@ entry {
     background-color:            inherit;
     text-color:                  inherit;
     cursor:                      text;
-    placeholder:                 "Search     👀 NOTE: CTRL TAB to change MODE";
+    placeholder:                 "Search      ❔: CTRL TAB to change MODE";
     placeholder-color:           @subtext0;
 }
 

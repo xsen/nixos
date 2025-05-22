@@ -7,7 +7,7 @@ set number relativenumber
 set showmode
 set showcmd
 set smartcase
-set ignorecase
+" set ignorecase
 set incsearch
 set hlsearch
 set visualbell
