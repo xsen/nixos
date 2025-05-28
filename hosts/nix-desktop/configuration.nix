@@ -129,6 +129,21 @@
       alsa.enable = true;
       alsa.support32Bit = true;
     };
+
+    syncthing = {
+      enable = true;
+      user = username;
+      dataDir = "/home/${username}/Cloud/Syncthing";
+      overrideDevices = true;
+      overrideFolders = true;
+      settings = {
+        folders = {
+          "Books" = {
+            path = "/home/${username}/Cloud/Syncthing/Books";
+          };
+        };
+      };
+    };
   };
 
   security = {
@@ -168,6 +183,12 @@
       checkReversePath = false;
       allowedTCPPorts = [
         9003
+        8384
+        22000
+      ];
+      allowedUDPPorts = [
+        22000
+        21027
       ];
 
       trustedInterfaces = [

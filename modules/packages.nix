@@ -58,6 +58,8 @@
     nekoray
     discord
     libreoffice-qt
+    koreader
+    figma-linux
     haruna
     qbittorrent
     viewnior
