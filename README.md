@@ -26,29 +26,29 @@ Applications are styled with the Catppuccin Mocha theme.
 ![Showcase3](home/images/showcase3.png)
 
 ## 🛠️ Components
-| Component         | Description                    |
-|-------------------|--------------------------------|
-| Video driver      | Nvidia "570.153.02"            |
-| Shell             | Zsh                            |
-| Shell Prompt      | Starship                       |
-| WM (Compositor)   | Hyprland                       |
-| Bar               | Waybar                         |
-| Notification      | Mako                           |
-| Launcher          | Rofi-Wayland                   |
-| Editor            | JetBrains IDE                  |
-| Terminal          | Kitty                          |
-| Theme             | Catppuccin Mocha               |
-| Font              | JetBrains Mono Nerd Font       |
-| Player            | Yandex Music + Spotify         |
-| File Browser      | Thunar + Yazi                  |
-| Internet Browser  | Yandex Browser + Google Chrome |
-| Screenshot        | Hyprshot + Satty               |
-| Idle              | Hypridle                       |
-| Lock              | Hyprlock                       |
-| Wallpaper         | Hyprpaper                      |
-| Display Manager   | SDDM                           |
-| Polkit            | lxqt-policykit                 |
-| Network           | Nekoray Tun mode               |
+| Component        | Description                    |
+|------------------|--------------------------------|
+| Video driver     | Nvidia "575.64.05"             |
+| Shell            | Zsh                            |
+| Shell Prompt     | Starship                       |
+| WM (Compositor)  | Hyprland                       |
+| Bar              | Waybar                         |
+| Notification     | Mako                           |
+| Launcher         | Rofi-Wayland                   |
+| Editor           | JetBrains IDE                  |
+| Terminal         | Kitty                          |
+| Theme            | Catppuccin Mocha               |
+| Font             | JetBrains Mono Nerd Font       |
+| Player           | Yandex Music + Spotify         |
+| File Browser     | Thunar + Yazi                  |
+| Internet Browser | Yandex Browser + Google Chrome |
+| Screenshot       | Hyprshot + Satty               |
+| Idle             | Hypridle                       |
+| Lock             | Hyprlock                       |
+| Wallpaper        | Hyprpaper                      |
+| Display Manager  | SDDM                           |
+| Polkit           | lxqt-policykit                 |
+| Network          | Nekoray Tun mode               |
 
 ## 🖥️ Installation
 - Install NixOS

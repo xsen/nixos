@@ -89,14 +89,17 @@
 
       #package = config.boot.kernelPackages.nvidiaPackages.latest;
       package = config.boot.kernelPackages.nvidiaPackages.mkDriver {
-        version = "570.153.02";
-        sha256_64bit = "sha256-FIiG5PaVdvqPpnFA5uXdblH5Cy7HSmXxp6czTfpd4bY=";
-        sha256_aarch64 = "sha256-FIiG5PaVdvqPpnFA5uXdblH5Cy7HSmXxp6czTfpd4bY=";
+
+        version = "575.64.05";
+        sha256_64bit = "sha256-hfK1D5EiYcGRegss9+H5dDr/0Aj9wPIJ9NVWP3dNUC0=";
+        sha256_aarch64 = "sha256-hfK1D5EiYcGRegss9+H5dDr/0Aj9wPIJ9NVWP3dNUC0=";
+
         openSha256 = "sha256-ZpuVZybW6CFN/gz9rx+UJvQ715FZnAOYfHn5jt5Z2C8=";
         settingsSha256 = "sha256-ZpuVZybW6CFN/gz9rx+UJvQ715FZnAOYfHn5jt5Z2C8=";
         persistencedSha256 = lib.fakeSha256;
       };
     };
+
   };
 
   services = {
@@ -134,8 +137,8 @@
       enable = true;
       user = username;
       dataDir = "/home/${username}/Cloud/Syncthing";
-      overrideDevices = true;
-      overrideFolders = true;
+      overrideDevices = false;
+      overrideFolders = false;
       settings = {
         folders = {
           "Books" = {

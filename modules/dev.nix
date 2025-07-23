@@ -42,7 +42,7 @@ in
     lazydocker
     neovim
     jetbrains-toolbox
-    jetbrains.jdk
+#    jetbrains.jdk
     code-cursor
     vscode
   ];
