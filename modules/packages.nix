@@ -35,7 +35,8 @@
     qt5.full
     qt6.full
     wl-clipboard
-    xfce.thunar
+    pcmanfm-qt
+    peazip
     libva-utils
     vulkan-tools
     yandex-disk

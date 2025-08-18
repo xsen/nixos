@@ -2,7 +2,7 @@
 yandex-browser-stable --profile-directory='Profile 1' &
 discord &
 spotify &
-telegram-desktop &
+Telegram &
 yandex-browser-stable --profile-directory='Profile 2' &
 obsidian &
 ticktick

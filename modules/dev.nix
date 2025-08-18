@@ -42,8 +42,9 @@ in
     lazydocker
     neovim
     jetbrains-toolbox
+    zed-editor
 #    jetbrains.jdk
-    code-cursor
-    vscode
+#    code-cursor
+#    vscode
   ];
 }

@@ -16,11 +16,6 @@
     enable = true;
     flavor = "mocha";
 
-    gtk = {
-      enable = true;
-      icon.enable = true;
-    };
-
     cursors = {
       enable = true;
       accent = "blue";
@@ -72,6 +67,7 @@
       "$HOME/.scripts"
       "$HOME/.npm-packages"
       "$HOME/.local/share/JetBrains/Toolbox/scripts"
+      "$HOME/.config/composer/vendor/bin"
     ];
     file = {
       ".npmrc".source = ./npmrc;
