@@ -22,6 +22,7 @@ in
     };
     open-webui = {
       enable = true;
+      port = 8070;
     };
     ollama = {
       enable = true;
@@ -31,6 +32,7 @@ in
 
   environment.systemPackages = with pkgs; [
     glib
+    net-tools
     mkcert
     php83
     php83Packages.composer
@@ -43,8 +45,8 @@ in
     neovim
     jetbrains-toolbox
     zed-editor
-#    jetbrains.jdk
-#    code-cursor
-#    vscode
+    #    jetbrains.jdk
+    #    code-cursor
+    #    vscode
   ];
 }

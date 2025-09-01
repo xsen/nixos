@@ -37,7 +37,7 @@
         inherit system;
         config = {
           allowUnfree = true;
-          permittedInsecurePackages = [ "SDL_ttf-2.0.11" ];
+          permittedInsecurePackages = [ "qtwebengine-5.15.19" ];
         };
         overlays = [
           (import ./overlays.nix { inherit inputs; })

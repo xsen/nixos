@@ -196,6 +196,7 @@
 
       trustedInterfaces = [
         "br-*"
+        "docker0"
       ];
     };
   };
