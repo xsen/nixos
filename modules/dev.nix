@@ -21,7 +21,7 @@ in
       virtualHosts = vHosts.virtualHosts;
     };
     open-webui = {
-      enable = true;
+      enable = false;
       port = 8070;
     };
     ollama = {
@@ -45,6 +45,7 @@ in
     neovim
     jetbrains-toolbox
     zed-editor
+    gemini-cli
     #    jetbrains.jdk
     #    code-cursor
     #    vscode
