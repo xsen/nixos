@@ -40,6 +40,8 @@ in
       };
 
       settings = {
+        cursor_trail = 3;
+        cursor_trail_decay = "0.1 0.4";
         confirm_os_window_close = 0;
         window_padding_width = 8;
       };

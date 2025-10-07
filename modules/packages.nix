@@ -49,8 +49,6 @@
     hyprlock
     hypridle
     satty
-    rofimoji
-    rofi-calc
     telegram-desktop
     google-chrome
     blueberry
@@ -66,15 +64,7 @@
     viewnior
     jq
     nh
-    (plexamp.overrideAttrs (old: {
-      nativeBuildInputs = (old.nativeBuildInputs or [ ]) ++ [ makeWrapper ];
-      buildCommand = ''
-        ${old.buildCommand}
-        source "${makeWrapper}/nix-support/setup-hook"
-        wrapProgram "$out/bin/plexamp" \
-            --add-flags "--ozone-platform-hint=auto --enable-features=WaylandWindowDecorations --enable-wayland-ime=true --use-gl=desktop"
-      '';
-    }))
+    openshot-qt
     (obsidian.override (old: {
       commandLineArgs = "--disable-gpu-compositing";
     }))

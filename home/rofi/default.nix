@@ -3,7 +3,6 @@
   programs = {
     rofi = {
       enable = true;
-      package = pkgs.rofi-wayland;
       location = "center";
       font = "JetBrainsMono Nerd Font 16";
       extraConfig = {
@@ -26,12 +25,18 @@
 
       plugins = with pkgs; [
         rofimoji
-        (rofi-calc.override { rofi-unwrapped = rofi-wayland-unwrapped; })
+        (rofi-calc.override { rofi-unwrapped = rofi-unwrapped; })
       ];
     };
   };
 
-  home.file = {
-    ".config/rofi/custom.rasi".source = ./custom.rasi;
+  home = {
+    file = {
+      ".config/rofi/custom.rasi".source = ./custom.rasi;
+    };
+    packages = with pkgs; [
+      rofimoji
+      rofi-calc
+    ];
   };
 }
