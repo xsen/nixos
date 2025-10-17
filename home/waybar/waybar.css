@@ -112,6 +112,10 @@ window#waybar.hidden {
     color: @rosewater;
 }
 
+#language {
+    color: @yellow;
+}
+
 #custom-waybar-mpris,
 #custom-weather {
     color: @lavender;

@@ -71,9 +71,17 @@
     ];
     file = {
       ".npmrc".source = ./npmrc;
-      ".ideavimrc".source = ./ideavimrc;
+#      ".ideavimrc".source = ./ideavimrc;
       ".config/hypr".source = ./hypr;
-      ".config/satty/config.toml".source = ./satty.toml; # ver 0.18.0 bugs https://github.com/gabm/Satty/issues/170
+
+      ".scripts/smart-screenshot.sh" = {
+        source = ./scripts/smart-screenshot.sh;
+        executable = true;
+      };
+      ".scripts/switch-layout" = {
+        source = ./scripts/switch-layout.sh;
+        executable = true;
+      };
       ".scripts/launch-apps" = {
         source = ./scripts/launch-apps.sh;
         executable = true;

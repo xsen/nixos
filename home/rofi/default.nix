@@ -21,6 +21,7 @@
         display-calc = " 🖩  Calc ";
         display-window = "   Window ";
         sidebar-mode = true;
+        sorting-method = "fzf";
       };
 
       plugins = with pkgs; [
