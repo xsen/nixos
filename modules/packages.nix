@@ -32,8 +32,6 @@
     unzip
     kitty
     libnotify
-    qt5.full
-    qt6.full
     wl-clipboard
     pcmanfm-qt
     peazip

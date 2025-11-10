@@ -79,7 +79,6 @@
           catppuccin.homeModules.catppuccin
           spicetify-nix.homeManagerModules.spicetify
           ./hosts/${host}/home-manager.nix
-          #          yandex-music.homeManagerModules.default
         ];
       };
     };
