@@ -7,9 +7,17 @@
       withUWSM = true;
       xwayland.enable = true;
     };
+    throne = {
+      enable = true;
+      tunMode = {
+        enable = true;
+        setuid = true;
+      };
+    };
   };
 
   environment.systemPackages = with pkgs; [
+    throne
     home-manager
     pciutils
     nixfmt-rfc-style
@@ -52,7 +60,6 @@
     blueberry
     keepassxc
     ticktick
-    nekoray
     discord
     libreoffice-qt
     koreader

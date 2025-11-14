@@ -48,7 +48,7 @@ Applications are styled with the Catppuccin Mocha theme.
 | Wallpaper        | Hyprpaper                      |
 | Display Manager  | SDDM                           |
 | Polkit           | lxqt-policykit                 |
-| Network          | Nekoray Tun mode               |
+| Network          | Throne Tun mode                |
 
 ## 🖥️ Installation
 - Install NixOS
