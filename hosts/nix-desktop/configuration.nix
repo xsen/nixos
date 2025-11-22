@@ -154,18 +154,6 @@
 
   security = {
     rtkit.enable = true;
-    wrappers = {
-      # This is a workaround for a bug in the throne module's backward
-      # compatibility layer, which creates a broken `nekobox_core` wrapper.
-      # We forcefully override it to point to the correct executable,
-      # allowing `tunMode` to work without breaking the build.
-      nekobox_core = lib.mkForce {
-        source = "${config.programs.throne.package}/share/throne/Core";
-        owner = "root";
-        group = "root";
-        setuid = true;
-      };
-    };
   };
 
   systemd.services.sddm-wallpaper = {

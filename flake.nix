@@ -3,7 +3,6 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    nixpkgs-master.url = "github:nixos/nixpkgs/master";
     catppuccin.url = "github:catppuccin/nix";
     spicetify-nix.url = "github:Gerg-L/spicetify-nix";
     yandex-browser.url = "github:miuirussia/yandex-browser.nix";
@@ -24,7 +23,6 @@
       self,
       nix-ld,
       nixpkgs,
-      nixpkgs-master,
       catppuccin,
       home-manager,
       spicetify-nix,
@@ -61,7 +59,6 @@
           home-manager.nixosModules.home-manager
           catppuccin.nixosModules.catppuccin
           ./hosts/${host}/configuration.nix
-          "${nixpkgs-master}/nixos/modules/programs/throne.nix"
           {
             nixpkgs.pkgs = pkgs;
           }
