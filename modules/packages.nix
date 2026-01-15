@@ -69,7 +69,7 @@
     viewnior
     jq
     nh
-    openshot-qt
+#    openshot-qt
     (obsidian.override (old: {
       commandLineArgs = "--disable-gpu-compositing";
     }))

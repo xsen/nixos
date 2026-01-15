@@ -13,10 +13,10 @@
       enableCompletion = true;
       autosuggestion.enable = true;
       syntaxHighlighting.enable = true;
-      initContent = ''
-        eval "$(starship init zsh)"
-        bindkey "''${key[Up]}" up-line-or-search
-      '';
+#      initContent = ''
+#        eval "$(starship init zsh)"
+#        bindkey "''${key[Up]}" up-line-or-search
+#      '';
       shellAliases = {
         #cat = "bat";
         ls = "eza --icons=always";

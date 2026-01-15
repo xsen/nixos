@@ -13,15 +13,20 @@ fi
 
 mkdir -p ~/.wallpapers
 
+# Получаем абсолютный путь (важно для нового гипрпейпера)
 TARGET="$(realpath "$1")"
-TMP_FILE="$(mktemp -p ~/.wallpapers current.XXXXXX.png)"
+DEST="$HOME/.wallpapers/current.png"
+TMP_FILE="$(mktemp -p "$HOME/.wallpapers" current.XXXXXX.png)"
 
+# Обновляем симлинк
 ln -sf "$TARGET" "$TMP_FILE"
-mv -f "$TMP_FILE" ~/.wallpapers/current.png
+mv -f "$TMP_FILE" "$DEST"
 
 if pidof hyprpaper >/dev/null; then
-    hyprctl hyprpaper preload "$TARGET" >/dev/null 2>&1
-    hyprctl hyprpaper wallpaper ",$TARGET" >/dev/null 2>&1
+    # Используем новую команду reload.
+    # Она сама сделает preload и обновит мониторы.
+    # Пустая строка перед запятой означает "все мониторы".
+    hyprctl hyprpaper reload ",$TARGET" >/dev/null 2>&1
 else
     echo "Hyprpaper not running, wallpaper saved for next launch"
 fi

@@ -26,7 +26,7 @@ in
     };
     ollama = {
       enable = true;
-      acceleration = "cuda";
+      package = pkgs.ollama-cuda;
     };
   };
 
@@ -46,6 +46,7 @@ in
     jetbrains-toolbox
     zed-editor
     gemini-cli
+    claude-code
     #    jetbrains.jdk
     #    code-cursor
     #    vscode

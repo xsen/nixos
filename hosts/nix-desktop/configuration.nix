@@ -42,6 +42,7 @@
         efiSupport = true;
         device = "nodev";
         useOSProber = true;
+        configurationLimit = 3;
 
         gfxmodeEfi = "3440x1440x32";
         extraConfig = "set gfxpayload=keep";
@@ -268,6 +269,11 @@
       WLR_NO_HARDWARE_CURSORS = "1";
     };
   };
-
-  system.stateVersion = "24.05";
+  system = {
+    activationScripts.binbash = ''
+      mkdir -p /bin
+      ln -sfn ${pkgs.bash}/bin/bash /bin/bash
+    '';
+    stateVersion = "24.05";
+  };
 }
