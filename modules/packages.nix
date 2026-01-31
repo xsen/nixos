@@ -53,6 +53,7 @@
     tor-browser
     hyprshot
     hyprlock
+    pyprland
     hypridle
     satty
     telegram-desktop
