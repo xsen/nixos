@@ -222,7 +222,7 @@
   users.users."${username}" = {
     isNormalUser = true;
     description = "Evgeny";
-    shell = pkgs.zsh;
+    shell = pkgs.fish;
     extraGroups = [
       "networkmanager"
       "wheel"

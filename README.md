@@ -29,7 +29,7 @@ Applications are styled with the Catppuccin Mocha theme.
 | Component        | Description                    |
 |------------------|--------------------------------|
 | Video driver     | Nvidia "580.126.09"            |
-| Shell            | Zsh                            |
+| Shell            | Fish                           |
 | Shell Prompt     | Starship                       |
 | WM (Compositor)  | Hyprland                       |
 | Bar              | Waybar                         |

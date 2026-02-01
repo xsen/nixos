@@ -7,34 +7,48 @@
 }:
 {
   programs = {
-    hstr.enable = true;
-    zsh = {
+    fish = {
       enable = true;
-      enableCompletion = true;
-      autosuggestion.enable = true;
-      syntaxHighlighting.enable = true;
-#      initContent = ''
-#        eval "$(starship init zsh)"
-#        bindkey "''${key[Up]}" up-line-or-search
-#      '';
+      interactiveShellInit = ''
+        if not set -q COLORTERM
+            set -gx COLORTERM truecolor
+        end
+
+        fish_vi_key_bindings
+
+        set -g fish_greeting ""
+
+        if status is-interactive
+            # Используем --color-theme, чтобы PHPStorm не тупил
+            fish_config theme choose "Catppuccin Mocha" --color-theme=dark 2>/dev/null
+        end
+      '';
+
       shellAliases = {
-        #cat = "bat";
         ls = "eza --icons=always";
         nh-clean = "nh clean all";
         nh-all = "nh os switch && nh home switch";
         nh-os = "nh os switch";
         nh-home = "nh home switch";
-        sail = "sh $([ -f sail ] && echo sail || echo vendor/bin/sail)";
       };
-      history = {
-        size = 1000000;
-        save = 1000000;
-        ignoreSpace = true;
+
+      functions = {
+        sail = {
+          body = ''
+            if test -f sail
+                sh sail $argv
+            else
+                sh vendor/bin/sail $argv
+            end
+          '';
+        };
       };
     };
+
     starship = {
       enable = true;
       enableZshIntegration = true;
+      enableFishIntegration = true;
       settings = {
         format = lib.concatStrings [
           "[](fg:surface0)"
@@ -122,7 +136,7 @@
           disabled = false;
           time_format = "%R";
           style = "bg:surface0";
-          format = ''[[  $time ](fg:yellow bg:surface0)]($style)'';
+          format = "[[  $time ](fg:yellow bg:surface0)]($style)";
         };
         line_break = {
           disabled = false;
@@ -133,8 +147,6 @@
           error_symbol = "[](bold fg:red)";
           vimcmd_symbol = "[](bold fg:green)";
           vimcmd_replace_one_symbol = "[](bold fg:pink)";
-          #          vimcmd_replace_symbol = "[](bold fg:pink)";
-          #          vimcmd_visual_symbol = "[](bold fg:yellow)";
         };
       };
     };

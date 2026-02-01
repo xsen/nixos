@@ -12,7 +12,7 @@ in
   imports = [
     ./waybar
     ./rofi
-    ./zsh.nix
+    ./fish.nix
   ];
   programs = {
     spicetify = {
