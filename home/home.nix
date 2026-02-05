@@ -61,7 +61,7 @@
     sessionVariables = {
       EDITOR = "vim";
       BROWSER = "yandex-browser-stable";
-      TERMINAL = "kitty";
+      TERMINAL = "ghostty";
       NH_OS_FLAKE = "$HOME/.nix-config";
     };
     sessionPath = [

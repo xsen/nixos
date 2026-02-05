@@ -11,16 +11,34 @@
       enable = true;
       interactiveShellInit = ''
         if not set -q COLORTERM
-            set -gx COLORTERM truecolor
+          set -gx COLORTERM truecolor
         end
 
         fish_vi_key_bindings
-
         set -g fish_greeting ""
 
+        function b
+          bash -c "$argv"
+        end
+
+        function done
+          $argv
+          set -l status_code $status
+          set -l full_cmd (string join " " $argv)
+
+          if test $status_code -eq 0
+            notify-send "Выполнено успешно" "$full_cmd" -i terminal -t 3000
+          else
+            notify-send "Ошибка ($status_code)" "$full_cmd" -u critical -i error
+          end
+        end
+
         if status is-interactive
-            # Используем --color-theme, чтобы PHPStorm не тупил
-            fish_config theme choose "Catppuccin Mocha" --color-theme=dark 2>/dev/null
+          if set -q TERMINAL_EMULATOR; or set -q JEDITERM_SOURCE_PURGE
+              fish_config theme choose "Catppuccin Mocha" --color-theme=dark 2>/dev/null
+          else
+              fish_config theme choose "Catppuccin Mocha" 2>/dev/null
+          end
         end
       '';
 

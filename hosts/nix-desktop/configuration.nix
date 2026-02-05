@@ -86,7 +86,7 @@
       powerManagement.finegrained = false;
       open = false;
       nvidiaSettings = true;
-      forceFullCompositionPipeline = true;
+      #forceFullCompositionPipeline = true;
 
       #package = config.boot.kernelPackages.nvidiaPackages.latest;
       package = config.boot.kernelPackages.nvidiaPackages.mkDriver {
@@ -263,6 +263,7 @@
       EDITOR = "vim";
     };
     sessionVariables = {
+      XDG_SESSION_TYPE = "wayland";
       NIXOS_OZONE_WL = "1";
       LIBVA_DRIVER_NAME = "nvidia";
       __GLX_VENDOR_LIBRARY_NAME = "nvidia";

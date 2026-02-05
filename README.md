@@ -36,7 +36,7 @@ Applications are styled with the Catppuccin Mocha theme.
 | Notification     | Mako                           |
 | Launcher         | Rofi-Wayland                   |
 | Editor           | JetBrains IDE                  |
-| Terminal         | Kitty                          |
+| Terminal         | Ghostty                        |
 | Theme            | Catppuccin Mocha               |
 | Font             | JetBrains Mono Nerd Font       |
 | Player           | Yandex Music + Spotify         |

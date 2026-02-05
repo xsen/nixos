@@ -40,6 +40,7 @@
     tldr
     unzip
     kitty
+    ghostty
     libnotify
     wl-clipboard
     pcmanfm-qt

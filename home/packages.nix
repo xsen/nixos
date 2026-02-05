@@ -30,9 +30,32 @@ in
       enable = true;
       package = pkgs.btop.override { cudaSupport = true; };
     };
+
+    ghostty = {
+      enable = true;
+      settings = {
+        font-family = "JetBrainsMono Nerd Font";
+        font-size = 14;
+        window-padding-x = 8;
+        window-padding-y = 8;
+        confirm-close-surface = false;
+
+        cursor-style = "block";
+
+        keybind = [
+          "ctrl+c=copy_to_clipboard"
+          "ctrl+v=paste_from_clipboard"
+          "ctrl+shift+c=text:\x03"
+        ];
+      };
+    };
+
     kitty = {
       enable = true;
-      shellIntegration.enableZshIntegration = true;
+      shellIntegration = {
+        enableZshIntegration = true;
+        enableFishIntegration = true;
+      };
 
       font = {
         name = "JetBrainsMono Nerd Font";
