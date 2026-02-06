@@ -69,7 +69,7 @@ in
   "clock" = {
     "interval" = 1;
     "format" = "{:%H\n%M}";
-#    "format-alt" = " {:%H:%M:%S \n %Y\n %d %B \n %A}";
+    #    "format-alt" = " {:%H:%M:%S \n %Y\n %d %B \n %A}";
     "tooltip-format" = "<tt><small>{calendar}</small></tt>";
     "calendar" = {
       "mode" = "year";
@@ -257,7 +257,16 @@ in
     "spacing" = 8;
   };
   "hyprland/language" = {
-    "format" = "{short}";
+    "format-en" = "<span color='#89b4fa'>EN</span>";
+    "format-ru" = "<span color='#eba0ac'>RU</span>";
+    "format" = "{}";
+  };
+  "hyprland/submap" = {
+    "always-on" = true;
+    "default-submap" = "DE";
+    "format" = "{}";
+    "max-length" = 2;
+    "tooltip" = false;
   };
   "custom/menu" = {
     "format" = "󱄅 ";

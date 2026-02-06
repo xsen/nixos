@@ -113,6 +113,20 @@ window#waybar.hidden {
 }
 
 #language {
+    color: @text;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+#submap {
+    color: @overlay0;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+#submap.AP {
+    color: @green;
+}
+
+#submap.RE {
     color: @yellow;
 }
 

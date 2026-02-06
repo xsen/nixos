@@ -82,7 +82,7 @@
         username = {
           show_always = true;
           style_user = "bg:surface0 fg:green";
-          style_root = "bg:surface0 fg:reed";
+          style_root = "bg:surface0 fg:red";
           format = "[ $user ]($style)";
         };
         directory = {

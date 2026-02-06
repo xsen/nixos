@@ -26,6 +26,8 @@
     "custom/separator#hr"
     "hyprland/language"
     "custom/separator#hr"
+    "hyprland/submap"
+    "custom/separator#hr"
     #    "custom/separator#dot-line"
     #    "custom/menu"
     #    "custom/separator#dot-line"
