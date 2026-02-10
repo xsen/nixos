@@ -17,7 +17,7 @@ in
   programs = {
     spicetify = {
       enable = true;
-      wayland = false;
+      wayland = true;
       windowManagerPatch = true;
       enabledExtensions = with spicePkgs.extensions; [
         adblockify
@@ -41,12 +41,6 @@ in
         confirm-close-surface = false;
 
         cursor-style = "block";
-
-        keybind = [
-          "ctrl+c=copy_to_clipboard"
-          "ctrl+v=paste_from_clipboard"
-          "ctrl+shift+c=text:\x03"
-        ];
       };
     };
 
