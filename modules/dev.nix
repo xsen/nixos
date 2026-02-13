@@ -47,6 +47,7 @@ in
     zed-editor
     gemini-cli
     claude-code
+    opencode
     #    jetbrains.jdk
     #    code-cursor
     #    vscode

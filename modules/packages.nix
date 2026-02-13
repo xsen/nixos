@@ -60,6 +60,7 @@
     satty
     telegram-desktop
     google-chrome
+    firefox
     blueberry
     keepassxc
     ticktick

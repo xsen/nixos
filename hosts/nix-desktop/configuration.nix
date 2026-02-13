@@ -26,6 +26,7 @@
       ];
       substituters = [
         "https://hyprland.cachix.org"
+        "https://mirror.yandex.ru/nixos"
         "https://nix-community.cachix.org"
       ];
       trusted-public-keys = [
