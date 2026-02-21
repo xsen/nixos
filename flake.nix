@@ -48,7 +48,6 @@
       nixosConfigurations."${host}" = nixpkgs.lib.nixosSystem {
         specialArgs = {
           inherit
-            system
             inputs
             host
             username
@@ -69,7 +68,6 @@
         inherit pkgs;
         extraSpecialArgs = {
           inherit
-            system
             inputs
             host
             username

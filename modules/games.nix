@@ -44,12 +44,12 @@
       steam-run
       vulkan-tools
 
-      wineWowPackages.stable
+      wineWow64Packages.stable
       winetricks
 
       (lutris.override {
         extraPkgs = pkgs: [
-          wineWowPackages.stable
+          wineWow64Packages.stable
           winetricks
           gamemode
           gamescope

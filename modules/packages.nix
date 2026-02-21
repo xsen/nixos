@@ -21,7 +21,7 @@
     throne
     home-manager
     pciutils
-    nixfmt-rfc-style
+    nixfmt
     wget
     curl
     git

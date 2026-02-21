@@ -71,7 +71,7 @@ mainbox {
     border-radius:               0px 0px 0px 0px;
     border-color:                @selected;
     background-color:            transparent;
-    children:                    [ "inputbar", "listview" ];
+    children:                    [ "inputbar", "message", "listview" ];
 }
 
 /*****----- Inputbar -----*****/
@@ -204,4 +204,14 @@ textbox {
     vertical-align:              0.5;
     horizontal-align:            0.5;
     highlight:                   none;
+}
+
+message {
+    enabled: true;
+    background-color: @background-alt;   /* Используем surface0 */
+    text-color: @foreground;             /* Используем text */
+    font: "JetBrainsMono Nerd Font 14";
+    padding: 12px;
+    border-radius: 16px;
+    margin: 0px 0px 10px 0px;            /* Отступ снизу перед listview */
 }
