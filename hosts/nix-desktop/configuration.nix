@@ -24,13 +24,16 @@
         "nix-command"
       ];
       substituters = [
+        "https://cache.nixos.org"
         "https://hyprland.cachix.org"
         "https://mirror.yandex.ru/nixos"
         "https://nix-community.cachix.org"
+        "https://cuda-maintainers.cachix.org"
       ];
       trusted-public-keys = [
         "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
         "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+        "cuda-maintainers.cachix.org-1:0dq3bujKpuEPMAL6K3UID8B4JHiDncSrxVOKZm5JwLg="
       ];
     };
   };
@@ -53,7 +56,8 @@
     kernelPackages = pkgs.linuxPackages_latest;
     kernelParams = [
       "video=3440x1440@144"
-      "nvidia.NVreg_EnableGpuFirmware=0"
+      "nvidia-drm.fbdev=1"
+      "nvidia.NVreg_EnableGpuFirmware=1"
       "nvidia.NVreg_PreserveVideoMemoryAllocations=1"
       "nvidia-drm.modeset=1"
     ];
@@ -61,6 +65,7 @@
       "nvidia"
       "nvidia_drm"
       "nvidia_uvm"
+      "nvidia_modeset"
     ];
   };
 
@@ -91,9 +96,9 @@
       #package = config.boot.kernelPackages.nvidiaPackages.latest;
       package = config.boot.kernelPackages.nvidiaPackages.mkDriver {
 
-        version = "580.126.09";
-        sha256_64bit = "sha256-TKxT5I+K3/Zh1HyHiO0kBZokjJ/YCYzq/QiKSYmG7CY=";
-        sha256_aarch64 = "sha256-TKxT5I+K3/Zh1HyHiO0kBZokjJ/YCYzq/QiKSYmG7CY=";
+        version = "580.126.18";
+        sha256_64bit = "sha256-p3gbLhwtZcZYCRTHbnntRU0ClF34RxHAMwcKCSqatJ0=";
+        sha256_aarch64 = "sha256-p3gbLhwtZcZYCRTHbnntRU0ClF34RxHAMwcKCSqatJ0=";
 
         openSha256 = "sha256-ZpuVZybW6CFN/gz9rx+UJvQ715FZnAOYfHn5jt5Z2C8=";
         settingsSha256 = "sha256-ZpuVZybW6CFN/gz9rx+UJvQ715FZnAOYfHn5jt5Z2C8=";

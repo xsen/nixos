@@ -65,18 +65,25 @@ let g:argtextobj_pairs="[:],(:),<:>"
 " Which-key settings
 set which-key
 set notimeout
-let g:WhichKey_FontSize = 20
-let g:WhichKey_PrefixColor = "#a403fe"
-let g:WhichKey_CommandColor = "#01ffff"
-let g:WhichKey_PrefixStyle = "bold"
-let g:WhichKey_KeyStyle = "italic"
+
+let g:WhichKey_ShowTypedSequence = "true"
+let g:WhichKey_ShowVimActions = "true"
 let g:WhichKey_SortOrder = "by_key_prefix_first"
-let g:WhichKey_ShowTypedSequence = "false"
+
+let g:WhichKey_PrefixColor = "#cba6f7"
+let g:WhichKey_CommandColor = "#74c7ec"
+let g:WhichKey_PrefixStyle = "bold"
+let g:WhichKey_CommandStyle = "italic"
+let g:WhichKey_FontFamily = "JetBrains Mono NL"
+
+let g:WhichKey_FontSize = 16
 
 
 "" ========================================================
 "" Key Mappings
 "" ========================================================
+
+noremap \ "_
 
 " better HJKL
 "map H ^

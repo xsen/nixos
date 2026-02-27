@@ -48,6 +48,8 @@ in
     gemini-cli
     claude-code
     opencode
+    codex
+    llmfit
     #    jetbrains.jdk
     #    code-cursor
     #    vscode

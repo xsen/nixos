@@ -72,7 +72,7 @@
     ];
     file = {
       ".npmrc".source = ./npmrc;
-#      ".ideavimrc".source = ./ideavimrc;
+      ".ideavimrc".source = ./ideavimrc;
       ".config/hypr".source = ./hypr;
 
       ".scripts/smart-screenshot.sh" = {
