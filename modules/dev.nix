@@ -50,6 +50,7 @@ in
     opencode
     codex
     llmfit
+    python3
     #    jetbrains.jdk
     #    code-cursor
     #    vscode

@@ -30,7 +30,7 @@
     p7zip
     zoxide
     yazi
-    neofetch
+    fastfetch
     eza
     fzf
     bat
@@ -61,7 +61,7 @@
     telegram-desktop
     google-chrome
     firefox
-    blueberry
+    blueman
     keepassxc
     ticktick
     discord

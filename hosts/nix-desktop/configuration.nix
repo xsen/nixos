@@ -96,9 +96,9 @@
       #package = config.boot.kernelPackages.nvidiaPackages.latest;
       package = config.boot.kernelPackages.nvidiaPackages.mkDriver {
 
-        version = "580.126.18";
-        sha256_64bit = "sha256-p3gbLhwtZcZYCRTHbnntRU0ClF34RxHAMwcKCSqatJ0=";
-        sha256_aarch64 = "sha256-p3gbLhwtZcZYCRTHbnntRU0ClF34RxHAMwcKCSqatJ0=";
+        version = "595.58.03";
+        sha256_64bit = "sha256-jA1Plnt5MsSrVxQnKu6BAzkrCnAskq+lVRdtNiBYKfk=";
+        sha256_aarch64 = "sha256-jA1Plnt5MsSrVxQnKu6BAzkrCnAskq+lVRdtNiBYKfk=";
 
         openSha256 = "sha256-ZpuVZybW6CFN/gz9rx+UJvQ715FZnAOYfHn5jt5Z2C8=";
         settingsSha256 = "sha256-ZpuVZybW6CFN/gz9rx+UJvQ715FZnAOYfHn5jt5Z2C8=";
@@ -125,6 +125,20 @@
         package = pkgs.kdePackages.sddm;
       };
     };
+
+    #    greetd = {
+    #      enable = true;
+    #      settings = {
+    #        initial_session = {
+    #          command = "uwsm start hyprland-uwsm.desktop";
+    #          user = username;
+    #        };
+    #        default_session = {
+    #          command = "${pkgs.tuigreet}/bin/tuigreet --cmd 'uwsm start hyprland-uwsm.desktop'";
+    #          user = "greeter";
+    #        };
+    #      };
+    #    };
 
     xserver = {
       videoDrivers = [ "nvidia" ];

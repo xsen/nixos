@@ -35,9 +35,9 @@
 
         if status is-interactive
           if set -q TERMINAL_EMULATOR; or set -q JEDITERM_SOURCE_PURGE
-              fish_config theme choose "Catppuccin Mocha" --color-theme=dark 2>/dev/null
+              fish_config theme choose "catppuccin-mocha" --color-theme=dark 2>/dev/null
           else
-              fish_config theme choose "Catppuccin Mocha" 2>/dev/null
+              fish_config theme choose "catppuccin-mocha" 2>/dev/null
           end
         end
       '';
