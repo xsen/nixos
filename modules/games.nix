@@ -42,7 +42,6 @@
   environment = {
     systemPackages = with pkgs; [
       steam-run
-      vulkan-tools
 
       wineWow64Packages.stable
       winetricks

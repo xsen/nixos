@@ -25,7 +25,7 @@ in
       port = 8070;
     };
     ollama = {
-      enable = true;
+      enable = false;
       package = pkgs.ollama-cuda;
     };
   };
@@ -44,15 +44,15 @@ in
     lazydocker
     neovim
     jetbrains-toolbox
-    zed-editor
     gemini-cli
     claude-code
     opencode
     codex
     llmfit
     python3
-    #    jetbrains.jdk
-    #    code-cursor
-    #    vscode
+    # zed-editor
+    # jetbrains.jdk
+    # code-cursor
+    # vscode
   ];
 }

@@ -14,6 +14,7 @@ in
     ./rofi
     ./fish.nix
   ];
+
   programs = {
     spicetify = {
       enable = true;
@@ -26,9 +27,21 @@ in
       theme = spicePkgs.themes.catppuccin;
       colorScheme = "mocha";
     };
+
     btop = {
       enable = true;
       package = pkgs.btop.override { cudaSupport = true; };
+    };
+
+    obs-studio = {
+      enable = true;
+      plugins = with pkgs.obs-studio-plugins; [
+        wlrobs
+        obs-vaapi
+      ];
+      package = pkgs.obs-studio.override {
+        cudaSupport = true;
+      };
     };
 
     ghostty = {
@@ -39,9 +52,7 @@ in
         window-padding-x = 8;
         window-padding-y = 8;
         confirm-close-surface = false;
-
         cursor-style = "block";
-
         keybind = [
           "super+ctrl+shift+arrow_down=resize_split:down,10"
           "super+ctrl+shift+arrow_left=resize_split:left,10"
@@ -115,25 +126,23 @@ in
         enableZshIntegration = true;
         enableFishIntegration = true;
       };
-
       font = {
         name = "JetBrainsMono Nerd Font";
         size = 14;
       };
-
       settings = {
         cursor_trail = 3;
         cursor_trail_decay = "0.1 0.4";
         confirm_os_window_close = 0;
         window_padding_width = 8;
       };
-
       keybindings = {
         "ctrl+c" = "copy_and_clear_or_interrupt";
         "ctrl+v" = "paste_from_clipboard";
         "ctrl+shift+c" = "send_text all \\x03";
       };
     };
+
     vim = {
       enable = true;
       settings = {

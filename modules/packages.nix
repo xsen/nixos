@@ -39,7 +39,6 @@
     ripgrep
     tldr
     unzip
-    kitty
     ghostty
     libnotify
     wl-clipboard
@@ -55,7 +54,6 @@
     tor-browser
     hyprshot
     hyprlock
-    pyprland
     hypridle
     satty
     telegram-desktop
@@ -73,7 +71,8 @@
     viewnior
     jq
     nh
-#    openshot-qt
+    # openshot-qt
+    ffmpeg_6-full
     (obsidian.override (old: {
       commandLineArgs = "--disable-gpu-compositing";
     }))

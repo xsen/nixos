@@ -126,20 +126,6 @@
       };
     };
 
-    #    greetd = {
-    #      enable = true;
-    #      settings = {
-    #        initial_session = {
-    #          command = "uwsm start hyprland-uwsm.desktop";
-    #          user = username;
-    #        };
-    #        default_session = {
-    #          command = "${pkgs.tuigreet}/bin/tuigreet --cmd 'uwsm start hyprland-uwsm.desktop'";
-    #          user = "greeter";
-    #        };
-    #      };
-    #    };
-
     xserver = {
       videoDrivers = [ "nvidia" ];
       xkb = {
@@ -174,6 +160,11 @@
 
   security = {
     rtkit.enable = true;
+  };
+
+  xdg.portal = {
+    enable = true;
+    extraPortals = [ pkgs.xdg-desktop-portal-hyprland ];
   };
 
   systemd.services.sddm-wallpaper = {
@@ -246,10 +237,6 @@
       "networkmanager"
       "wheel"
     ];
-
-    packages = with pkgs; [
-
-    ];
   };
 
   console = {
@@ -286,7 +273,6 @@
       NIXOS_OZONE_WL = "1";
       LIBVA_DRIVER_NAME = "nvidia";
       __GLX_VENDOR_LIBRARY_NAME = "nvidia";
-      WLR_NO_HARDWARE_CURSORS = "1";
     };
   };
   system = {
