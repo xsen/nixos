@@ -31,12 +31,15 @@ in
   };
 
   environment.systemPackages = with pkgs; [
+    nil
+    nixd
     glib
     net-tools
     mkcert
     php83
     php83Packages.composer
     nodejs
+    bun
     pkg-config
     openssl
     openssl.dev
@@ -50,7 +53,8 @@ in
     codex
     llmfit
     python3
-    # zed-editor
+    uv
+    zed-editor
     # jetbrains.jdk
     # code-cursor
     # vscode

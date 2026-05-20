@@ -96,9 +96,9 @@
       #package = config.boot.kernelPackages.nvidiaPackages.latest;
       package = config.boot.kernelPackages.nvidiaPackages.mkDriver {
 
-        version = "595.58.03";
-        sha256_64bit = "sha256-jA1Plnt5MsSrVxQnKu6BAzkrCnAskq+lVRdtNiBYKfk=";
-        sha256_aarch64 = "sha256-jA1Plnt5MsSrVxQnKu6BAzkrCnAskq+lVRdtNiBYKfk=";
+        version = "595.71.05";
+        sha256_64bit = "sha256-NiA7iWC35JyKQva6H1hjzeNKBek9KyS3mK8G3YRva4I=";
+        sha256_aarch64 = "sha256-NiA7iWC35JyKQva6H1hjzeNKBek9KyS3mK8G3YRva4I=";
 
         openSha256 = "sha256-ZpuVZybW6CFN/gz9rx+UJvQ715FZnAOYfHn5jt5Z2C8=";
         settingsSha256 = "sha256-ZpuVZybW6CFN/gz9rx+UJvQ715FZnAOYfHn5jt5Z2C8=";
@@ -129,8 +129,39 @@
     xserver = {
       videoDrivers = [ "nvidia" ];
       xkb = {
-        layout = "us,ru";
+        layout = "us,ru-pro";
         options = "grp:caps_toggle,grp_led:caps";
+        extraLayouts.ru-pro = {
+            description = "Russian layout with US symbols on AltGr";
+            languages = [ "ru" ];
+            symbolsFile = pkgs.writeText "ru-pro.xkb" ''
+              xkb_symbols "basic" {
+                include "ru(winkeys)"
+                include "level3(ralt_switch)"
+
+                key <AE01> { [ 1, exclam, exclam, exclam ] };
+                key <AE02> { [ 2, quotedbl, at, at ] };
+                key <AE03> { [ 3, numerosign, numbersign, numbersign ] };                          // 3 -> #
+                key <AE04> { [ 4, semicolon, dollar, dollar ] };                                   // 4 -> $
+                key <AE05> { [ 5, percent, percent, percent ] };                                   // 5 -> %
+                key <AE06> { [ 6, colon, asciicircum, asciicircum ] };                             // 6 -> ^
+                key <AE07> { [ 7, question, ampersand, ampersand ] };                              // 7 -> &
+                key <AE08> { [ 8, asterisk, asterisk, asterisk ] };                                // 8 -> *
+                key <AE09> { [ 9, parenleft, parenleft, parenleft ] };                             // 9 -> (
+                key <AE10> { [ 0, parenright, parenright, parenright ] };                          // 0 -> )
+                key <AE11> { [ minus, underscore, minus, underscore ] };                           // - -> _
+                key <AE12> { [ equal, plus, equal, plus ] };                                       // = -> +
+
+                key <AD11> { [ Cyrillic_ha, Cyrillic_HA, bracketleft, braceleft ] };               // х Х -> [ {
+                key <AD12> { [ Cyrillic_hardsign, Cyrillic_HARDSIGN, bracketright, braceright ] }; // ъ Ъ -> ] }
+                key <AC10> { [ Cyrillic_zhe, Cyrillic_ZHE, semicolon, colon ] };                   // ж Ж -> ; :
+                key <AC11> { [ Cyrillic_e, Cyrillic_E, apostrophe, quotedbl ] };                   // э Э -> ' "
+                key <AB08> { [ Cyrillic_be, Cyrillic_BE, comma, less ] };                          // б Б -> , <
+                key <AB09> { [ Cyrillic_yu, Cyrillic_YU, period, greater ] };                      // ю Ю -> . >
+                key <BKSL> { [ backslash, slash, backslash, bar ] };                               // \ / -> \ |
+              };
+            '';
+          };
       };
     };
 

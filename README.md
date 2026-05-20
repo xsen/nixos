@@ -28,7 +28,7 @@ Applications are styled with the Catppuccin Mocha theme.
 ## 🛠️ Components
 | Component        | Description                    |
 |------------------|--------------------------------|
-| Video driver     | Nvidia "580.126.09"            |
+| Video driver     | Nvidia "595.71.05"             |
 | Shell            | Fish                           |
 | Shell Prompt     | Starship                       |
 | WM (Compositor)  | Hyprland                       |

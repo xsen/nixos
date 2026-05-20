@@ -19,4 +19,15 @@ in
       wrapProgram "$out/bin/discord" --add-flags "--disable-gpu-compositing"
     '';
   });
+
+  koreader = prev.symlinkJoin {
+    name = "koreader";
+    paths = [ prev.koreader ];
+    nativeBuildInputs = [ final.makeWrapper ];
+    postBuild = ''
+      rm $out/bin/koreader
+      makeWrapper ${prev.koreader}/bin/koreader $out/bin/koreader \
+        --set SDL_VIDEODRIVER x11
+    '';
+  };
 }
