@@ -68,6 +68,7 @@
       enableZshIntegration = true;
       enableFishIntegration = true;
       settings = {
+        add_newline = false;
         format = lib.concatStrings [
           "[](fg:surface0)"
           "[󱄅](bg:surface0 fg:blue)$username"

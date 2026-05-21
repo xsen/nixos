@@ -30,6 +30,7 @@
     p7zip
     zoxide
     yazi
+    ncdu
     fastfetch
     eza
     fzf

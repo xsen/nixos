@@ -54,6 +54,7 @@ in
     llmfit
     python3
     uv
+    beekeeper-studio
     zed-editor
     # jetbrains.jdk
     # code-cursor

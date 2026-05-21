@@ -49,11 +49,15 @@ in
       settings = {
         font-family = "JetBrainsMono Nerd Font";
         font-size = 14;
-        window-padding-x = 8;
-        window-padding-y = 8;
+        window-padding-x = 14;
+        window-padding-y = 14;
         confirm-close-surface = false;
         cursor-style = "block";
         keybind = [
+          "alt+n=new_tab"
+          "alt+w=close_tab:this"
+          "alt+h=previous_tab"
+          "alt+l=next_tab"
           "super+ctrl+shift+arrow_down=resize_split:down,10"
           "super+ctrl+shift+arrow_left=resize_split:left,10"
           "super+ctrl+shift+arrow_right=resize_split:right,10"
