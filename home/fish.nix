@@ -48,6 +48,7 @@
         nh-all = "nh os switch && nh home switch";
         nh-os = "nh os switch";
         nh-home = "nh home switch";
+        update-hypr-stubs = "cp --no-preserve=mode -f $(find $(dirname $(dirname $(readlink -f $(which Hyprland)))) -name 'hl.meta.lua') ~/.nix-config/home/hypr/stubs/";
       };
 
       functions = {
