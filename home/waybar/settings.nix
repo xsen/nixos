@@ -20,7 +20,7 @@
   ];
   modules-center = [
     #    "mpris"
-#    "hyprland/window"
+    #    "hyprland/window"
     "custom/separator#hr"
     "hyprland/workspaces#pacman"
     "custom/separator#hr"
@@ -34,6 +34,8 @@
     #    "custom/cava_mviz"
   ];
   modules-right = [
+    # "custom/separator#hr"
+    # "custom/hypridle"
     "custom/separator#hr"
     #"custom/swaync"
     "tray"

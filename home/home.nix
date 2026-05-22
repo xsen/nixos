@@ -8,6 +8,7 @@
 {
   imports = [
     ./packages.nix
+    ./hypr/hypr-config.nix
   ];
 
   wayland.windowManager.hyprland.systemd.enable = false;
@@ -63,7 +64,7 @@
       EDITOR = "vim";
       BROWSER = "yandex-browser-stable";
       TERMINAL = "ghostty";
-      NH_OS_FLAKE = "$HOME/.nix-config";
+      NH_FLAKE = "$HOME/.nix-config";
     };
     sessionPath = [
       "$HOME/.scripts"
@@ -73,9 +74,6 @@
     ];
     file = {
       ".npmrc".source = ./npmrc;
-#      ".ideavimrc".source = ./ideavimrc;
-      ".config/hypr".source = ./hypr;
-
       ".scripts/smart-screenshot.sh" = {
         source = ./scripts/smart-screenshot.sh;
         executable = true;

@@ -2,7 +2,7 @@
     font-family: "JetBrainsMono Nerd Font";
     font-weight: bold;
     min-height: 0;
-    font-size: 1.00em;
+    font-size: 1em;
     font-feature-settings: '"zero", "ss01", "ss02", "ss03", "ss04", "ss05", "cv31"';
 }
 
@@ -25,7 +25,7 @@ window#waybar.hidden {
 .modules-center,
 .modules-right {
     padding: 2px;
-    background: rgba(30,30,48, 0.7);
+    background: rgba(30, 30, 48, 0.7);
     border: 2px solid @overlay0;
     border-radius: 4px;
 }
@@ -78,6 +78,14 @@ window#waybar.hidden {
 #custom-weather.showyIcyDay,
 #custom-weather.snowyIcyNight,
 #custom-weather.sunnyDay {
+}
+
+#custom-hypridle {
+    color: @blue;
+}
+
+#custom-hypridle.disabled {
+    color: @red;
 }
 
 #custom-light_dark,
@@ -143,17 +151,14 @@ window#waybar.hidden {
     color: @sapphire;
 }
 
-
 #custom-cava_mviz,
 #pulseaudio.bluetooth {
     color: @pink;
 }
 
-
 #window {
     color: @mauve;
 }
-
 
 #network {
     color: @teal;
@@ -188,13 +193,12 @@ window#waybar.hidden {
     -gtk-icon-effect: highlight;
 }
 
-
 #workspaces button {
     box-shadow: none;
     text-shadow: none;
     border-radius: 9px;
     animation: gradient_f 20s ease-in infinite;
-    transition: all 0.5s cubic-bezier(.55, -0.68, .48, 1.682);
+    transition: all 0.5s cubic-bezier(0.55, -0.68, 0.48, 1.682);
 }
 
 #workspaces button:hover {
@@ -202,7 +206,7 @@ window#waybar.hidden {
     color: @overlay0;
     background-color: @surface0;
     animation: gradient_f 20s ease-in infinite;
-    transition: all 0.3s cubic-bezier(.55, -0.68, .48, 1.682);
+    transition: all 0.3s cubic-bezier(0.55, -0.68, 0.48, 1.682);
 }
 
 #workspaces button.persistent {
@@ -214,7 +218,7 @@ window#waybar.hidden {
     color: @peach;
     border-radius: 10px;
     animation: gradient_f 20s ease-in infinite;
-    transition: all 0.3s cubic-bezier(.55, -0.68, .48, 1.682);
+    transition: all 0.3s cubic-bezier(0.55, -0.68, 0.48, 1.682);
 }
 
 #workspaces button.urgent {
@@ -224,15 +228,13 @@ window#waybar.hidden {
 
 #taskbar button.active {
     animation: gradient_f 20s ease-in infinite;
-    transition: all 0.3s cubic-bezier(.55, -0.68, .48, 1.682);
+    transition: all 0.3s cubic-bezier(0.55, -0.68, 0.48, 1.682);
 }
 
 #taskbar button:hover {
     animation: gradient_f 20s ease-in infinite;
-    transition: all 0.3s cubic-bezier(.55, -0.68, .48, 1.682);
+    transition: all 0.3s cubic-bezier(0.55, -0.68, 0.48, 1.682);
 }
-
-
 
 #network.disconnected,
 #network.disabled {

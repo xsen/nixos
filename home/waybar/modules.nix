@@ -268,6 +268,13 @@ in
     "max-length" = 2;
     "tooltip" = false;
   };
+  "custom/hypridle" = {
+    "exec" = "${scriptPath}/hypridle.sh";
+    "return-type" = "json";
+    "format" = "{}";
+    "on-click" = "${scriptPath}/hypridle.sh --toggle";
+    "interval" = 2;
+  };
   "custom/menu" = {
     "format" = "󱄅 ";
     "tooltip" = true;
