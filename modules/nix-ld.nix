@@ -1,7 +1,7 @@
 { pkgs, ... }:
 {
-  programs.nix-ld.dev.enable = true;
-  programs.nix-ld.dev.libraries = with pkgs; [
+  programs.nix-ld.enable = true;
+  programs.nix-ld.libraries = with pkgs; [
     SDL
     SDL2
     SDL2_image

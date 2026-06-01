@@ -31,12 +31,12 @@ Applications are styled with the Catppuccin Mocha theme.
 
 | Component        | Description                    |
 | ---------------- | ------------------------------ |
-| Video driver     | Nvidia "595.71.05"             |
+| Video driver     | Nvidia "595.80"                |
 | Shell            | Fish                           |
 | Shell Prompt     | Starship                       |
 | WM (Compositor)  | Hyprland                       |
 | Bar              | Waybar                         |
-| Notification     | Mako                           |
+| Notification     | Swaync                         |
 | Launcher         | Rofi-Wayland                   |
 | Editor           | Zed                            |
 | Terminal         | Ghostty                        |

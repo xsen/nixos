@@ -125,6 +125,19 @@ window#waybar.hidden {
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+#custom-swaync {
+    color: @text;
+}
+
+#custom-swaync.notification {
+    color: @peach;
+}
+
+#custom-swaync.dnd-notification,
+#custom-swaync.dnd-none {
+    color: @overlay0;
+}
+
 #submap {
     color: @overlay0;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);

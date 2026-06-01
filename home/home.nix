@@ -9,29 +9,20 @@
   imports = [
     ./packages.nix
     ./hypr/hypr-config.nix
+    ./swaync.nix
   ];
 
   wayland.windowManager.hyprland.systemd.enable = false;
 
   catppuccin = {
     enable = true;
+    autoEnable = true;
     flavor = "mocha";
     gtk.icon.enable = true;
 
     cursors = {
       enable = true;
       accent = "blue";
-    };
-  };
-
-  services = {
-    mako = {
-      enable = true;
-      settings = {
-        width = 600;
-        padding = "20";
-        default-timeout = 10000;
-      };
     };
   };
 
@@ -47,6 +38,7 @@
   };
 
   home = {
+    enableNixpkgsReleaseCheck = false;
     activation = {
       setupWallpapers = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
         mkdir -p ~/.wallpapers

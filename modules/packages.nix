@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, inputs, ... }:
 {
   programs = {
     fish.enable = true;
@@ -18,6 +18,7 @@
   };
 
   environment.systemPackages = with pkgs; [
+    antigravity-cli
     throne
     home-manager
     pciutils

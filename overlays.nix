@@ -11,6 +11,8 @@ in
   yandex-browser-stable =
     inputs.yandex-browser.packages.${prev.stdenv.hostPlatform.system}.yandex-browser-stable;
 
+  antigravity-cli = inputs.antigravity-cli.packages.${prev.stdenv.hostPlatform.system}.default;
+
   claude-code = pkgs-master.claude-code;
 
   discord = prev.discord.overrideAttrs (oldAttrs: {

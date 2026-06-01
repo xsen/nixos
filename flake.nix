@@ -4,9 +4,19 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-master.url = "github:nixos/nixpkgs/master";
-    catppuccin.url = "github:catppuccin/nix";
-    spicetify-nix.url = "github:Gerg-L/spicetify-nix";
-    yandex-browser.url = "github:miuirussia/yandex-browser.nix";
+    antigravity-cli.url = "github:xsen/antigravity-cli-nix";
+    catppuccin = {
+      url = "github:catppuccin/nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    spicetify-nix = {
+      url = "github:Gerg-L/spicetify-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    yandex-browser = {
+      url = "github:miuirussia/yandex-browser.nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     home-manager = {
       url = "github:nix-community/home-manager/master";
@@ -24,6 +34,7 @@
       self,
       nix-ld,
       nixpkgs,
+      antigravity-cli,
       nixpkgs-master,
       catppuccin,
       home-manager,
@@ -56,7 +67,6 @@
             ;
         };
         modules = [
-          nix-ld.nixosModules.nix-ld
           home-manager.nixosModules.home-manager
           catppuccin.nixosModules.catppuccin
           ./hosts/${host}/configuration.nix
