@@ -2,18 +2,18 @@
 
 mode=$1
 
-hyprctl keyword animations:enabled false
+hyprctl eval 'hl.config({ animations = { enabled = false } })'
 
 case $mode in
     "output")
-        hyprshot -m output -r -- | satty --filename - --output-filename ~/Cloud/Yandex.Disk/Скриншоты/$(date '+%Y-%m-%d_%H-%M-%S').png --early-exit --copy-command 'wl-copy'
+        hyprshot -z -m output -r -- | satty --filename - --output-filename ~/Cloud/Nextcloud/Автозагрузка/Screenshots/$(date '+%Y-%m-%d_%H-%M-%S').png --early-exit --copy-command 'wl-copy'
         ;;
     "window")
-        hyprshot -m window -r -- | satty --filename - --output-filename ~/Cloud/Yandex.Disk/Скриншоты/$(date '+%Y-%m-%d_%H-%M-%S').png --early-exit --copy-command 'wl-copy'
+        hyprshot -z -m window -r -- | satty --filename - --output-filename ~/Cloud/Nextcloud/Автозагрузка/Screenshots/$(date '+%Y-%m-%d_%H-%M-%S').png --early-exit --copy-command 'wl-copy'
         ;;
     "region")
-        hyprshot -m region -r -- | satty --filename - --output-filename ~/Cloud/Yandex.Disk/Скриншоты/$(date '+%Y-%m-%d_%H-%M-%S').png --early-exit --copy-command 'wl-copy'
+        hyprshot -z -m region -r -- | satty --filename - --output-filename ~/Cloud/Nextcloud/Автозагрузка/Screenshots/$(date '+%Y-%m-%d_%H-%M-%S').png --early-exit --copy-command 'wl-copy'
         ;;
 esac
 
-hyprctl keyword animations:enabled true
+hyprctl eval 'hl.config({ animations = { enabled = true } })'

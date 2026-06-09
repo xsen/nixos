@@ -116,6 +116,11 @@
     gvfs.enable = true;
     udisks2.enable = true;
 
+    gnome = {
+      gcr-ssh-agent.enable = false;
+      gnome-keyring.enable = true;
+    };
+
     displayManager = {
       sddm = {
         enable = true;
@@ -208,6 +213,7 @@
 
   security = {
     rtkit.enable = true;
+    pam.services.login.enableGnomeKeyring = true;
   };
 
   xdg.portal = {

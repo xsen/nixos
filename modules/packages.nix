@@ -31,6 +31,7 @@
     p7zip
     zoxide
     yazi
+    bottom
     ncdu
     fastfetch
     eza
@@ -48,6 +49,7 @@
     peazip
     libva-utils
     vulkan-tools
+    nextcloud-client
     yandex-disk
     yandex-browser-stable
     hyprcursor

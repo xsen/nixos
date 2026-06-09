@@ -292,7 +292,7 @@ hl.window_rule({ name = "auth-dialogs", match = { title = "Authentication Requir
 
 hl.window_rule({ name = "yandex-xsen1", match = { class = "[yY]andex-browser", title = ".*xsen1.*" }, workspace = 1 })
 hl.window_rule({ name = "yandex-xsen2", match = { class = "[yY]andex-browser", title = ".*xsen2.*" }, workspace = 3 })
-hl.window_rule({ name = "app-obsidian", match = { class = "electron|obsidian", initial_title = "Obsidian" }, workspace = 2 })
+hl.window_rule({ name = "app-obsidian", match = { class = "obsidian" }, workspace = 2 })
 hl.window_rule({ name = "app-ticktick", match = { class = "ticktick" }, workspace = 2 })
 hl.window_rule({ name = "app-telegram", match = { class = "org\\.telegram\\.desktop" }, workspace = 3 })
 hl.window_rule({ name = "app-social", match = { class = "(?i)(discord|spotify|plexamp|yandexmusic|yandex-music)" }, workspace = 4 })
