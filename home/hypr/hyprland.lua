@@ -21,10 +21,11 @@ hl.monitor({
 ---- AUTOSTART ----
 -------------------
 hl.on("hyprland.start", function()
+    hl.exec_cmd("uwsm app -- waybar")
     hl.exec_cmd("uwsm app -- lxqt-policykit-agent")
     hl.exec_cmd("uwsm app -- hyprpaper")
-    hl.exec_cmd("uwsm app -- waybar")
     hl.exec_cmd("uwsm app -- hypridle")
+    hl.exec_cmd("uwsm app -- sh -c 'sleep 2 && keepassxc --minimized'")
 end)
 
 -------------------------------
@@ -102,7 +103,7 @@ hl.animation({ leaf = "specialWorkspace", enabled = true, speed = 5, bezier = "w
 
 hl.config({
     master = {
-        new_status = "slave",
+        new_status = "inherit",
         orientation = "right",
         mfact = 0.6,
     },

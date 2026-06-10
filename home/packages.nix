@@ -53,6 +53,7 @@ in
         window-padding-y = 14;
         confirm-close-surface = false;
         cursor-style = "block";
+        scrollbar = "never";
         keybind = [
           "alt+n=new_tab"
           "alt+w=close_tab:this"

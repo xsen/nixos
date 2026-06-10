@@ -37,6 +37,21 @@
     gtk4.theme = null;
   };
 
+  dconf.settings = {
+    "org/gnome/desktop/interface" = {
+      gtk-enable-primary-paste = true;
+    };
+  };
+
+  xdg = {
+    desktopEntries."ghostty-yazi" = {
+      name = "Yazi File Manager (Ghostty)";
+      exec = "ghostty -e yazi %f";
+      terminal = false;
+      mimeType = [ "inode/directory" ];
+    };
+  };
+
   home = {
     enableNixpkgsReleaseCheck = false;
     activation = {
