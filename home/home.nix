@@ -5,6 +5,9 @@
   config,
   ...
 }:
+let
+  nixConfigDir = "${config.home.homeDirectory}/Code/nixos/xsen";
+in
 {
   imports = [
     ./packages.nix
@@ -50,6 +53,37 @@
       terminal = false;
       mimeType = [ "inode/directory" ];
     };
+
+    mimeApps = {
+      enable = true;
+      defaultApplications = {
+        "text/markdown" = [ "dev.zed.Zed.desktop" "nvim.desktop" ];
+        "text/x-markdown" = [ "dev.zed.Zed.desktop" "nvim.desktop" ];
+        "application/json" = [ "dev.zed.Zed.desktop" "gvim.desktop" ];
+        "text/html" = [ "yandex-browser.desktop" ];
+        "x-scheme-handler/http" = [ "yandex-browser.desktop" ];
+        "x-scheme-handler/https" = [ "yandex-browser.desktop" ];
+        "x-scheme-handler/about" = [ "yandex-browser.desktop" ];
+        "x-scheme-handler/unknown" = [ "yandex-browser.desktop" ];
+        "x-scheme-handler/tg" = [ "org.telegram.desktop.desktop" ];
+        "x-scheme-handler/tonsite" = [ "org.telegram.desktop.desktop" ];
+        "x-scheme-handler/jetbrains" = [ "jetbrainsd.desktop" ];
+        "x-scheme-handler/mailto" = [ "yandex-browser.desktop" ];
+        "x-scheme-handler/figma" = [ "figma-linux.desktop" ];
+        "x-scheme-handler/claude-cli" = [ "claude-code-url-handler.desktop" ];
+        "inode/directory" = [ "ghostty-yazi.desktop" ];
+      };
+      associations = {
+        added = {
+          "image/png" = [ "viewnior.desktop" ];
+          "x-scheme-handler/tg" = [ "org.telegram.telegram-desktop" "org.telegram.desktop.desktop" ];
+          "x-scheme-handler/tonsite" = [ "org.telegram.telegram-desktop" "org.telegram.desktop.desktop" ];
+          "application/json" = [ "dev.zed.Zed.desktop" "gvim.desktop" "yandex-browser.desktop" ];
+          "text/plain" = [ "jetbrains-phpstorm-48772c4e-b18a-4415-ba39-fbfad2359cfa.desktop" "gvim.desktop" "writer.desktop" ];
+          "image/jpeg" = [ "yandex-browser.desktop" ];
+        };
+      };
+    };
   };
 
   home = {
@@ -81,6 +115,15 @@
     ];
     file = {
       ".npmrc".source = ./npmrc;
+
+      # Out-of-store symlinks for mutable configuration files (accessible for agents/user without rebuilding)
+      ".config/zed/settings.json".source = config.lib.file.mkOutOfStoreSymlink "${nixConfigDir}/home/zed/settings.json";
+      ".config/zed/keymap.json".source = config.lib.file.mkOutOfStoreSymlink "${nixConfigDir}/home/zed/keymap.json";
+      ".config/zed/tasks.json".source = config.lib.file.mkOutOfStoreSymlink "${nixConfigDir}/home/zed/tasks.json";
+
+      ".gemini/config/AGENTS.md".source = config.lib.file.mkOutOfStoreSymlink "${nixConfigDir}/home/antigravity/AGENTS.md";
+      ".gemini/config/mcp_config.json".source = config.lib.file.mkOutOfStoreSymlink "${nixConfigDir}/home/antigravity/mcp_config.json";
+      ".gemini/config/instructions.md".source = config.lib.file.mkOutOfStoreSymlink "${nixConfigDir}/home/antigravity/instructions.md";
       ".scripts/smart-screenshot.sh" = {
         source = ./scripts/smart-screenshot.sh;
         executable = true;

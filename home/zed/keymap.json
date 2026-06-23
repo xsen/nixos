@@ -1,0 +1,136 @@
+[
+  // ==========================================
+  // ГЛОБАЛЬНЫЕ КОНТЕКСТЫ (WORKSPACE И БАЗОВЫЙ VIM)
+  // ==========================================
+  {
+    "context": "Workspace",
+    "bindings": {
+      "ctrl-w": null,
+      "shift shift": "file_finder::Toggle",
+      "alt-t": "terminal_panel::Toggle",
+
+      // Навигация между сплитами (Глобальная)
+      "ctrl-h": "workspace::ActivatePaneLeft",
+      "ctrl-j": "workspace::ActivatePaneDown",
+      "ctrl-k": "workspace::ActivatePaneUp",
+      "ctrl-l": "workspace::ActivatePaneRight",
+    },
+  },
+  {
+    "context": "(VimControl && !menu)",
+    "bindings": {
+      "ctrl-w": null,
+      "space": null, // Отключение дефолтного vim::WrappingRight
+      "space space": "vim::HelixJumpToWord",
+    },
+  },
+
+  // ==========================================
+  // РЕЖИМЫ VIM (NORMAL / VISUAL / NOT EDITING)
+  // ==========================================
+  {
+    "context": "(vim_mode == normal) || not_editing",
+    "bindings": {
+      // Переключение панелей (Toggle)
+      "space a": "agent::Toggle",
+      "space g": "git_panel::Toggle",
+      "space f": "project_panel::Toggle",
+      "space O": "outline_panel::Toggle",
+      "space o": "outline::Toggle",
+      "space s": "project_symbols::Toggle",
+      "space p": "projects::OpenRecent",
+
+      // Навигация между сплитами (Дублирование для надежности в Normal)
+      "ctrl-h": "workspace::ActivatePaneLeft",
+      "ctrl-j": "workspace::ActivatePaneDown",
+      "ctrl-k": "workspace::ActivatePaneUp",
+      "ctrl-l": "workspace::ActivatePaneRight",
+    },
+  },
+  {
+    "context": "vim_mode == normal || vim_mode == visual",
+    "bindings": {
+      "s": "vim::PushSneak",
+      "shift-s": "vim::PushSneakBackward",
+    },
+  },
+
+  // ==========================================
+  // ЗАКЛАДКИ, БУФЕРЫ, КОД И LSP (СТРОГО NORMAL MODE)
+  // ==========================================
+  {
+    "context": "Editor && vim_mode == normal && !VimWaiting && !menu",
+    "bindings": {
+      // Поиск
+      "space /": "workspace::NewSearch",
+
+      // --- Управление окнами и табами ---
+      "space w v": "pane::SplitRight",
+      "space w h": "pane::SplitDown",
+      "space w m": "workspace::ToggleZoom",
+
+      "space w b": "tab_switcher::Toggle",
+      "space w d": "pane::CloseActiveItem",
+
+      "space w a": "pane::CloseAllItems",
+      "space w o": "pane::CloseOtherItems",
+      "space w r": "pane::CloseItemsToTheRight",
+      "space w l": "pane::CloseItemsToTheLeft",
+
+      // Быстрая навигация по табам (Alt / Цифры)
+      "alt-h": "pane::ActivatePreviousItem",
+      "alt-l": "pane::ActivateNextItem",
+      "space 1": ["pane::ActivateItem", 0],
+      "space 2": ["pane::ActivateItem", 1],
+      "space 3": ["pane::ActivateItem", 2],
+      "space 4": ["pane::ActivateItem", 3],
+      "space 5": ["pane::ActivateItem", 4],
+      "space 6": ["pane::ActivateItem", 5],
+      "space 7": ["pane::ActivateItem", 6],
+      "space 8": ["pane::ActivateItem", 7],
+      "space 9": ["pane::ActivateItem", 8],
+
+      // Код, LSP и Рефакторинг
+      "space c a": "editor::ToggleCodeActions",
+      "space c r": "editor::Rename",
+      "space x x": "diagnostics::Deploy",
+      "g R": "editor::FindAllReferences",
+      "g r": "vim::PushReplaceWithRegister",
+
+      // Форматирование
+      "space c f": "editor::Format",
+      "space c v": "editor::FormatSelections",
+      "space c i": "editor::OrganizeImports",
+    },
+  },
+
+  // ==========================================
+  // ВСТРОЕННЫЙ ТЕРМИНАЛ (TERMINAL PANEL)
+  // ==========================================
+  {
+    "context": "Terminal",
+    "bindings": {
+      "alt-t": "terminal_panel::Toggle",
+      "alt-n": "workspace::NewTerminal",
+      "alt-w": "pane::CloseActiveItem",
+
+      // Навигация по табам терминала
+      "alt-h": "pane::ActivatePreviousItem",
+      "alt-l": "pane::ActivateNextItem",
+      "alt-1": ["pane::ActivateItem", 0],
+      "alt-2": ["pane::ActivateItem", 1],
+      "alt-3": ["pane::ActivateItem", 2],
+      "alt-4": ["pane::ActivateItem", 3],
+    },
+  },
+
+  // ==========================================
+  // ОТДЕЛЬНЫЕ ПАНЕЛИ (GIT)
+  // ==========================================
+  {
+    "context": "GitPanel",
+    "bindings": {
+      "space g": "git_panel::Toggle",
+    },
+  },
+]

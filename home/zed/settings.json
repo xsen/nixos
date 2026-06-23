@@ -1,0 +1,155 @@
+{
+  // ==========================================
+  // СИСТЕМНЫЕ НАСТРОЙКИ И ТЕЛЕМЕТРИЯ
+  // ==========================================
+  "cli_default_open_behavior": "existing_window",
+  "use_system_path_prompts": false,
+  "telemetry": {
+    "diagnostics": false,
+    "metrics": false
+  },
+
+  // ==========================================
+  // ВНЕШНИЙ ВИД, ТЕМЫ И ШРИФТЫ
+  // ==========================================
+  "theme": {
+    "mode": "dark",
+    "light": "Catppuccin Mocha",
+    "dark": "Catppuccin Mocha"
+  },
+  "icon_theme": {
+    "mode": "dark",
+    "light": "Catppuccin Mocha",
+    "dark": "Catppuccin Mocha"
+  },
+  "theme_overrides": {
+    "Catppuccin Mocha": {
+      "vim.helix_jump_label.foreground": "#f9e2af"
+    }
+  },
+  "ui_font_family": "JetBrainsMono Nerd Font",
+  "ui_font_size": 15,
+  "buffer_font_family": "JetBrainsMono Nerd Font Mono",
+  "buffer_font_size": 15,
+  "buffer_line_height": "comfortable",
+
+  // ==========================================
+  // ПОВЕДЕНИЕ РЕДАКТОРА И АВТОМАТИЗАЦИЯ
+  // ==========================================
+  "autosave": "on_focus_change",
+  "format_on_save": "on",
+  "extend_comment_on_newline": false,
+  "soft_wrap": "editor_width",
+  "preferred_line_length": 80,
+  "show_wrap_guides": true,
+
+  // ==========================================
+  // VIM-РЕЖИМ (ЭМУЛЯЦИЯ И ХОТКЕИ)
+  // ==========================================
+  "vim_mode": true,
+  "relative_line_numbers": "enabled",
+  "which_key": {
+    "enabled": true,
+    "delay_ms": 200
+  },
+  "vim": {
+    "use_smartcase_find": true,
+    "highlight_on_yank_duration": 300
+  },
+
+  // ==========================================
+  // ИНТЕРФЕЙС, ОКНА И БОКОВЫЕ ПАНЕЛИ
+  // ==========================================
+  "sticky_scroll": {
+    "enabled": true
+  },
+  "resize_all_panels_in_dock": ["right", "left", "bottom"],
+  "project_panel": {
+    "hide_root": true
+  },
+  "file_finder": {
+    "modal_max_width": "medium"
+  },
+  "scrollbar": {
+    "show": "never"
+  },
+  "gutter": {
+    "folds": false,
+    "min_line_number_digits": 0,
+    "line_numbers": true,
+    "bookmarks": false,
+    "breakpoints": false,
+    "runnables": false
+  },
+
+  // ==========================================
+  // ИНТЕГРАЦИЯ С GIT
+  // ==========================================
+  "git": {
+    "inline_blame": {
+      "enabled": false
+    }
+  },
+
+  // ==========================================
+  // ИИ-АССИСТЕНТ (AGENT)
+  // ==========================================
+  "agent_ui_font_size": 15,
+  "agent_buffer_font_size": 15,
+  "agent": {
+    "play_sound_when_agent_done": "when_hidden"
+  },
+  "agent_servers": {
+    "opencode": {
+      "type": "registry"
+    },
+    "gemini": {
+      "type": "registry"
+    }
+  },
+
+  // ==========================================
+  // НАСТРОЙКИ ЯЗЫКОВ И LSP / ТЕРМИНАЛ
+  // ==========================================
+  "terminal": {
+    "line_height": "comfortable"
+  },
+  "languages": {
+    "PHP": {
+      "language_servers": ["intelephense"]
+    }
+  },
+  "lsp": {
+    "nil": {
+      "initialization_options": {
+        "nix": {
+          "flake": {
+            "autoArchive": true
+          }
+        }
+      }
+    }
+  },
+  "auto_install_extensions": {
+    "basher": true,
+    "blade": true,
+    "catppuccin": true,
+    "catppuccin-icons": true,
+    "docker-compose": true,
+    "dockerfile": true,
+    "emmet": true,
+    "env": true,
+    "git-firefly": true,
+    "html": true,
+    "laravel": true,
+    "log": true,
+    "lua": true,
+    "nix": true,
+    "opencode": true,
+    "php": true,
+    "scss": true,
+    "sql": true,
+    "vue": true,
+    "xml": true
+  }
+}
