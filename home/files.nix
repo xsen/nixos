@@ -15,6 +15,8 @@ in
     ".gemini/config/mcp_config.json".source = config.lib.file.mkOutOfStoreSymlink "${nixConfigDir}/home/antigravity/mcp_config.json";
     ".gemini/config/instructions.md".source = config.lib.file.mkOutOfStoreSymlink "${nixConfigDir}/home/antigravity/instructions.md";
     ".gemini/settings.json".source = config.lib.file.mkOutOfStoreSymlink "${nixConfigDir}/home/antigravity/settings.json";
+    ".gemini/antigravity-cli/settings.json".source = config.lib.file.mkOutOfStoreSymlink "${nixConfigDir}/home/antigravity/cli-settings.json";
+    ".gemini/antigravity-cli/statusline-command.sh".source = config.lib.file.mkOutOfStoreSymlink "${nixConfigDir}/home/antigravity/statusline-command.sh";
 
     ".scripts/smart-screenshot.sh" = {
       source = ./scripts/smart-screenshot.sh;

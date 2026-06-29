@@ -1,6 +1,7 @@
 { pkgs, inputs, ... }:
 {
   programs = {
+    ssh.startAgent = true;
     fish.enable = true;
     zsh.enable = true;
     hyprland = {
@@ -18,7 +19,9 @@
   };
 
   environment.systemPackages = with pkgs; [
+    antigravity
     antigravity-cli
+    evelens
     throne
     home-manager
     pciutils

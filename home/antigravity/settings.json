@@ -4,6 +4,7 @@
       "selectedType": "oauth-personal"
     }
   },
+  "editor": "zed --wait",
   "general": {
     "vimMode": true,
     "enableNotifications": true,

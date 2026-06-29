@@ -53,15 +53,27 @@
       "x-scheme-handler/figma" = [ "figma-linux.desktop" ];
       "x-scheme-handler/claude-cli" = [ "claude-code-url-handler.desktop" ];
       "inode/directory" = [ "ghostty-yazi.desktop" ];
+
+      # Изображения (по умолчанию в Viewnior)
+      "image/png" = [ "viewnior.desktop" ];
+      "image/jpeg" = [ "viewnior.desktop" ];
+      "image/jpg" = [ "viewnior.desktop" ];
+      "image/gif" = [ "viewnior.desktop" ];
+      "image/webp" = [ "viewnior.desktop" ];
+      "image/bmp" = [ "viewnior.desktop" ];
     };
     associations = {
       added = {
-        "image/png" = [ "viewnior.desktop" ];
+        "image/png" = [ "viewnior.desktop" "yandex-browser.desktop" ];
+        "image/jpeg" = [ "viewnior.desktop" "yandex-browser.desktop" ];
+        "image/jpg" = [ "viewnior.desktop" "yandex-browser.desktop" ];
+        "image/gif" = [ "viewnior.desktop" "yandex-browser.desktop" ];
+        "image/webp" = [ "viewnior.desktop" "yandex-browser.desktop" ];
+        "image/bmp" = [ "viewnior.desktop" "yandex-browser.desktop" ];
         "x-scheme-handler/tg" = [ "org.telegram.telegram-desktop" "org.telegram.desktop.desktop" ];
         "x-scheme-handler/tonsite" = [ "org.telegram.telegram-desktop" "org.telegram.desktop.desktop" ];
         "application/json" = [ "dev.zed.Zed.desktop" "gvim.desktop" "yandex-browser.desktop" ];
         "text/plain" = [ "jetbrains-phpstorm-48772c4e-b18a-4415-ba39-fbfad2359cfa.desktop" "gvim.desktop" "writer.desktop" ];
-        "image/jpeg" = [ "yandex-browser.desktop" ];
       };
     };
   };

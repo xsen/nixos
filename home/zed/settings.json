@@ -6,7 +6,7 @@
   "use_system_path_prompts": false,
   "telemetry": {
     "diagnostics": false,
-    "metrics": false
+    "metrics": false,
   },
 
   // ==========================================
@@ -15,17 +15,17 @@
   "theme": {
     "mode": "dark",
     "light": "Catppuccin Mocha",
-    "dark": "Catppuccin Mocha"
+    "dark": "Catppuccin Mocha",
   },
   "icon_theme": {
     "mode": "dark",
     "light": "Catppuccin Mocha",
-    "dark": "Catppuccin Mocha"
+    "dark": "Catppuccin Mocha",
   },
   "theme_overrides": {
     "Catppuccin Mocha": {
-      "vim.helix_jump_label.foreground": "#f9e2af"
-    }
+      "vim.helix_jump_label.foreground": "#f9e2af",
+    },
   },
   "ui_font_family": "JetBrainsMono Nerd Font",
   "ui_font_size": 15,
@@ -50,28 +50,28 @@
   "relative_line_numbers": "enabled",
   "which_key": {
     "enabled": true,
-    "delay_ms": 200
+    "delay_ms": 200,
   },
   "vim": {
     "use_smartcase_find": true,
-    "highlight_on_yank_duration": 300
+    "highlight_on_yank_duration": 300,
   },
 
   // ==========================================
   // ИНТЕРФЕЙС, ОКНА И БОКОВЫЕ ПАНЕЛИ
   // ==========================================
   "sticky_scroll": {
-    "enabled": true
+    "enabled": true,
   },
   "resize_all_panels_in_dock": ["right", "left", "bottom"],
   "project_panel": {
-    "hide_root": true
+    "hide_root": true,
   },
   "file_finder": {
-    "modal_max_width": "medium"
+    "modal_max_width": "medium",
   },
   "scrollbar": {
-    "show": "never"
+    "show": "never",
   },
   "gutter": {
     "folds": false,
@@ -79,7 +79,7 @@
     "line_numbers": true,
     "bookmarks": false,
     "breakpoints": false,
-    "runnables": false
+    "runnables": false,
   },
 
   // ==========================================
@@ -87,8 +87,8 @@
   // ==========================================
   "git": {
     "inline_blame": {
-      "enabled": false
-    }
+      "enabled": false,
+    },
   },
 
   // ==========================================
@@ -97,38 +97,38 @@
   "agent_ui_font_size": 15,
   "agent_buffer_font_size": 15,
   "agent": {
-    "play_sound_when_agent_done": "when_hidden"
+    "play_sound_when_agent_done": "when_hidden",
   },
   "agent_servers": {
     "opencode": {
-      "type": "registry"
+      "type": "registry",
     },
     "gemini": {
-      "type": "registry"
-    }
+      "type": "registry",
+    },
   },
 
   // ==========================================
   // НАСТРОЙКИ ЯЗЫКОВ И LSP / ТЕРМИНАЛ
   // ==========================================
   "terminal": {
-    "line_height": "comfortable"
+    "line_height": "comfortable",
   },
   "languages": {
     "PHP": {
-      "language_servers": ["intelephense"]
-    }
+      "language_servers": ["intelephense"],
+    },
   },
   "lsp": {
     "nil": {
       "initialization_options": {
         "nix": {
           "flake": {
-            "autoArchive": true
-          }
-        }
-      }
-    }
+            "autoArchive": true,
+          },
+        },
+      },
+    },
   },
   "auto_install_extensions": {
     "basher": true,
@@ -150,6 +150,6 @@
     "scss": true,
     "sql": true,
     "vue": true,
-    "xml": true
-  }
+    "xml": true,
+  },
 }

@@ -36,6 +36,15 @@
 
   gtk = {
     enable = true;
+    theme = {
+      name = "catppuccin-mocha-blue-standard+rimless";
+      package = pkgs.catppuccin-gtk.override {
+        accents = [ "blue" ];
+        size = "standard";
+        tweaks = [ "rimless" ];
+        variant = "mocha";
+      };
+    };
     gtk4.theme = null;
   };
 

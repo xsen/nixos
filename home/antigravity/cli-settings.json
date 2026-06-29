@@ -1,0 +1,35 @@
+{
+  "allowNonWorkspaceAccess": true,
+  "enableTelemetry": false,
+  "notifications": true,
+  "editor": "zed --wait",
+  "permissions": {
+    "allow": [
+      "command(cd)",
+      "command(php artisan test)",
+      "command(composer)",
+      "command(cat)",
+      "command(find)",
+      "command(grep)",
+      "command(rg)",
+      "command(ls)",
+      "command(git)",
+      "command(jq)",
+      "command(head)",
+      "command(tail)",
+      "command(file)"
+    ],
+    "ask": ["command(cat \\..*)", "command(head \\..*)", "command(tail \\..*)"]
+  },
+  "runningLightSpeed": "fast",
+  "showFeedbackSurvey": false,
+  "statusLine": {
+    "type": "command",
+    "command": "/home/evgeny/.gemini/antigravity-cli/statusline-command.sh",
+    "enabled": true
+  },
+  "trustedWorkspaces": [
+    "/home/evgeny/Code/Soft/eve-zavod",
+    "/home/evgeny/Code/nixos/xsen"
+  ]
+}

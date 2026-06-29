@@ -105,7 +105,10 @@ hl.config({
     master = {
         new_status = "inherit",
         orientation = "right",
-        mfact = 0.6,
+        mfact = 0.55,
+    },
+    dwindle = {
+        preserve_split = true,
     },
     misc = {
         vrr = 3,
@@ -151,6 +154,8 @@ hl.config({
 ---------------------
 local mainMod = "SUPER"
 
+hl.bind("escape", hl.dsp.exec_cmd("hyprctl switchxkblayout all 0"), { non_consuming = true })
+
 -- Screenshotting
 hl.bind("CTRL + PRINT", hl.dsp.exec_cmd("smart-screenshot.sh output"))
 hl.bind("SHIFT + PRINT", hl.dsp.exec_cmd("smart-screenshot.sh window"))
@@ -161,6 +166,7 @@ hl.bind(mainMod .. " + C", hl.dsp.window.close())
 hl.bind(mainMod .. " + M", hl.dsp.exec_cmd("uwsm stop"))
 hl.bind(mainMod .. " + F", hl.dsp.window.float({ action = "toggle" }))
 hl.bind(mainMod .. " + W", hl.dsp.layout("togglesplit"))
+hl.bind(mainMod .. " + F11", hl.dsp.window.fullscreen())
 hl.bind(mainMod .. " + O", hl.dsp.exec_cmd("hyprlock"))
 hl.bind(mainMod .. " + I", hl.dsp.exec_cmd("~/.config/waybar/scripts/hypridle.sh --toggle"))
 
@@ -276,6 +282,11 @@ end)
 --------------------------------
 ---- WINDOWS AND WORKSPACES ----
 --------------------------------
+
+hl.workspace_rule({ workspace = "6", layout = "dwindle" })
+hl.workspace_rule({ workspace = "7", layout = "dwindle" })
+hl.window_rule({ name = "eve-online-tile", match = { class = "steam_app_8500" }, tile = true })
+
 hl.window_rule({
     name = "global-suppress-maximize",
     match = { class = ".*" },
@@ -298,6 +309,9 @@ hl.window_rule({ name = "app-ticktick", match = { class = "ticktick" }, workspac
 hl.window_rule({ name = "app-telegram", match = { class = "org\\.telegram\\.desktop" }, workspace = 3 })
 hl.window_rule({ name = "app-social", match = { class = "(?i)(discord|spotify|plexamp|yandexmusic|yandex-music)" }, workspace = 4 })
 hl.window_rule({ name = "app-steam", match = { class = "steam" }, workspace = "5 silent" })
+hl.window_rule({ name = "eve-launcher", match = { class = "steam_app_8500", title = "Программа запуска EVE Online" }, workspace =
+"5" })
+hl.window_rule({ name = "eve-game", match = { class = "steam_app_8500", title = "^EVE$" }, workspace = "6" })
 
 hl.window_rule({
     name = "transparency-tagging",

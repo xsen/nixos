@@ -22,6 +22,9 @@
         display-window = "   Window ";
         sidebar-mode = true;
         sorting-method = "fzf";
+        sort = true;
+        matching = "normal";
+        drun-match-fields = "name,generic,keywords,categories";
       };
 
       plugins = with pkgs; [

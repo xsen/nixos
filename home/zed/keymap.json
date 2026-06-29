@@ -22,6 +22,7 @@
       "ctrl-w": null,
       "space": null, // Отключение дефолтного vim::WrappingRight
       "space space": "vim::HelixJumpToWord",
+      // "space k": "vim::PushFlash",
     },
   },
 

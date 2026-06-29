@@ -52,12 +52,15 @@ in
     opencode
     codex
     llmfit
+    cargo
+    rustc
+    rustfmt
+    rust-analyzer
+    gcc
+    clippy
     python3
     uv
     beekeeper-studio
     zed-editor
-    # jetbrains.jdk
-    # code-cursor
-    # vscode
   ];
 }
