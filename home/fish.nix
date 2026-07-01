@@ -22,15 +22,21 @@
         end
 
         function done
+          if not set -q argv[1]
+            return 0
+          end
           $argv
           set -l status_code $status
           set -l full_cmd (string join " " $argv)
 
-          if test $status_code -eq 0
-            notify-send "Выполнено успешно" "$full_cmd" -i terminal -t 3000
-          else
-            notify-send "Ошибка ($status_code)" "$full_cmd" -u critical -i error
+          if type -q notify-send
+            if test $status_code -eq 0
+              notify-send "Выполнено успешно" "$full_cmd" -i terminal -t 3000
+            else
+              notify-send "Ошибка ($status_code)" "$full_cmd" -u critical -i error
+            end
           end
+          return $status_code
         end
 
         if status is-interactive
@@ -45,9 +51,6 @@
       shellAliases = {
         ls = "eza --icons=always";
         nh-clean = "nh clean all";
-        nh-all = "nh os switch && nh home switch";
-        nh-os = "nh os switch";
-        nh-home = "nh home switch";
         update-hypr-stubs = "cp --no-preserve=mode -f $(find $(dirname $(dirname $(readlink -f $(which Hyprland)))) -name 'hl.meta.lua') ~/.nix-config/home/hypr/stubs/";
       };
 
@@ -59,6 +62,39 @@
             else
                 sh vendor/bin/sail $argv
             end
+          '';
+        };
+
+        nh-os = {
+          body = ''
+                        set -l tmpdir (mktemp -d); or return 1
+                        begin
+                            echo '#!/bin/sh
+            if ! /run/wrappers/bin/sudo -n true 2>/dev/null; then
+                if command -v notify-send >/dev/null 2>&1; then
+                    notify-send "Требуется пароль" "Введите пароль в терминале для сборки системы" -i dialog-password -u critical
+                fi
+            fi
+            exec /run/wrappers/bin/sudo "$@"' > $tmpdir/sudo
+                            chmod +x $tmpdir/sudo
+
+                            set -lx PATH $tmpdir $PATH
+                            done nh os switch $argv
+                        always
+                            rm -rf $tmpdir
+                        end
+          '';
+        };
+
+        nh-home = {
+          body = ''
+            done nh home switch $argv
+          '';
+        };
+
+        nh-all = {
+          body = ''
+            nh-os $argv; and nh-home $argv
           '';
         };
       };
