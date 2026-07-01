@@ -4,10 +4,30 @@ set -f
 
 input=$(cat)
 
-cwd=$(echo "$input"         | jq -r '.cwd // .workspace.current_dir // ""')
-ctx_used=$(echo "$input"    | jq -r '.context_window.used_percentage // empty | round')
-session_id=$(echo "$input"  | jq -r '.session_id // ""')
-state=$(echo "$input"       | jq -r '.agent_state // "idle"')
+{
+  read -r cwd
+  read -r ctx_used
+  read -r session_id
+  read -r state
+  read -r model
+  read -r rem_5h
+  read -r reset_5h
+  read -r rem_weekly
+  read -r reset_weekly
+} < <(
+  echo "$input" | jq -r '
+    .cwd // .workspace.current_dir // "",
+    (.context_window.used_percentage // "" | if . != "" then round else "" end),
+    .session_id // "",
+    .agent_state // "idle",
+    ((.model // {}) | .display_name // .id // ""),
+    .quota["gemini-5h"].remaining_fraction // "",
+    .quota["gemini-5h"].reset_in_seconds // "",
+    .quota["gemini-weekly"].remaining_fraction // "",
+    .quota["gemini-weekly"].reset_in_seconds // ""
+  ' 2>/dev/null
+)
+if [ -z "$state" ]; then state="idle"; fi
 
 # ── Catppuccin Mocha palette ──────────────────────────────────────────────────
 blue=$'\x1b[38;2;137;180;250m'
@@ -39,7 +59,7 @@ color_for_pct() {
     fi
 }
 
-# ── Helper: format epoch as HH:MM or "28.06 23:50" ───────────────────────────
+# ── Helper: format epoch as HH:MM or "28.06" ─────────────────────────────
 fmt_epoch_time() {
     date -d "@$1" +"%H:%M" 2>/dev/null || date -r "$1" +"%H:%M" 2>/dev/null
 }
@@ -90,24 +110,25 @@ if [ -n "$cwd" ] && git -C "$cwd" rev-parse --git-dir >/dev/null 2>&1; then
         [ "$untracked" -gt 0 ] && git_status_flags="${git_status_flags}?${untracked}"
     fi
     if [ -n "$branch" ]; then
-        git_part=" ${branch}"
+        git_part="${branch}"
         [ -n "$git_status_flags" ] && git_part="${git_part} ${git_status_flags}"
     fi
+fi
+
+# ── Model ─────────────────────────────────────────────────────────────────────
+model_part=""
+if [ -n "$model" ]; then
+    model_part="${subtext}mdl:${teal}${model}${reset}"
 fi
 
 # ── Context window ────────────────────────────────────────────────────────────
 ctx_part=""
 if [ -n "$ctx_used" ]; then
     col=$(color_for_pct "$ctx_used")
-    ctx_part="${flamingo}context:${col}${ctx_used}%${reset}"
+    ctx_part="${subtext}ctx:${col}${ctx_used}%${reset}"
 fi
 
 # ── Quota limits ──────────────────────────────────────────────────────────────
-rem_5h=$(echo "$input" | jq -r '.quota["gemini-5h"].remaining_fraction // empty')
-reset_5h=$(echo "$input" | jq -r '.quota["gemini-5h"].reset_in_seconds // empty')
-
-rem_weekly=$(echo "$input" | jq -r '.quota["gemini-weekly"].remaining_fraction // empty')
-reset_weekly=$(echo "$input" | jq -r '.quota["gemini-weekly"].reset_in_seconds // empty')
 
 now_epoch=$(date +%s)
 
@@ -131,16 +152,16 @@ spr_part=""
 if [ -n "$rl_5h_pct" ]; then
     col=$(color_for_pct "$rl_5h_pct")
     reset_str=""
-    [ -n "$rl_5h_reset" ] && reset_str=" ${mauve}($(fmt_epoch_time "$rl_5h_reset")${mauve})${reset}"
-    spr_part=$(printf "${mauve}sprint:${col}%d%%%s${reset}" "$rl_5h_pct" "$reset_str")
+    [ -n "$rl_5h_reset" ] && reset_str=" ${overlay}($(fmt_epoch_time "$rl_5h_reset"))${reset}"
+    spr_part=$(printf "${subtext}spr:${col}%d%%%s${reset}" "$rl_5h_pct" "$reset_str")
 fi
 
 wk_part=""
 if [ -n "$rl_7d_pct" ]; then
     col=$(color_for_pct "$rl_7d_pct")
     reset_str=""
-    [ -n "$rl_7d_reset" ] && reset_str=" ${sapphire}($(fmt_epoch_date "$rl_7d_reset")${sapphire})${reset}"
-    wk_part=$(printf "${sapphire}weekly:${col}%d%%%s${reset}" "$rl_7d_pct" "$reset_str")
+    [ -n "$rl_7d_reset" ] && reset_str=" ${overlay}($(fmt_epoch_date "$rl_7d_reset"))${reset}"
+    wk_part=$(printf "${subtext}wk:${col}%d%%%s${reset}" "$rl_7d_pct" "$reset_str")
 fi
 
 # ── Assemble Single Line ──────────────────────────────────────────────────────
@@ -148,11 +169,18 @@ fi
 printf "%s" "$state_part"
 
 # Divider + Block 2: Directory
-printf " ${overlay}│${reset} ${blue}%s${reset}" "$short_dir"
+if [ -n "$short_dir" ]; then
+    printf " ${overlay}│${reset} ${blue}%s${reset}" "$short_dir"
+fi
 
 # Divider + Block 3: Git
 if [ -n "$git_part" ]; then
-    printf " ${overlay}│${reset} ${yellow}%s${reset}" "$git_part"
+    printf " ${overlay}│${reset} ${peach}%s${reset}" "$git_part"
+fi
+
+# Divider + Block: Model
+if [ -n "$model_part" ]; then
+    printf " ${overlay}│${reset} %s" "$model_part"
 fi
 
 # Divider + Block 4: Context

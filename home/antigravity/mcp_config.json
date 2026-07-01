@@ -3,6 +3,36 @@
     "playwright": {
       "command": "/home/evgeny/.gemini/config/plugins/chrome-devtools-mcp/launch-playwright.sh",
       "args": []
+    },
+    "eve-aura": {
+      "command": "bun",
+      "args": [
+        "run",
+        "/home/evgeny/Code/eve-aura/src/index.ts"
+      ]
+    },
+    "dbhub": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@bytebase/dbhub@latest",
+        "--transport",
+        "stdio"
+      ]
+    },
+    "sequential-thinking": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-sequential-thinking"
+      ]
+    },
+    "figma": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-figma"
+      ]
     }
   }
 }
