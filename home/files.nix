@@ -20,8 +20,8 @@ in
       source = config.lib.file.mkOutOfStoreSymlink "${nixConfigDir}/home/antigravity/mcp_config.json";
       force = true;
     };
-    ".gemini/config/instructions.md".source =
-      config.lib.file.mkOutOfStoreSymlink "${nixConfigDir}/home/antigravity/instructions.md";
+    ".gemini/config/skills".source =
+      config.lib.file.mkOutOfStoreSymlink "${nixConfigDir}/home/antigravity/skills";
     ".gemini/settings.json" = {
       source = config.lib.file.mkOutOfStoreSymlink "${nixConfigDir}/home/antigravity/settings.json";
       force = true;

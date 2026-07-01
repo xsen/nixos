@@ -14,8 +14,9 @@ input=$(cat)
   read -r reset_5h
   read -r rem_weekly
   read -r reset_weekly
+  read -r active_subs
 } < <(
-  echo "$input" | jq -r '
+  jq -r '
     .cwd // .workspace.current_dir // "",
     (.context_window.used_percentage // "" | if . != "" then round else "" end),
     .session_id // "",
@@ -24,10 +25,32 @@ input=$(cat)
     .quota["gemini-5h"].remaining_fraction // "",
     .quota["gemini-5h"].reset_in_seconds // "",
     .quota["gemini-weekly"].remaining_fraction // "",
-    .quota["gemini-weekly"].reset_in_seconds // ""
-  ' 2>/dev/null
+    .quota["gemini-weekly"].reset_in_seconds // "",
+    ([.subagents[]? | select(.status != "completed" and .status != "failed" and .status != "cancelled")] | length)
+  ' <<< "$input" 2>/dev/null
 )
 if [ -z "$state" ]; then state="idle"; fi
+
+active_tasks=0
+my_agy_pid=$PPID
+child_pids=$(pgrep -P "$my_agy_pid" 2>/dev/null)
+if [ -n "$child_pids" ]; then
+    for cpid in $child_pids; do
+        comm=$(cat "/proc/$cpid/comm" 2>/dev/null)
+        cmdline=$(tr '\0' ' ' < "/proc/$cpid/cmdline" 2>/dev/null)
+        if [[ "$comm" == "ps" || "$comm" == "pgrep" || "$comm" == *"statusline"* || "$cmdline" == *"statusline-command.sh"* ]]; then
+            continue
+        fi
+        if tr '\0' '\n' < "/proc/$cpid/environ" 2>/dev/null | grep -q "^ANTIGRAVITY_SOURCE_METADATA="; then
+            ((active_tasks++))
+        fi
+    done
+fi
+
+total_background_activities=$(( ${active_subs:-0} + active_tasks ))
+if [ "$state" = "idle" ] && [ "$total_background_activities" -gt 0 ]; then
+    state="waiting"
+fi
 
 # ── Catppuccin Mocha palette ──────────────────────────────────────────────────
 blue=$'\x1b[38;2;137;180;250m'
@@ -78,6 +101,9 @@ case "$state" in
         ;;
     tool_use)
         state_part="${blue}● tool${reset}"
+        ;;
+    waiting)
+        state_part="${lavender}● wait${reset}"
         ;;
     idle)
         state_part="${subtext}● idle${reset}"
