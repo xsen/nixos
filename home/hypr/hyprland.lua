@@ -312,6 +312,7 @@ hl.window_rule({ name = "app-social", match = { class = "(?i)(discord|spotify|pl
 hl.window_rule({ name = "app-steam", match = { class = "steam" }, workspace = "5 silent" })
 hl.window_rule({ name = "eve-launcher", match = { class = "steam_app_8500", title = "Программа запуска EVE Online" }, workspace =
 "5" })
+hl.window_rule({ name = "eve-tray", match = { class = "steam_app_8500", title = "^$" }, workspace = "99 silent", no_focus = true })
 hl.window_rule({ name = "eve-game", match = { class = "steam_app_8500", title = "^EVE$" }, workspace = "6" })
 
 hl.window_rule({
