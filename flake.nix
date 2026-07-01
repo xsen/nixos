@@ -27,6 +27,11 @@
       url = "github:Mic92/nix-ld";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    nix-index-database = {
+      url = "github:nix-community/nix-index-database";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -40,6 +45,7 @@
       home-manager,
       spicetify-nix,
       yandex-browser,
+      nix-index-database,
     }@inputs:
     let
       host = "nix-desktop";
@@ -88,6 +94,7 @@
         modules = [
           catppuccin.homeModules.catppuccin
           spicetify-nix.homeManagerModules.spicetify
+          nix-index-database.homeModules.nix-index
           ./hosts/${host}/home-manager.nix
         ];
       };

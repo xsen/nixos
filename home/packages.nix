@@ -14,7 +14,6 @@ in
     ./rofi
     ./fish.nix
   ];
-
   programs = {
     spicetify = {
       enable = true;
@@ -26,6 +25,11 @@ in
       ];
       theme = spicePkgs.themes.catppuccin;
       colorScheme = "mocha";
+    };
+
+    direnv = {
+      enable = true;
+      nix-direnv.enable = true;
     };
 
     btop = {
@@ -161,5 +165,12 @@ in
         set softtabstop=2
       '';
     };
+
+    nix-index = {
+      enable = true;
+      enableFishIntegration = true;
+    };
+
+    nix-index-database.comma.enable = true;
   };
 }

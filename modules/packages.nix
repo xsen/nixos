@@ -4,6 +4,7 @@
     ssh.startAgent = true;
     fish.enable = true;
     zsh.enable = true;
+    command-not-found.enable = false;
     hyprland = {
       enable = true;
       withUWSM = true;
@@ -21,6 +22,7 @@
   environment.systemPackages = with pkgs; [
     antigravity
     antigravity-cli
+    localsend
     evelens
     throne
     home-manager

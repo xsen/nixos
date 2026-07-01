@@ -255,10 +255,12 @@
         9003
         8384
         22000
+        53317
       ];
       allowedUDPPorts = [
         22000
         21027
+        53317
       ];
 
       trustedInterfaces = [
