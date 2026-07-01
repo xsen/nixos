@@ -28,6 +28,8 @@
     "custom/separator#hr"
     "hyprland/submap"
     "custom/separator#hr"
+    "custom/browser-profile"
+    "custom/separator#hr"
     #    "custom/separator#dot-line"
     #    "custom/menu"
     #    "custom/separator#dot-line"

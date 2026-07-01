@@ -3,9 +3,18 @@
     enable = true;
     defaultApplications = {
       # Текст и разметка (по умолчанию в Zed)
-      "text/markdown" = [ "dev.zed.Zed.desktop" "nvim.desktop" ];
-      "text/x-markdown" = [ "dev.zed.Zed.desktop" "nvim.desktop" ];
-      "application/json" = [ "dev.zed.Zed.desktop" "gvim.desktop" ];
+      "text/markdown" = [
+        "dev.zed.Zed.desktop"
+        "nvim.desktop"
+      ];
+      "text/x-markdown" = [
+        "dev.zed.Zed.desktop"
+        "nvim.desktop"
+      ];
+      "application/json" = [
+        "dev.zed.Zed.desktop"
+        "gvim.desktop"
+      ];
       "text/plain" = [ "dev.zed.Zed.desktop" ];
       "text/x-log" = [ "dev.zed.Zed.desktop" ];
 
@@ -41,15 +50,15 @@
       "text/x-c++hdr" = [ "dev.zed.Zed.desktop" ];
 
       # Браузерные и внешние обработчики
-      "text/html" = [ "yandex-browser.desktop" ];
-      "x-scheme-handler/http" = [ "yandex-browser.desktop" ];
-      "x-scheme-handler/https" = [ "yandex-browser.desktop" ];
-      "x-scheme-handler/about" = [ "yandex-browser.desktop" ];
-      "x-scheme-handler/unknown" = [ "yandex-browser.desktop" ];
+      "text/html" = [ "browser-dispatcher.desktop" ];
+      "x-scheme-handler/http" = [ "browser-dispatcher.desktop" ];
+      "x-scheme-handler/https" = [ "browser-dispatcher.desktop" ];
+      "x-scheme-handler/about" = [ "browser-dispatcher.desktop" ];
+      "x-scheme-handler/unknown" = [ "browser-dispatcher.desktop" ];
       "x-scheme-handler/tg" = [ "org.telegram.desktop.desktop" ];
       "x-scheme-handler/tonsite" = [ "org.telegram.desktop.desktop" ];
       "x-scheme-handler/jetbrains" = [ "jetbrainsd.desktop" ];
-      "x-scheme-handler/mailto" = [ "yandex-browser.desktop" ];
+      "x-scheme-handler/mailto" = [ "browser-dispatcher.desktop" ];
       "x-scheme-handler/figma" = [ "figma-linux.desktop" ];
       "x-scheme-handler/claude-cli" = [ "claude-code-url-handler.desktop" ];
       "inode/directory" = [ "ghostty-yazi.desktop" ];
@@ -64,16 +73,48 @@
     };
     associations = {
       added = {
-        "image/png" = [ "viewnior.desktop" "yandex-browser.desktop" ];
-        "image/jpeg" = [ "viewnior.desktop" "yandex-browser.desktop" ];
-        "image/jpg" = [ "viewnior.desktop" "yandex-browser.desktop" ];
-        "image/gif" = [ "viewnior.desktop" "yandex-browser.desktop" ];
-        "image/webp" = [ "viewnior.desktop" "yandex-browser.desktop" ];
-        "image/bmp" = [ "viewnior.desktop" "yandex-browser.desktop" ];
-        "x-scheme-handler/tg" = [ "org.telegram.telegram-desktop" "org.telegram.desktop.desktop" ];
-        "x-scheme-handler/tonsite" = [ "org.telegram.telegram-desktop" "org.telegram.desktop.desktop" ];
-        "application/json" = [ "dev.zed.Zed.desktop" "gvim.desktop" "yandex-browser.desktop" ];
-        "text/plain" = [ "jetbrains-phpstorm-48772c4e-b18a-4415-ba39-fbfad2359cfa.desktop" "gvim.desktop" "writer.desktop" ];
+        "image/png" = [
+          "viewnior.desktop"
+          "yandex-browser.desktop"
+        ];
+        "image/jpeg" = [
+          "viewnior.desktop"
+          "yandex-browser.desktop"
+        ];
+        "image/jpg" = [
+          "viewnior.desktop"
+          "yandex-browser.desktop"
+        ];
+        "image/gif" = [
+          "viewnior.desktop"
+          "yandex-browser.desktop"
+        ];
+        "image/webp" = [
+          "viewnior.desktop"
+          "yandex-browser.desktop"
+        ];
+        "image/bmp" = [
+          "viewnior.desktop"
+          "yandex-browser.desktop"
+        ];
+        "x-scheme-handler/tg" = [
+          "org.telegram.telegram-desktop"
+          "org.telegram.desktop.desktop"
+        ];
+        "x-scheme-handler/tonsite" = [
+          "org.telegram.telegram-desktop"
+          "org.telegram.desktop.desktop"
+        ];
+        "application/json" = [
+          "dev.zed.Zed.desktop"
+          "gvim.desktop"
+          "yandex-browser.desktop"
+        ];
+        "text/plain" = [
+          "jetbrains-phpstorm-48772c4e-b18a-4415-ba39-fbfad2359cfa.desktop"
+          "gvim.desktop"
+          "writer.desktop"
+        ];
       };
     };
   };

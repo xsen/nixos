@@ -344,4 +344,9 @@ in
     "interval" = "once";
     "tooltip" = false;
   };
+  "custom/browser-profile" = {
+    "exec" = "${scriptPath}/browser-profile.sh";
+    "interval" = 1;
+    "return-type" = "json";
+  };
 }

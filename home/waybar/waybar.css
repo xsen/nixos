@@ -34,6 +34,13 @@ window#waybar.hidden {
     border: 2px solid @lavender;
 }
 
+.modules-left widget,
+.modules-center widget,
+.modules-right widget {
+    padding-left: 6px;
+    padding-right: 6px;
+}
+
 #backlight,
 #backlight-slider,
 #battery,
@@ -139,7 +146,7 @@ window#waybar.hidden {
 }
 
 #submap {
-    color: @overlay0;
+    color: @blue;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
@@ -149,6 +156,23 @@ window#waybar.hidden {
 
 #submap.RE {
     color: @yellow;
+}
+
+#custom-browser-profile {
+    font-weight: bold;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+#custom-browser-profile.work {
+    color: @lavender;
+}
+
+#custom-browser-profile.personal {
+    color: @peach;
+}
+
+#custom-browser-profile.auto {
+    color: @blue;
 }
 
 #custom-waybar-mpris,
@@ -210,6 +234,9 @@ window#waybar.hidden {
     box-shadow: none;
     text-shadow: none;
     border-radius: 9px;
+    padding: 5px 6px;
+    margin: 2px 0;
+    min-width: 0;
     animation: gradient_f 20s ease-in infinite;
     transition: all 0.5s cubic-bezier(0.55, -0.68, 0.48, 1.682);
 }
@@ -218,6 +245,8 @@ window#waybar.hidden {
     border-radius: 10px;
     color: @overlay0;
     background-color: @surface0;
+    padding: 5px 6px;
+    min-width: 0;
     animation: gradient_f 20s ease-in infinite;
     transition: all 0.3s cubic-bezier(0.55, -0.68, 0.48, 1.682);
 }

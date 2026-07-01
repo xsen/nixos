@@ -12,6 +12,7 @@
     ./swaync.nix
     ./mime.nix
     ./files.nix
+    ./browser-dispatcher.nix
   ];
 
   wayland.windowManager.hyprland.systemd.enable = false;
@@ -80,7 +81,7 @@
     };
     sessionVariables = {
       EDITOR = "vim";
-      BROWSER = "yandex-browser-stable";
+      BROWSER = "browser-dispatcher";
       TERMINAL = "ghostty";
       NH_FLAKE = "$HOME/.nix-config";
     };
