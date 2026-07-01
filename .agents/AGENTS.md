@@ -30,10 +30,10 @@
   Перед сдачей задачи агент должен убедиться, что конфигурация собирается без ошибок. Для этого используй:
   * Быстрая проверка синтаксиса: `nix-instantiate --parse <file>`
   * Полная валидация флейка: `nix flake check`
-  * Тестовая сборка системы (в локальную папку `./result` без применения):
-    `nix build .#nixosConfigurations.nix-desktop.config.system.build.toplevel`
-  * Тестовая сборка home-manager (без применения):
-    `nix build .#homeConfigurations.evgeny.activationPackage`
+  * Тестовая сборка системы:
+    `nix build .#nixosConfigurations.nix-desktop.config.system.build.toplevel --no-link`
+  * Тестовая сборка home-manager:
+    `nix build .#homeConfigurations.evgeny.activationPackage --no-link`
 
 * **Применение изменений (выполняет пользователь)**:
   После успешной тестовой сборки агент должен предложить пользователю применить изменения, выведя соответствующую команду:

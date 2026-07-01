@@ -68,21 +68,20 @@
         nh-os = {
           body = ''
                         set -l tmpdir (mktemp -d); or return 1
-                        begin
-                            echo '#!/bin/sh
+                        echo '#!/bin/sh
             if ! /run/wrappers/bin/sudo -n true 2>/dev/null; then
                 if command -v notify-send >/dev/null 2>&1; then
                     notify-send "Требуется пароль" "Введите пароль в терминале для сборки системы" -i dialog-password -u critical
                 fi
             fi
             exec /run/wrappers/bin/sudo "$@"' > $tmpdir/sudo
-                            chmod +x $tmpdir/sudo
+                        chmod +x $tmpdir/sudo
 
-                            set -lx PATH $tmpdir $PATH
-                            done nh os switch $argv
-                        always
-                            rm -rf $tmpdir
-                        end
+                        set -lx PATH $tmpdir $PATH
+                        done nh os switch $argv
+                        set -l status_code $status
+                        rm -rf $tmpdir
+                        return $status_code
           '';
         };
 
