@@ -26,7 +26,7 @@ input=$(cat)
     .quota["gemini-5h"].reset_in_seconds // "",
     .quota["gemini-weekly"].remaining_fraction // "",
     .quota["gemini-weekly"].reset_in_seconds // "",
-    ([.subagents[]? | select(.status != "completed" and .status != "failed" and .status != "cancelled")] | length)
+    ([.. | objects | select(has("id") and has("status") and .status != "completed" and .status != "failed" and .status != "cancelled")] | length)
   ' <<< "$input" 2>/dev/null
 )
 if [ -z "$state" ]; then state="idle"; fi

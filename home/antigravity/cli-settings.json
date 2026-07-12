@@ -41,8 +41,12 @@
       "command(prettier)",
       "command(phpunit)",
       "command(nixfmt)",
+      "command(nix build)",
+      "command(nix develop)",
+      "command(nix flake check)",
       "command(nix-instantiate)",
-      "command(nix flake check)"
+      "read_file(/home/evgeny/.gemini/config/skills)",
+      "read_file(/home/evgeny/.gemini/antigravity-cli)"
     ],
     "ask": ["command(cat \\..*)", "command(head \\..*)", "command(tail \\..*)"]
   },
