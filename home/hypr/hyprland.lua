@@ -10,12 +10,7 @@ local menu = "pkill rofi || rofi -calc-command \"echo -n '{result}' | wl-copy\" 
 ------------------
 ---- MONITORS ----
 ------------------
-hl.monitor({
-    output   = "DP-1",
-    mode     = "3440x1440@144",
-    position = "0x0",
-    scale    = "1",
-})
+require("monitors")
 
 -------------------
 ---- AUTOSTART ----
@@ -208,6 +203,8 @@ for i = 1, 10 do
     hl.bind(mainMod .. " + " .. key, hl.dsp.focus({ workspace = i }))
     hl.bind(mainMod .. " + SHIFT + " .. key, hl.dsp.window.move({ workspace = i }))
 end
+hl.bind(mainMod .. " + E", hl.dsp.focus({ workspace = 6 }))
+
 
 -- Special Workspace
 hl.bind(mainMod .. " + S", hl.dsp.workspace.toggle_special("magic"))
@@ -286,7 +283,7 @@ end)
 
 hl.workspace_rule({ workspace = "6", layout = "dwindle" })
 hl.workspace_rule({ workspace = "7", layout = "dwindle" })
-hl.window_rule({ name = "eve-online-tile", match = { class = "steam_app_8500" }, tile = true })
+hl.window_rule({ name = "eve-online-tile", match = { class = "(?i)(steam_app_8500|exefile|eve\\.exe)" }, tile = true })
 
 hl.window_rule({
     name = "global-suppress-maximize",
@@ -313,7 +310,7 @@ hl.window_rule({ name = "app-steam", match = { class = "steam" }, workspace = "5
 hl.window_rule({ name = "eve-launcher", match = { class = "steam_app_8500", title = "Программа запуска EVE Online" }, workspace =
 "5" })
 hl.window_rule({ name = "eve-tray", match = { class = "steam_app_8500", title = "^$" }, workspace = "99 silent", no_focus = true })
-hl.window_rule({ name = "eve-game", match = { class = "steam_app_8500", title = "^EVE$" }, workspace = "6" })
+hl.window_rule({ name = "eve-game", match = { class = "(?i)(steam_app_8500|exefile|eve\\.exe)", title = "(?i)^EVE.*" }, workspace = "6", tile = true })
 
 hl.window_rule({
     name = "transparency-tagging",
