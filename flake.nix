@@ -48,7 +48,6 @@
       nix-index-database,
     }@inputs:
     let
-      host = "nix-desktop";
       system = "x86_64-linux";
       username = "evgeny";
 
@@ -64,38 +63,73 @@
       };
     in
     {
-      nixosConfigurations."${host}" = nixpkgs.lib.nixosSystem {
+      nixosConfigurations."nix-desktop" = nixpkgs.lib.nixosSystem {
         specialArgs = {
           inherit
             inputs
-            host
             username
             ;
+          host = "nix-desktop";
         };
         modules = [
           home-manager.nixosModules.home-manager
           catppuccin.nixosModules.catppuccin
-          ./hosts/${host}/configuration.nix
+          ./hosts/nix-desktop/configuration.nix
           {
             nixpkgs.pkgs = pkgs;
           }
         ];
       };
 
-      homeConfigurations."${username}" = home-manager.lib.homeManagerConfiguration {
+      nixosConfigurations."nix-laptop" = nixpkgs.lib.nixosSystem {
+        specialArgs = {
+          inherit
+            inputs
+            username
+            ;
+          host = "nix-laptop";
+        };
+        modules = [
+          home-manager.nixosModules.home-manager
+          catppuccin.nixosModules.catppuccin
+          ./hosts/nix-laptop/configuration.nix
+          {
+            nixpkgs.pkgs = pkgs;
+          }
+        ];
+      };
+
+      homeConfigurations."${username}@nix-desktop" = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
         extraSpecialArgs = {
           inherit
             inputs
-            host
             username
             ;
+          host = "nix-desktop";
         };
         modules = [
           catppuccin.homeModules.catppuccin
           spicetify-nix.homeManagerModules.spicetify
           nix-index-database.homeModules.nix-index
-          ./hosts/${host}/home-manager.nix
+          ./hosts/nix-desktop/home-manager.nix
+        ];
+      };
+
+      homeConfigurations."${username}@nix-laptop" = home-manager.lib.homeManagerConfiguration {
+        inherit pkgs;
+        extraSpecialArgs = {
+          inherit
+            inputs
+            username
+            ;
+          host = "nix-laptop";
+        };
+        modules = [
+          catppuccin.homeModules.catppuccin
+          spicetify-nix.homeManagerModules.spicetify
+          nix-index-database.homeModules.nix-index
+          ./hosts/nix-laptop/home-manager.nix
         ];
       };
     };
