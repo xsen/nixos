@@ -15,6 +15,11 @@ in
     ./fish.nix
   ];
   programs = {
+
+    vicinae = {
+      enable = true;
+    };
+
     spicetify = {
       enable = true;
       wayland = true;
