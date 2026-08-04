@@ -24,11 +24,12 @@ in
       sha256 = "668975e5de43ef2feb3b31a9c2e9478b13ff596959a78b793bfd7b3098f78bb4";
     };
 
-    extraPkgs = pkgs: with pkgs; [
-      icu
-      openssl
-      zlib
-    ];
+    extraPkgs =
+      pkgs: with pkgs; [
+        icu
+        openssl
+        zlib
+      ];
 
     extraInstallCommands =
       let
@@ -41,7 +42,6 @@ in
         install -m 444 -D ${contents}/evelens.png $out/share/icons/hicolor/256x256/apps/evelens.png
       '';
   };
-
 
   discord = prev.discord.overrideAttrs (oldAttrs: {
     nativeBuildInputs = (oldAttrs.nativeBuildInputs or [ ]) ++ [ final.makeWrapper ];

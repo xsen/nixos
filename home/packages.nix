@@ -18,6 +18,10 @@ in
 
     vicinae = {
       enable = true;
+      systemd = {
+        enable = true;
+        autoStart = true;
+      };
     };
 
     spicetify = {
@@ -35,11 +39,6 @@ in
     direnv = {
       enable = true;
       nix-direnv.enable = true;
-    };
-
-    btop = {
-      enable = true;
-      package = pkgs.btop.override { cudaSupport = true; };
     };
 
     obs-studio = {

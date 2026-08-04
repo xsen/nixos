@@ -228,12 +228,52 @@
     packages = [ pkgs.terminus_font ];
   };
 
-  fonts.packages = with pkgs; [
-    font-awesome
-    terminus_font
-    nerd-fonts.jetbrains-mono
-    noto-fonts
-  ];
+  fonts = {
+    packages = with pkgs; [
+      font-awesome
+      terminus_font
+      nerd-fonts.jetbrains-mono
+      noto-fonts
+      inter
+      roboto
+      liberation_ttf
+    ];
+
+    fontconfig = {
+      enable = true;
+      defaultFonts = {
+        monospace = [
+          "JetBrainsMono Nerd Font"
+          "JetBrainsMonoNF"
+          "JetBrains Mono"
+        ];
+        sansSerif = [
+          "Inter"
+          "Noto Sans"
+        ];
+        serif = [ "Noto Serif" ];
+      };
+      localConf = ''
+        <?xml version="1.0"?>
+        <!DOCTYPE fontconfig SYSTEM "urn:fontconfig:fonts.dtd">
+        <fontconfig>
+          <!-- Map popular UI fonts to Inter -->
+          <match target="pattern">
+            <test qual="any" name="family"><string>Segoe UI</string></test>
+            <edit name="family" mode="assign" binding="same"><string>Inter</string></edit>
+          </match>
+          <match target="pattern">
+            <test qual="any" name="family"><string>Arial</string></test>
+            <edit name="family" mode="assign" binding="same"><string>Inter</string></edit>
+          </match>
+          <match target="pattern">
+            <test qual="any" name="family"><string>Helvetica</string></test>
+            <edit name="family" mode="assign" binding="same"><string>Inter</string></edit>
+          </match>
+        </fontconfig>
+      '';
+    };
+  };
 
   catppuccin = {
     enable = true;

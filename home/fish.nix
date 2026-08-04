@@ -51,10 +51,35 @@
       shellAliases = {
         ls = "eza --icons=always";
         nh-clean = "nh clean all";
-        update-hypr-stubs = "cp --no-preserve=mode -f $(find $(dirname $(dirname $(readlink -f $(which Hyprland)))) -name 'hl.meta.lua') ~/.nix-config/home/hypr/stubs/";
       };
 
       functions = {
+        update-hypr-stubs = {
+          body = ''
+            set -l hypr_bin (readlink -f (type -p hyprland 2>/dev/null; or type -p Hyprland 2>/dev/null; or command -v hyprland 2>/dev/null))
+            if test -z "$hypr_bin"
+                echo "Ошибка: Hyprland не найден в PATH."
+                return 1
+            end
+
+            set -l hypr_dir (dirname (dirname $hypr_bin))
+            set -l meta_file (find $hypr_dir -name 'hl.meta.lua' 2>/dev/null | head -n 1)
+
+            if test -z "$meta_file"
+                echo "Ошибка: Файл hl.meta.lua не найден в $hypr_dir"
+                return 1
+            end
+
+            set -l dest_dir "$HOME/.nix-config/home/hypr/stubs"
+            mkdir -p $dest_dir
+            cp --no-preserve=mode -f $meta_file $dest_dir/
+
+            echo "Обновлены Hyprland Lua stubs в $dest_dir/hl.meta.lua"
+            if type -q notify-send
+                notify-send "Hyprland Stubs" "Успешно обновлен hl.meta.lua" -i dialog-information -t 3000
+            end
+          '';
+        };
         sail = {
           body = ''
             if test -f sail

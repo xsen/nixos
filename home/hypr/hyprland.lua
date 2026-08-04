@@ -194,7 +194,7 @@ hl.bind(mainMod .. " + CTRL + j", hl.dsp.window.move({ into_group = "down" }))
 hl.bind(mainMod .. " + CTRL + G", hl.dsp.window.move({ out_of_group = true }))
 
 -- Menus
-hl.bind(mainMod .. " + Space", hl.dsp.exec_cmd(menu .. " -show drun -modes \"drun,calc\""))
+hl.bind(mainMod .. " + Space", hl.dsp.exec_cmd("vicinae toggle"))
 hl.bind(mainMod .. " + SHIFT + Space", hl.dsp.exec_cmd(menu .. " -show drun -modes \"drun,calc,run,filebrowser,window\""))
 
 -- Workspaces
@@ -307,10 +307,15 @@ hl.window_rule({ name = "app-ticktick", match = { class = "ticktick" }, workspac
 hl.window_rule({ name = "app-telegram", match = { class = "org\\.telegram\\.desktop" }, workspace = 3 })
 hl.window_rule({ name = "app-social", match = { class = "(?i)(discord|spotify|plexamp|yandexmusic|yandex-music)" }, workspace = 4 })
 hl.window_rule({ name = "app-steam", match = { class = "steam" }, workspace = "5 silent" })
-hl.window_rule({ name = "eve-launcher", match = { class = "steam_app_8500", title = "Программа запуска EVE Online" }, workspace =
-"5" })
+hl.window_rule({
+    name = "eve-launcher",
+    match = { class = "steam_app_8500", title = "Программа запуска EVE Online" },
+    workspace =
+    "5"
+})
 hl.window_rule({ name = "eve-tray", match = { class = "steam_app_8500", title = "^$" }, workspace = "99 silent", no_focus = true })
-hl.window_rule({ name = "eve-game", match = { class = "(?i)(steam_app_8500|exefile|eve\\.exe)", title = "(?i)^EVE.*" }, workspace = "6", tile = true })
+hl.window_rule({ name = "eve-game", match = { class = "(?i)(steam_app_8500|exefile|eve\\.exe)", title = "(?i)^EVE.*" }, workspace =
+"6", tile = true })
 
 hl.window_rule({
     name = "transparency-tagging",

@@ -3,9 +3,11 @@
 ---@meta
 
 ---@alias HL.EventName
+---| "config.props_refreshed"
 ---| "config.reloaded"
 ---| "hyprland.shutdown"
 ---| "hyprland.start"
+---| "input.keyboard.key"
 ---| "keybinds.submap"
 ---| "layer.closed"
 ---| "layer.opened"
@@ -31,6 +33,7 @@
 ---| "workspace.created"
 ---| "workspace.move_to_monitor"
 ---| "workspace.removed"
+---| "workspace.special_active"
 
 ---@alias HL.ConfigKey
 ---| "animations.enabled"
@@ -123,6 +126,8 @@
 ---| "decoration.glow.range"
 ---| "decoration.glow.render_power"
 ---| "decoration.inactive_opacity"
+---| "decoration.motion_blur.enabled"
+---| "decoration.motion_blur.samples"
 ---| "decoration.rounding"
 ---| "decoration.rounding_power"
 ---| "decoration.screen_shader"
@@ -199,6 +204,7 @@
 ---| "group.groupbar.col.inactive"
 ---| "group.groupbar.col.locked_active"
 ---| "group.groupbar.col.locked_inactive"
+---| "group.groupbar.disable_when_only"
 ---| "group.groupbar.enabled"
 ---| "group.groupbar.font_family"
 ---| "group.groupbar.font_size"
@@ -271,6 +277,10 @@
 ---| "input.tablet.region_size"
 ---| "input.tablet.relative_input"
 ---| "input.tablet.transform"
+---| "input.tablettool.eraser_button_mode"
+---| "input.tablettool.eraser_button_override"
+---| "input.tablettool.pressure_range_max"
+---| "input.tablettool.pressure_range_min"
 ---| "input.touchdevice.enabled"
 ---| "input.touchdevice.output"
 ---| "input.touchdevice.transform"
@@ -288,6 +298,8 @@
 ---| "input.touchpad.tap_to_click"
 ---| "input.virtualkeyboard.release_pressed_on_close"
 ---| "input.virtualkeyboard.share_states"
+---| "input_capture.capture_modifiers"
+---| "input_capture.enforce_barriers"
 ---| "layout.single_window_aspect_ratio"
 ---| "layout.single_window_aspect_ratio_tolerance"
 ---| "master.allow_small_split"
@@ -295,6 +307,7 @@
 ---| "master.center_ignores_reserved"
 ---| "master.center_master_fallback"
 ---| "master.drop_at_cursor"
+---| "master.focus_master_on_close"
 ---| "master.mfact"
 ---| "master.new_on_active"
 ---| "master.new_on_top"
@@ -324,6 +337,7 @@
 ---| "misc.focus_on_activate"
 ---| "misc.font_family"
 ---| "misc.force_default_wallpaper"
+---| "misc.initial_workspace_token_timeout"
 ---| "misc.initial_workspace_tracking"
 ---| "misc.key_press_enables_dpms"
 ---| "misc.layers_hog_keyboard_focus"
@@ -335,6 +349,7 @@
 ---| "misc.on_focus_under_fullscreen"
 ---| "misc.render_unfocused_fps"
 ---| "misc.screencopy_force_8b"
+---| "misc.session_lock_blur"
 ---| "misc.session_lock_xray"
 ---| "misc.size_limits_tiled"
 ---| "misc.splash_font_family"
@@ -434,6 +449,7 @@ local __HL_LayoutProvider = {}
 ---@field description? string
 ---@field desc? string
 ---@field device? {inclusive?: boolean, list?: string[]}
+---@field allow_input_capture? boolean
 local __HL_BindOptions = {}
 
 ---@class HL.TimerOptions
@@ -444,7 +460,7 @@ local __HL_TimerOptions = {}
 ---@class HL.GestureSpec
 ---@field fingers integer
 ---@field direction string
----@field action string
+---@field action string|function
 ---@field mods? string
 ---@field scale? number
 ---@field mode? string
@@ -460,8 +476,9 @@ local __HL_GestureSpec = {}
 local __HL_PermissionSpec = {}
 
 ---@class HL.NotificationOptions
+---@field text string
+---@field timeout number
 ---@field color? string
----@field timeout? number
 ---@field icon? integer|string
 ---@field font_size? number
 local __HL_NotificationOptions = {}
@@ -603,6 +620,8 @@ local __HL_WorkspaceRuleSpec = {}
 local __HL_EventSubscription = {}
 
 ---@class HL.Group
+---@field add fun(self: HL.Group, window: HL.Window, index?: integer)
+---@field remove fun(self: HL.Group, window_or_index: HL.Window|integer)
 ---@field current HL.Window|nil
 ---@field current_index integer
 ---@field denied boolean
@@ -616,13 +635,14 @@ local __HL_Group = {}
 ---@field remove fun(self: HL.Keybind, ...): any
 ---@field set_enabled fun(self: HL.Keybind, ...): any
 ---@field unbind fun(self: HL.Keybind, ...): any
+---@field allow_input_capture boolean|nil
 ---@field arg string
 ---@field auto_consuming boolean
 ---@field catchall boolean
 ---@field click boolean
 ---@field description any
 ---@field device_inclusive boolean
----@field devices nil
+---@field devices any
 ---@field display_key string
 ---@field dont_inhibit boolean
 ---@field drag boolean
@@ -665,19 +685,27 @@ local __HL_LayerRule = {}
 local __HL_LayerSurface = {}
 
 ---@class HL.Monitor
+---@field set_special_workspace fun(self: HL.Monitor, ...): any
+---@field set_workspace fun(self: HL.Monitor, ...): any
 ---@field active_special_workspace HL.Workspace|nil
 ---@field active_workspace HL.Workspace|nil
+---@field available_modes boolean|integer|number|table
+---@field cm string
 ---@field description string
 ---@field dpms_status boolean
----@field focused boolean|nil
+---@field focused boolean
 ---@field height integer
 ---@field id integer
 ---@field is_mirror boolean
 ---@field mirrors HL.Monitor|table
 ---@field name string
+---@field physical_height integer
+---@field physical_width integer
 ---@field position integer|table
 ---@field refresh_rate number
+---@field reserved number|table
 ---@field scale number
+---@field serial string
 ---@field size integer|table
 ---@field transform integer
 ---@field vrr_active boolean
@@ -715,8 +743,9 @@ local __HL_Timer = {}
 
 ---@class HL.Window
 ---@field accepts_input boolean
----@field active boolean|nil
+---@field active boolean
 ---@field address string
+---@field allowed_over_fullscreen boolean
 ---@field at integer|table
 ---@field class string
 ---@field content_type string
@@ -724,6 +753,7 @@ local __HL_Timer = {}
 ---@field focus_history_id integer
 ---@field fullscreen integer
 ---@field fullscreen_client integer
+---@field fullscreen_handler string
 ---@field group HL.Group|nil
 ---@field hidden boolean
 ---@field inhibiting_idle boolean
@@ -732,13 +762,14 @@ local __HL_Timer = {}
 ---@field layout HL.Window|boolean|integer|number|string|table|nil
 ---@field mapped boolean
 ---@field monitor HL.Monitor|nil
----@field over_fullscreen boolean
 ---@field pid integer
+---@field pin_fullscreened boolean
 ---@field pinned boolean
 ---@field size integer|table
 ---@field stable_id integer
 ---@field swallowing HL.Window|nil
 ---@field tags string|table
+---@field tearing_hint boolean|nil
 ---@field title string
 ---@field visible boolean
 ---@field workspace HL.Workspace|nil
@@ -774,16 +805,23 @@ local __HL_WindowRule = {}
 ---@field windows integer
 local __HL_Workspace = {}
 
+---@class HL.WorkspaceRule
+---@field is_enabled fun(self: HL.WorkspaceRule, ...): any
+---@field set_enabled fun(self: HL.WorkspaceRule, ...): any
+local __HL_WorkspaceRule = {}
+
 ---@class HL.API
 ---@field animation fun(...): any
 ---@field bind fun(keys: string, dispatcher: HL.Dispatcher|function, opts?: HL.BindOptions): HL.Keybind
----@field config fun(config: table): nil
+---@field clear_crashed_lockscreen fun(...): any
+---@field config fun(config: HL.ConfigOpt): nil
 ---@field curve fun(...): any
 ---@field define_submap fun(name: string, reset_or_fn: string|function, fn?: function): nil
 ---@field device fun(spec: HL.DeviceSpec): nil
 ---@field dispatch fun(dispatcher: HL.Dispatcher|function): any
 ---@field env fun(...): any
 ---@field exec_cmd fun(cmd: string, rules?: table<string, string|number|boolean>): nil
+---@field exec_scheduled_prop_refresh_immediately fun(...): any
 ---@field gesture fun(spec: HL.GestureSpec): nil
 ---@field get_active_monitor fun(): HL.Monitor|nil
 ---@field get_active_special_workspace fun(monitor?: HL.MonitorSelector): HL.Workspace|nil
@@ -795,6 +833,7 @@ local __HL_Workspace = {}
 ---@field get_last_window fun(): HL.Window|nil
 ---@field get_last_workspace fun(monitor?: HL.MonitorSelector): HL.Workspace|nil
 ---@field get_layers fun(filters?: HL.LayerQueryFilter): HL.LayerSurface[]
+---@field get_loaded_plugins fun(...): any
 ---@field get_monitor fun(selector: HL.MonitorSelector): HL.Monitor|nil
 ---@field get_monitor_at fun(x: number|HL.Vec2, y?: number): HL.Monitor|nil
 ---@field get_monitor_at_cursor fun(): HL.Monitor|nil
@@ -805,6 +844,7 @@ local __HL_Workspace = {}
 ---@field get_workspace fun(selector: HL.WorkspaceSelector): HL.Workspace|nil
 ---@field get_workspace_windows fun(workspace: HL.WorkspaceSelector): HL.Window[]
 ---@field get_workspaces fun(): HL.Workspace[]
+---@field is_key_down fun(...): any
 ---@field layer_rule fun(spec: HL.LayerRuleSpec): HL.LayerRule
 ---@field monitor fun(spec: HL.MonitorSpec): nil
 ---@field on fun(event: HL.EventName, cb: fun(...)): HL.EventSubscription
@@ -813,7 +853,7 @@ local __HL_Workspace = {}
 ---@field unbind fun(...): any
 ---@field version fun(...): any
 ---@field window_rule fun(spec: HL.WindowRuleSpec): HL.WindowRule
----@field workspace_rule fun(spec: HL.WorkspaceRuleSpec): nil
+---@field workspace_rule fun(spec: HL.WorkspaceRuleSpec): HL.WorkspaceRule
 ---@field dsp HL.DspNamespace
 ---@field layout HL.LayoutNamespace
 ---@field notification HL.NotificationNamespace
@@ -833,6 +873,7 @@ local __HL_API = {}
 ---@field layout fun(...): HL.Dispatcher
 ---@field no_op fun(...): HL.Dispatcher
 ---@field pass fun(...): HL.Dispatcher
+---@field release_input_capture fun(...): HL.Dispatcher
 ---@field send_key_state fun(...): HL.Dispatcher
 ---@field send_shortcut fun(...): HL.Dispatcher
 ---@field submap fun(...): HL.Dispatcher
@@ -882,6 +923,7 @@ local __HL_DspGroupNamespace = {}
 local __HL_DspWindowNamespace = {}
 
 ---@class HL.DspWorkspaceNamespace
+---@field change_id fun(...): HL.Dispatcher
 ---@field move fun(...): HL.Dispatcher
 ---@field rename fun(...): HL.Dispatcher
 ---@field swap_monitors fun(...): HL.Dispatcher
@@ -990,17 +1032,19 @@ hl = {}
 ---@field ['decoration.dim_special'] number|boolean
 ---@field ['decoration.dim_strength'] number|boolean
 ---@field ['decoration.fullscreen_opacity'] number|boolean
----@field ['decoration.glow.color'] string
----@field ['decoration.glow.color_inactive'] string
+---@field ['decoration.glow.color'] string|HL.Gradient
+---@field ['decoration.glow.color_inactive'] string|HL.Gradient
 ---@field ['decoration.glow.enabled'] boolean
 ---@field ['decoration.glow.range'] integer|boolean
 ---@field ['decoration.glow.render_power'] integer|boolean
 ---@field ['decoration.inactive_opacity'] number|boolean
+---@field ['decoration.motion_blur.enabled'] boolean
+---@field ['decoration.motion_blur.samples'] integer|boolean
 ---@field ['decoration.rounding'] integer|boolean
 ---@field ['decoration.rounding_power'] number|boolean
 ---@field ['decoration.screen_shader'] string
----@field ['decoration.shadow.color'] string
----@field ['decoration.shadow.color_inactive'] string
+---@field ['decoration.shadow.color'] string|HL.Gradient
+---@field ['decoration.shadow.color_inactive'] string|HL.Gradient
 ---@field ['decoration.shadow.enabled'] boolean
 ---@field ['decoration.shadow.offset'] HL.Vec2Like
 ---@field ['decoration.shadow.range'] integer|boolean
@@ -1072,6 +1116,7 @@ hl = {}
 ---@field ['group.groupbar.col.inactive'] string|HL.Gradient
 ---@field ['group.groupbar.col.locked_active'] string|HL.Gradient
 ---@field ['group.groupbar.col.locked_inactive'] string|HL.Gradient
+---@field ['group.groupbar.disable_when_only'] boolean
 ---@field ['group.groupbar.enabled'] boolean
 ---@field ['group.groupbar.font_family'] string
 ---@field ['group.groupbar.font_size'] integer|boolean
@@ -1144,6 +1189,10 @@ hl = {}
 ---@field ['input.tablet.region_size'] HL.Vec2Like
 ---@field ['input.tablet.relative_input'] boolean
 ---@field ['input.tablet.transform'] integer|boolean
+---@field ['input.tablettool.eraser_button_mode'] integer|boolean
+---@field ['input.tablettool.eraser_button_override'] integer|boolean
+---@field ['input.tablettool.pressure_range_max'] number|boolean
+---@field ['input.tablettool.pressure_range_min'] number|boolean
 ---@field ['input.touchdevice.enabled'] boolean
 ---@field ['input.touchdevice.output'] string
 ---@field ['input.touchdevice.transform'] integer|boolean
@@ -1161,6 +1210,8 @@ hl = {}
 ---@field ['input.touchpad.tap_to_click'] boolean
 ---@field ['input.virtualkeyboard.release_pressed_on_close'] boolean
 ---@field ['input.virtualkeyboard.share_states'] integer|boolean
+---@field ['input_capture.capture_modifiers'] boolean
+---@field ['input_capture.enforce_barriers'] boolean
 ---@field ['layout.single_window_aspect_ratio'] HL.Vec2Like
 ---@field ['layout.single_window_aspect_ratio_tolerance'] number|boolean
 ---@field ['master.allow_small_split'] boolean
@@ -1168,6 +1219,7 @@ hl = {}
 ---@field ['master.center_ignores_reserved'] boolean
 ---@field ['master.center_master_fallback'] string
 ---@field ['master.drop_at_cursor'] boolean
+---@field ['master.focus_master_on_close'] boolean
 ---@field ['master.mfact'] number|boolean
 ---@field ['master.new_on_active'] string
 ---@field ['master.new_on_top'] boolean
@@ -1197,6 +1249,7 @@ hl = {}
 ---@field ['misc.focus_on_activate'] boolean
 ---@field ['misc.font_family'] string
 ---@field ['misc.force_default_wallpaper'] integer|boolean
+---@field ['misc.initial_workspace_token_timeout'] integer|boolean
 ---@field ['misc.initial_workspace_tracking'] integer|boolean
 ---@field ['misc.key_press_enables_dpms'] boolean
 ---@field ['misc.layers_hog_keyboard_focus'] boolean
@@ -1208,6 +1261,7 @@ hl = {}
 ---@field ['misc.on_focus_under_fullscreen'] integer|boolean
 ---@field ['misc.render_unfocused_fps'] integer|boolean
 ---@field ['misc.screencopy_force_8b'] boolean
+---@field ['misc.session_lock_blur'] boolean
 ---@field ['misc.session_lock_xray'] boolean
 ---@field ['misc.size_limits_tiled'] boolean
 ---@field ['misc.splash_font_family'] string
@@ -1248,3 +1302,470 @@ hl = {}
 ---@field ['xwayland.force_zero_scaling'] boolean
 ---@field ['xwayland.use_nearest_neighbor'] boolean
 local __HL_ConfigValueTypes = {}
+
+
+---@class HL.ConfigOpt
+---@field general? HL.ConfigOpt.General
+---@field decoration? HL.ConfigOpt.Decoration
+---@field animations? HL.ConfigOpt.Animations
+---@field input? HL.ConfigOpt.Input
+---@field gestures? HL.ConfigOpt.Gestures
+---@field group? HL.ConfigOpt.Group
+---@field misc? HL.ConfigOpt.Misc
+---@field binds? HL.ConfigOpt.Binds
+---@field xwayland? HL.ConfigOpt.Xwayland
+---@field opengl? HL.ConfigOpt.OpenGL
+---@field render? HL.ConfigOpt.Render
+---@field cursor? HL.ConfigOpt.Cursor
+---@field ecosystem? HL.ConfigOpt.Ecosystem
+---@field debug? HL.ConfigOpt.Debug
+---@field layout? HL.ConfigOpt.Layout
+---@field dwindle? HL.ConfigOpt.Dwindle
+---@field master? HL.ConfigOpt.Master
+---@field scrolling? HL.ConfigOpt.Scrolling
+---@field experimental? HL.ConfigOpt.Experimental
+---@field input_capture? HL.ConfigOpt.InputCapture
+---@field quirks? HL.ConfigOpt.Quirks
+
+---@class HL.ConfigOpt.General
+---@field border_size? integer|boolean
+---@field gaps_in? integer|HL.CssGap
+---@field gaps_out? integer|HL.CssGap
+---@field float_gaps? integer|HL.CssGap
+---@field gaps_workspaces? integer|boolean
+---@field col? HL.ConfigOpt.General.Col
+---@field layout? string
+---@field no_focus_fallback? boolean
+---@field resize_on_border? boolean
+---@field extend_border_grab_area? integer|boolean
+---@field hover_icon_on_border? boolean
+---@field allow_tearing? boolean
+---@field resize_corner? integer|boolean
+---@field snap? HL.ConfigOpt.General.Snap
+---@field modal_parent_blocking? boolean
+---@field locale? string
+
+---@class HL.ConfigOpt.General.Col
+---@field inactive_border? string|HL.Gradient
+---@field active_border? string|HL.Gradient
+---@field nogroup_border? string|HL.Gradient
+---@field nogroup_border_active? string|HL.Gradient
+
+---@class HL.ConfigOpt.General.Snap
+---@field enabled? boolean
+---@field window_gap? integer|boolean
+---@field monitor_gap? integer|boolean
+---@field border_overlap? boolean
+---@field respect_gaps? boolean
+
+---@class HL.ConfigOpt.Decoration
+---@field rounding? integer|boolean
+---@field rounding_power? number|boolean
+---@field active_opacity? number|boolean
+---@field inactive_opacity? number|boolean
+---@field fullscreen_opacity? number|boolean
+---@field shadow? HL.ConfigOpt.Decoration.Shadow
+---@field glow? HL.ConfigOpt.Decoration.Glow
+---@field dim_modal? boolean
+---@field dim_inactive? boolean
+---@field dim_strength? number|boolean
+---@field dim_special? number|boolean
+---@field dim_around? number|boolean
+---@field screen_shader? string
+---@field border_part_of_window? boolean
+---@field blur? HL.ConfigOpt.Decoration.Blur
+---@field motion_blur? HL.ConfigOpt.Decoration.MotionBlur
+
+---@class HL.ConfigOpt.Decoration.Shadow
+---@field enabled? boolean
+---@field range? integer|boolean
+---@field render_power? integer|boolean
+---@field sharp? boolean
+---@field color? string|HL.Gradient
+---@field color_inactive? string|HL.Gradient
+---@field offset? HL.Vec2Like
+---@field scale? number|boolean
+
+---@class HL.ConfigOpt.Decoration.Glow
+---@field enabled? boolean
+---@field range? integer|boolean
+---@field render_power? integer|boolean
+---@field color? string|HL.Gradient
+---@field color_inactive? string|HL.Gradient
+
+---@class HL.ConfigOpt.Decoration.Blur
+---@field enabled? boolean
+---@field size? integer|boolean
+---@field passes? integer|boolean
+---@field ignore_opacity? boolean
+---@field new_optimizations? boolean
+---@field xray? boolean
+---@field noise? number|boolean
+---@field contrast? number|boolean
+---@field brightness? number|boolean
+---@field vibrancy? number|boolean
+---@field vibrancy_darkness? number|boolean
+---@field special? boolean
+---@field popups? boolean
+---@field popups_ignorealpha? number|boolean
+---@field input_methods? boolean
+---@field input_methods_ignorealpha? number|boolean
+
+---@class HL.ConfigOpt.Decoration.MotionBlur
+---@field enabled? boolean
+---@field samples? integer|boolean
+
+---@class HL.ConfigOpt.Animations
+---@field enabled? boolean
+---@field workspace_wraparound? boolean
+
+---@class HL.ConfigOpt.Input
+---@field kb_model? string
+---@field kb_layout? string
+---@field kb_variant? string
+---@field kb_options? string
+---@field kb_rules? string
+---@field kb_file? string
+---@field numlock_by_default? boolean
+---@field resolve_binds_by_sym? boolean
+---@field repeat_rate? integer|boolean
+---@field repeat_delay? integer|boolean
+---@field sensitivity? number|boolean
+---@field accel_profile? string
+---@field force_no_accel? boolean
+---@field rotation? integer|boolean
+---@field left_handed? boolean
+---@field scroll_points? string
+---@field scroll_method? string
+---@field scroll_button? integer|boolean
+---@field scroll_button_lock? boolean
+---@field scroll_factor? number|boolean
+---@field natural_scroll? boolean
+---@field follow_mouse? integer|boolean
+---@field follow_mouse_threshold? number|boolean
+---@field focus_on_close? integer|boolean
+---@field mouse_refocus? boolean
+---@field float_switch_override_focus? integer|boolean
+---@field special_fallthrough? boolean
+---@field off_window_axis_events? integer|boolean
+---@field emulate_discrete_scroll? integer|boolean
+---@field follow_mouse_shrink? integer|boolean
+---@field touchpad? HL.ConfigOpt.Input.Touchpad
+---@field touchdevice? HL.ConfigOpt.Input.Touchdevice
+---@field virtualkeyboard? HL.ConfigOpt.Input.Virtualkeyboard
+---@field tablet? HL.ConfigOpt.Input.Tablet
+---@field tablettool? HL.ConfigOpt.Input.Tablettool
+
+---@class HL.ConfigOpt.Input.Touchpad
+---@field disable_while_typing? boolean
+---@field natural_scroll? boolean
+---@field scroll_factor? number|boolean
+---@field middle_button_emulation? boolean
+---@field tap_button_map? string
+---@field clickfinger_behavior? boolean
+---@field tap_to_click? boolean
+---@field drag_lock? integer|boolean
+---@field tap_and_drag? boolean
+---@field flip_x? boolean
+---@field flip_y? boolean
+---@field drag_3fg? integer|boolean
+
+---@class HL.ConfigOpt.Input.Touchdevice
+---@field transform? integer|boolean
+---@field output? string
+---@field enabled? boolean
+
+---@class HL.ConfigOpt.Input.Virtualkeyboard
+---@field share_states? integer|boolean
+---@field release_pressed_on_close? boolean
+
+---@class HL.ConfigOpt.Input.Tablet
+---@field transform? integer|boolean
+---@field output? string
+---@field region_position? HL.Vec2Like
+---@field absolute_region_position? boolean
+---@field region_size? HL.Vec2Like
+---@field relative_input? boolean
+---@field left_handed? boolean
+---@field active_area_size? HL.Vec2Like
+---@field active_area_position? HL.Vec2Like
+
+---@class HL.ConfigOpt.Input.Tablettool
+---@field eraser_button_mode? integer|boolean
+---@field eraser_button_override? integer|boolean
+---@field pressure_range_min? number|boolean
+---@field pressure_range_max? number|boolean
+
+---@class HL.ConfigOpt.Gestures
+---@field workspace_swipe_distance? integer|boolean
+---@field workspace_swipe_touch? boolean
+---@field workspace_swipe_invert? boolean
+---@field workspace_swipe_touch_invert? boolean
+---@field workspace_swipe_min_speed_to_force? integer|boolean
+---@field workspace_swipe_cancel_ratio? number|boolean
+---@field workspace_swipe_create_new? boolean
+---@field workspace_swipe_direction_lock? boolean
+---@field workspace_swipe_direction_lock_threshold? integer|boolean
+---@field workspace_swipe_forever? boolean
+---@field workspace_swipe_use_r? boolean
+---@field close_max_timeout? integer|boolean
+---@field scrolling? HL.ConfigOpt.Gestures.Scrolling
+
+---@class HL.ConfigOpt.Gestures.Scrolling
+---@field move_snap_to_grid? boolean
+---@field move_snap_cursor? boolean
+
+---@class HL.ConfigOpt.Group
+---@field insert_after_current? boolean
+---@field focus_removed_window? boolean
+---@field merge_groups_on_drag? boolean
+---@field merge_groups_on_groupbar? boolean
+---@field col? HL.ConfigOpt.Group.Col
+---@field auto_group? boolean
+---@field drag_into_group? integer|boolean
+---@field merge_floated_into_tiled_on_groupbar? boolean
+---@field group_on_movetoworkspace? boolean
+---@field groupbar? HL.ConfigOpt.Group.Groupbar
+
+---@class HL.ConfigOpt.Group.Col
+---@field border_active? string|HL.Gradient
+---@field border_inactive? string|HL.Gradient
+---@field border_locked_inactive? string|HL.Gradient
+---@field border_locked_active? string|HL.Gradient
+
+---@class HL.ConfigOpt.Group.Groupbar
+---@field enabled? boolean
+---@field disable_when_only? boolean
+---@field font_family? string
+---@field font_weight_active? integer|string
+---@field font_weight_inactive? integer|string
+---@field font_size? integer|boolean
+---@field gradients? boolean
+---@field height? integer|boolean
+---@field indicator_gap? integer|boolean
+---@field indicator_height? integer|boolean
+---@field stacked? boolean
+---@field priority? integer|boolean
+---@field render_titles? boolean
+---@field scrolling? boolean
+---@field middle_click_close? boolean
+---@field rounding? integer|boolean
+---@field rounding_power? number|boolean
+---@field gradient_rounding? integer|boolean
+---@field gradient_rounding_power? number|boolean
+---@field round_only_edges? boolean
+---@field gradient_round_only_edges? boolean
+---@field text_color? string
+---@field text_color_inactive? string
+---@field text_color_locked_active? string
+---@field text_color_locked_inactive? string
+---@field col? HL.ConfigOpt.Group.Groupbar.Col
+---@field gaps_out? integer|boolean
+---@field gaps_in? integer|boolean
+---@field keep_upper_gap? boolean
+---@field text_offset? integer|boolean
+---@field text_padding? integer|boolean
+---@field blur? boolean
+
+---@class HL.ConfigOpt.Group.Groupbar.Col
+---@field active? string|HL.Gradient
+---@field inactive? string|HL.Gradient
+---@field locked_active? string|HL.Gradient
+---@field locked_inactive? string|HL.Gradient
+
+---@class HL.ConfigOpt.Misc
+---@field disable_hyprland_logo? boolean
+---@field disable_splash_rendering? boolean
+---@field col? HL.ConfigOpt.Misc.Col
+---@field font_family? string
+---@field splash_font_family? string
+---@field force_default_wallpaper? integer|boolean
+---@field vrr? integer|boolean
+---@field mouse_move_enables_dpms? boolean
+---@field key_press_enables_dpms? boolean
+---@field name_vk_after_proc? boolean
+---@field always_follow_on_dnd? boolean
+---@field layers_hog_keyboard_focus? boolean
+---@field animate_manual_resizes? boolean
+---@field animate_mouse_windowdragging? boolean
+---@field disable_autoreload? boolean
+---@field enable_swallow? boolean
+---@field swallow_regex? string
+---@field swallow_exception_regex? string
+---@field focus_on_activate? boolean
+---@field mouse_move_focuses_monitor? boolean
+---@field allow_session_lock_restore? boolean
+---@field session_lock_xray? boolean
+---@field session_lock_blur? boolean
+---@field background_color? string
+---@field close_special_on_empty? boolean
+---@field on_focus_under_fullscreen? integer|boolean
+---@field exit_window_retains_fullscreen? boolean
+---@field initial_workspace_tracking? integer|boolean
+---@field initial_workspace_token_timeout? integer|boolean
+---@field middle_click_paste? boolean
+---@field render_unfocused_fps? integer|boolean
+---@field disable_xdg_env_checks? boolean
+---@field disable_hyprland_guiutils_check? boolean
+---@field disable_watchdog_warning? boolean
+---@field lockdead_screen_delay? integer|boolean
+---@field enable_anr_dialog? boolean
+---@field anr_missed_pings? integer|boolean
+---@field screencopy_force_8b? boolean
+---@field disable_scale_notification? boolean
+---@field size_limits_tiled? boolean
+
+---@class HL.ConfigOpt.Misc.Col
+---@field splash? string
+
+---@class HL.ConfigOpt.Binds
+---@field pass_mouse_when_bound? boolean
+---@field scroll_event_delay? integer|boolean
+---@field workspace_back_and_forth? boolean
+---@field hide_special_on_workspace_change? boolean
+---@field allow_workspace_cycles? boolean
+---@field workspace_center_on? integer|boolean
+---@field focus_preferred_method? integer|boolean
+---@field ignore_group_lock? boolean
+---@field movefocus_cycles_fullscreen? boolean
+---@field movefocus_cycles_groupfirst? boolean
+---@field disable_keybind_grabbing? boolean
+---@field window_direction_monitor_fallback? boolean
+---@field allow_pin_fullscreen? boolean
+---@field drag_threshold? integer|boolean
+
+---@class HL.ConfigOpt.Xwayland
+---@field enabled? boolean
+---@field use_nearest_neighbor? boolean
+---@field force_zero_scaling? boolean
+---@field create_abstract_socket? boolean
+
+---@class HL.ConfigOpt.OpenGL
+---@field nvidia_anti_flicker? boolean
+
+---@class HL.ConfigOpt.Render
+---@field direct_scanout? integer|boolean
+---@field expand_undersized_textures? boolean
+---@field xp_mode? boolean
+---@field ctm_animation? integer|boolean
+---@field cm_enabled? boolean
+---@field send_content_type? boolean
+---@field cm_auto_hdr? integer|boolean
+---@field new_render_scheduling? boolean
+---@field non_shader_cm? integer|boolean
+---@field cm_sdr_eotf? string
+---@field commit_timing_enabled? boolean
+---@field icc_vcgt_enabled? boolean
+---@field use_shader_blur_blend? boolean
+---@field use_fp16? integer|boolean
+---@field keep_unmodified_copy? integer|boolean
+---@field non_shader_cm_interop? integer|boolean
+---@field fp16_sdr_tf? integer|boolean
+
+---@class HL.ConfigOpt.Cursor
+---@field invisible? boolean
+---@field no_hardware_cursors? integer|boolean
+---@field no_break_fs_vrr? integer|boolean
+---@field min_refresh_rate? integer|boolean
+---@field hotspot_padding? integer|boolean
+---@field inactive_timeout? number|boolean
+---@field no_warps? boolean
+---@field persistent_warps? boolean
+---@field warp_on_change_workspace? integer|boolean
+---@field warp_on_toggle_special? integer|boolean
+---@field default_monitor? string
+---@field zoom_factor? number|boolean
+---@field zoom_rigid? boolean
+---@field zoom_disable_aa? boolean
+---@field zoom_detached_camera? boolean
+---@field enable_hyprcursor? boolean
+---@field hide_on_key_press? boolean
+---@field hide_on_touch? boolean
+---@field hide_on_tablet? boolean
+---@field use_cpu_buffer? integer|boolean
+---@field sync_gsettings_theme? boolean
+---@field warp_back_after_non_mouse_input? boolean
+
+---@class HL.ConfigOpt.Ecosystem
+---@field no_update_news? boolean
+---@field no_donation_nag? boolean
+---@field enforce_permissions? boolean
+
+---@class HL.ConfigOpt.Debug
+---@field overlay? boolean
+---@field damage_blink? boolean
+---@field gl_debugging? boolean
+---@field disable_logs? boolean
+---@field disable_time? boolean
+---@field damage_tracking? integer|boolean
+---@field enable_stdout_logs? boolean
+---@field manual_crash? integer|boolean
+---@field suppress_errors? boolean
+---@field disable_scale_checks? boolean
+---@field error_limit? integer|boolean
+---@field error_position? integer|boolean
+---@field colored_stdout_logs? boolean
+---@field log_damage? boolean
+---@field pass? boolean
+---@field full_cm_proto? boolean
+---@field ds_handle_same_buffer? boolean
+---@field ds_handle_same_buffer_fifo? boolean
+---@field fifo_pending_workaround? boolean
+---@field render_solitary_wo_damage? boolean
+---@field vfr? boolean
+---@field invalidate_fp16? integer|boolean
+
+---@class HL.ConfigOpt.Layout
+---@field single_window_aspect_ratio? HL.Vec2Like
+---@field single_window_aspect_ratio_tolerance? number|boolean
+
+---@class HL.ConfigOpt.Dwindle
+---@field force_split? integer|boolean
+---@field preserve_split? boolean
+---@field smart_split? boolean
+---@field smart_resizing? boolean
+---@field permanent_direction_override? boolean
+---@field special_scale_factor? number|boolean
+---@field split_width_multiplier? number|boolean
+---@field use_active_for_splits? boolean
+---@field default_split_ratio? number|boolean
+---@field split_bias? integer|boolean
+---@field precise_mouse_move? boolean
+
+---@class HL.ConfigOpt.Master
+---@field allow_small_split? boolean
+---@field special_scale_factor? number|boolean
+---@field mfact? number|boolean
+---@field new_status? string
+---@field new_on_top? boolean
+---@field new_on_active? string
+---@field orientation? string
+---@field slave_count_for_center_master? integer|boolean
+---@field center_master_fallback? string
+---@field center_ignores_reserved? boolean
+---@field smart_resizing? boolean
+---@field drop_at_cursor? boolean
+---@field always_keep_position? boolean
+---@field focus_master_on_close? boolean
+
+---@class HL.ConfigOpt.Scrolling
+---@field fullscreen_on_one_column? boolean
+---@field column_width? number|boolean
+---@field focus_fit_method? integer|boolean
+---@field follow_focus? boolean
+---@field follow_min_visible? number|boolean
+---@field explicit_column_widths? string
+---@field direction? string
+---@field wrap_focus? boolean
+---@field wrap_swapcol? boolean
+
+---@class HL.ConfigOpt.Experimental
+---@field wp_cm_1_2? boolean
+
+---@class HL.ConfigOpt.InputCapture
+---@field capture_modifiers? boolean
+---@field enforce_barriers? boolean
+
+---@class HL.ConfigOpt.Quirks
+---@field prefer_hdr? integer|boolean
+---@field skip_non_kms_dmabuf_formats? boolean

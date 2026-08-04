@@ -15,6 +15,7 @@
       "command(ls)",
       "command(git)",
       "command(jq)",
+      "command(wc)",
       "command(head)",
       "command(tail)",
       "command(file)",
