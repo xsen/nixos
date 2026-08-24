@@ -38,6 +38,8 @@ in
     mkcert
     php83
     php83Packages.composer
+    antigravity-ide
+    antigravity-cli
     nodejs
     bun
     pkg-config
@@ -47,7 +49,6 @@ in
     lazydocker
     neovim
     jetbrains-toolbox
-    gemini-cli
     claude-code
     opencode
     codex

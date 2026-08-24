@@ -15,18 +15,20 @@ input=$(cat)
   read -r rem_weekly
   read -r reset_weekly
   read -r active_subs
+  read -r task_count
 } < <(
   jq -r '
-    .cwd // .workspace.current_dir // "",
-    (.context_window.used_percentage // "" | if . != "" then round else "" end),
-    .session_id // "",
-    .agent_state // "idle",
-    ((.model // {}) | .display_name // .id // ""),
-    .quota["gemini-5h"].remaining_fraction // "",
-    .quota["gemini-5h"].reset_in_seconds // "",
-    .quota["gemini-weekly"].remaining_fraction // "",
-    .quota["gemini-weekly"].reset_in_seconds // "",
-    ([.. | objects | select(has("id") and has("status") and .status != "completed" and .status != "failed" and .status != "cancelled")] | length)
+    (.cwd // .workspace.current_dir // "" | gsub("[\r\n]"; " ")),
+    (.context_window.used_percentage | if type == "number" then round else "" end),
+    (.session_id // "" | gsub("[\r\n]"; " ")),
+    (.agent_state // "idle" | gsub("[\r\n]"; " ")),
+    (.model | if type == "object" then (.display_name // .id // "") elif type == "string" then . else "" end | gsub("[\r\n]"; " ")),
+    ((.quota // {}) | .["gemini-5h"].remaining_fraction // ""),
+    ((.quota // {}) | .["gemini-5h"].reset_in_seconds | if type == "number" then round else "" end),
+    ((.quota // {}) | .["gemini-weekly"].remaining_fraction // ""),
+    ((.quota // {}) | .["gemini-weekly"].reset_in_seconds | if type == "number" then round else "" end),
+    ([(.subagents | arrays | .[]) | select((.status // .state // "") as $s | $s != "completed" and $s != "failed" and $s != "cancelled" and $s != "done" and $s != "errored")] | length),
+    (.task_count // 0)
   ' <<< "$input" 2>/dev/null
 )
 if [ -z "$state" ]; then state="idle"; fi
@@ -42,15 +44,12 @@ if [ -n "$child_pids" ]; then
             continue
         fi
         if tr '\0' '\n' < "/proc/$cpid/environ" 2>/dev/null | grep -q "^ANTIGRAVITY_SOURCE_METADATA="; then
-            ((active_tasks++))
+            ((active_tasks += 1))
         fi
     done
 fi
 
-total_background_activities=$(( ${active_subs:-0} + active_tasks ))
-if [ "$state" = "idle" ] && [ "$total_background_activities" -gt 0 ]; then
-    state="waiting"
-fi
+total_tasks=$(( task_count > active_tasks ? task_count : active_tasks ))
 
 # ── Catppuccin Mocha palette ──────────────────────────────────────────────────
 blue=$'\x1b[38;2;137;180;250m'
@@ -73,7 +72,7 @@ overlay=$'\x1b[38;2;108;112;134m'
 
 # ── Helper: color by percentage (used%) ──────────────────────────────────────
 color_for_pct() {
-    local pct=$1
+    local pct=${1%.*}
     if [ -z "$pct" ]; then pct=0; fi
     if   [ "$pct" -ge 90 ]; then printf "%s" "$red"
     elif [ "$pct" -ge 70 ]; then printf "%s" "$yellow"
@@ -91,6 +90,11 @@ fmt_epoch_date() {
 }
 
 # ── Agent State ───────────────────────────────────────────────────────────────
+total_background_activities=$(( ${active_subs:-0} + ${total_tasks:-0} ))
+if [ "$state" = "idle" ] && [ "$total_background_activities" -gt 0 ]; then
+    state="bg"
+fi
+
 state_part=""
 case "$state" in
     working)
@@ -102,8 +106,11 @@ case "$state" in
     tool_use)
         state_part="${blue}● tool${reset}"
         ;;
-    waiting)
+    waiting|waiting_for_input)
         state_part="${lavender}● wait${reset}"
+        ;;
+    bg|sub)
+        state_part="${mauve}● bg${reset}"
         ;;
     idle)
         state_part="${subtext}● idle${reset}"
@@ -162,7 +169,8 @@ rl_5h_pct=""
 if [ -n "$rem_5h" ]; then
     rl_5h_pct=$(echo "$rem_5h" | awk '{printf "%d", (1 - $1) * 100 + 0.5}')
     if [ -n "$reset_5h" ]; then
-        rl_5h_reset=$(( now_epoch + reset_5h ))
+        r5_sec=${reset_5h%.*}
+        rl_5h_reset=$(( now_epoch + r5_sec ))
     fi
 fi
 
@@ -170,7 +178,8 @@ rl_7d_pct=""
 if [ -n "$rem_weekly" ]; then
     rl_7d_pct=$(echo "$rem_weekly" | awk '{printf "%d", (1 - $1) * 100 + 0.5}')
     if [ -n "$reset_weekly" ]; then
-        rl_7d_reset=$(( now_epoch + reset_weekly ))
+        rw_sec=${reset_weekly%.*}
+        rl_7d_reset=$(( now_epoch + rw_sec ))
     fi
 fi
 

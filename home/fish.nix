@@ -46,6 +46,14 @@
               fish_config theme choose "catppuccin-mocha" 2>/dev/null
           end
         end
+
+        function ssh --description 'SSH wrapper to use xterm-256color if TERM is xterm-ghostty'
+            if test "$TERM" = "xterm-ghostty"
+                env TERM=xterm-256color ssh $argv
+            else
+                command ssh $argv
+            end
+        end
       '';
 
       shellAliases = {

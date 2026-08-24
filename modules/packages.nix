@@ -20,8 +20,6 @@
   };
 
   environment.systemPackages = with pkgs; [
-    antigravity
-    antigravity-cli
     localsend
     evelens
     throne
