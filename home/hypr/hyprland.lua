@@ -298,6 +298,12 @@ hl.window_rule({
 })
 
 hl.window_rule({ name = "float-apps", match = { class = "Viewnior" }, float = true })
+hl.window_rule({
+    name = "gsimplecal-popup",
+    match = { class = "(?i)gsimplecal" },
+    float = true,
+    move = { "cursor_x - window_w - 35", "cursor_y - window_h - 10" },
+})
 hl.window_rule({ name = "auth-dialogs", match = { title = "Authentication Required" }, float = true })
 
 hl.window_rule({ name = "yandex-xsen1", match = { class = "[yY]andex-browser", title = ".*xsen1.*" }, workspace = 1 })

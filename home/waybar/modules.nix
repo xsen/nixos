@@ -70,20 +70,8 @@ in
     "interval" = 1;
     "format" = "{:%H\n%M}";
     #    "format-alt" = " {:%H:%M:%S \n %Y\n %d %B \n %A}";
-    "tooltip-format" = "<tt><small>{calendar}</small></tt>";
-    "calendar" = {
-      "mode" = "year";
-      "mode-mon-col" = 3;
-      "weeks-pos" = "right";
-      "on-scroll" = 1;
-      "format" = {
-        "months" = "<span color='#ffead3'><b>{}</b></span>";
-        "days" = "<span color='#ecc6d9'><b>{}</b></span>";
-        "weeks" = "<span color='#99ffdd'><b>W{}</b></span>";
-        "weekdays" = "<span color='#ffcc66'><b>{}</b></span>";
-        "today" = "<span color='#ff6699'><b><u>{}</u></b></span>";
-      };
-    };
+    "on-click" = "GDK_DPI_SCALE=1.35 gsimplecal";
+    "tooltip" = false;
   };
   "custom/gpu" = {
     "exec" = "${scriptPath}/gpu.sh";

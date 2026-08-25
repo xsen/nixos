@@ -35,6 +35,8 @@ in
     nixd
     glib
     net-tools
+    hunk
+    herdr
     mkcert
     php83
     php83Packages.composer

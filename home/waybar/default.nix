@@ -21,6 +21,8 @@ in
     ];
   };
 
+  xdg.configFile."gsimplecal/config".source = ./gsimplecal.conf;
+
   home.file = {
     ".config/waybar/scripts".source = ./scripts;
   };
@@ -31,5 +33,6 @@ in
     cava
     nvtopPackages.full
     pavucontrol
+    gsimplecal
   ];
 }

@@ -65,6 +65,7 @@
   };
 
   home = {
+    pointerCursor.enable = true;
     enableNixpkgsReleaseCheck = false;
     activation = {
       setupWallpapers = lib.hm.dag.entryAfter [ "writeBoundary" ] ''

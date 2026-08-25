@@ -23,7 +23,6 @@
     localsend
     evelens
     throne
-    herdr
     home-manager
     pciutils
     nixfmt
