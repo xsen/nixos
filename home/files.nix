@@ -53,6 +53,25 @@ in
       source = ./scripts/change-wallpaper.sh;
       executable = true;
     };
+    ".scripts/hypridle-toggle" = {
+      source = ./scripts/hypridle.sh;
+      executable = true;
+    };
+    ".scripts/hypridle.sh" = {
+      source = ./scripts/hypridle.sh;
+      executable = true;
+    };
+
+    ".local/bin/ai-local" = {
+      source = ./scripts/ai-local.sh;
+      executable = true;
+      force = true;
+    };
+    ".local/bin/local-ai" = {
+      source = ./scripts/ai-local.sh;
+      executable = true;
+      force = true;
+    };
 
     ".local/share/icons/start-apps-icon.png".source = ./images/start-apps-icon.png;
     ".local/share/applications/launch-apps.desktop".text = ''
