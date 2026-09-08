@@ -22,6 +22,10 @@ in
     };
     ".gemini/config/skills".source =
       config.lib.file.mkOutOfStoreSymlink "${nixConfigDir}/home/antigravity/skills";
+    ".gemini/config/scripts" = {
+      source = config.lib.file.mkOutOfStoreSymlink "${nixConfigDir}/home/antigravity/scripts";
+      force = true;
+    };
     ".gemini/settings.json" = {
       source = config.lib.file.mkOutOfStoreSymlink "${nixConfigDir}/home/antigravity/settings.json";
       force = true;

@@ -15,6 +15,7 @@ input=$(cat)
   read -r rem_weekly
   read -r reset_weekly
   read -r active_subs
+  read -r waiting_subs
   read -r task_count
 } < <(
   jq -r '
@@ -28,10 +29,28 @@ input=$(cat)
     ((.quota // {}) | .["gemini-weekly"].remaining_fraction // ""),
     ((.quota // {}) | .["gemini-weekly"].reset_in_seconds | if type == "number" then round else "" end),
     ([(.subagents | arrays | .[]) | select((.status // .state // "") as $s | $s != "completed" and $s != "failed" and $s != "cancelled" and $s != "done" and $s != "errored")] | length),
+    ([(.subagents | arrays | .[]) | select((.status // .state // "") == "waiting_for_input")] | length),
     (.task_count // 0)
   ' <<< "$input" 2>/dev/null
 )
 if [ -z "$state" ]; then state="idle"; fi
+if [ -z "$waiting_subs" ]; then waiting_subs=0; fi
+
+# ── Subagent Input Notification ──────────────────────────────────────────────
+sub_lock_file="${XDG_RUNTIME_DIR:-/tmp}/agy_subagent_wait_${session_id:-$PPID}.lock"
+if [ "${waiting_subs:-0}" -gt 0 ]; then
+    now_ts=$(date +%s)
+    last_notif=0
+    if [ -f "$sub_lock_file" ]; then
+        last_notif=$(cat "$sub_lock_file" 2>/dev/null || echo 0)
+    fi
+    if (( now_ts - ${last_notif:-0} > 25 )); then
+        echo "$now_ts" > "$sub_lock_file"
+        notify-send -u critical -a "Antigravity CLI" "Subagent requires input" "Press Ctrl+J to review and approve pending action" 2>/dev/null &
+    fi
+else
+    rm -f "$sub_lock_file" 2>/dev/null
+fi
 
 active_tasks=0
 my_agy_pid=$PPID
@@ -91,12 +110,17 @@ fmt_epoch_date() {
 
 # ── Agent State ───────────────────────────────────────────────────────────────
 total_background_activities=$(( ${active_subs:-0} + ${total_tasks:-0} ))
-if [ "$state" = "idle" ] && [ "$total_background_activities" -gt 0 ]; then
+if [ "${waiting_subs:-0}" -gt 0 ]; then
+    state="sub_wait"
+elif [ "$state" = "idle" ] && [ "$total_background_activities" -gt 0 ]; then
     state="bg"
 fi
 
 state_part=""
 case "$state" in
+    sub_wait)
+        state_part="${red}● sub:wait [Ctrl+J]${reset}"
+        ;;
     working)
         state_part="${green}● work${reset}"
         ;;

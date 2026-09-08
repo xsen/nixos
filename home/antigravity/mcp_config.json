@@ -1,7 +1,11 @@
 {
   "mcpServers": {
+    "chrome-devtools": {
+      "command": "/home/evgeny/.gemini/config/scripts/launch-chrome-mcp.sh",
+      "args": []
+    },
     "playwright": {
-      "command": "/home/evgeny/.gemini/config/plugins/chrome-devtools-mcp/launch-playwright.sh",
+      "command": "/home/evgeny/.gemini/config/scripts/launch-playwright-mcp.sh",
       "args": []
     },
     "eve-aura": {
