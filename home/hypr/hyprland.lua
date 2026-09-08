@@ -163,7 +163,7 @@ hl.bind(mainMod .. " + F", hl.dsp.window.float({ action = "toggle" }))
 hl.bind(mainMod .. " + W", hl.dsp.layout("togglesplit"))
 hl.bind(mainMod .. " + F11", hl.dsp.window.fullscreen())
 hl.bind(mainMod .. " + O", hl.dsp.exec_cmd("hyprlock"))
-hl.bind(mainMod .. " + I", hl.dsp.exec_cmd("~/.config/waybar/scripts/hypridle.sh --toggle"))
+hl.bind(mainMod .. " + I", hl.dsp.exec_cmd("hypridle-toggle"))
 
 -- Mouse bindings
 hl.bind(mainMod .. " + mouse_down", hl.dsp.focus({ workspace = "e-1" }))
