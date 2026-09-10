@@ -55,7 +55,10 @@
         inherit system;
         config = {
           allowUnfree = true;
-          permittedInsecurePackages = [ "qtwebengine-5.15.19" ];
+          permittedInsecurePackages = [
+            "qtwebengine-5.15.19"
+            "beekeeper-studio-6.0.5"
+          ];
         };
         overlays = [
           (import ./overlays.nix { inherit inputs; })

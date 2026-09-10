@@ -21,7 +21,6 @@
 
   environment.systemPackages = with pkgs; [
     localsend
-    evelens
     throne
     home-manager
     pciutils

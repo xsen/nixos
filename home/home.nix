@@ -88,7 +88,7 @@
     };
     sessionPath = [
       "$HOME/.scripts"
-      "$HOME/.npm-packages"
+      "$HOME/.npm-packages/bin"
       "$HOME/.local/share/JetBrains/Toolbox/scripts"
       "$HOME/.config/composer/vendor/bin"
     ];

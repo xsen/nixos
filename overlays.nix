@@ -17,11 +17,11 @@ in
 
   evelens = prev.appimageTools.wrapType2 rec {
     pname = "evelens";
-    version = "1.3.0";
+    version = "1.5.2";
 
     src = prev.fetchurl {
       url = "https://github.com/aliacollins/EveLens/releases/download/v${version}/EveLens-stable-linux-x86_64.AppImage";
-      sha256 = "668975e5de43ef2feb3b31a9c2e9478b13ff596959a78b793bfd7b3098f78bb4";
+      sha256 = "sha256-hDbhz49wS50kGB01uvOdYfcL1fbE+WRtFKKK7hwddmc=";
     };
 
     extraPkgs =
@@ -36,9 +36,9 @@ in
         contents = prev.appimageTools.extract { inherit pname version src; };
       in
       ''
-        install -m 444 -D ${contents}/EveLens.desktop $out/share/applications/evelens.desktop
+        install -m 644 -D ${contents}/EveLens.desktop $out/share/applications/evelens.desktop
         substituteInPlace $out/share/applications/evelens.desktop \
-          --replace 'Exec=EveLens' 'Exec=evelens'
+          --replace-fail 'Exec=EveLens' $'Exec=evelens\nStartupWMClass=EveLens'
         install -m 444 -D ${contents}/evelens.png $out/share/icons/hicolor/256x256/apps/evelens.png
       '';
   };

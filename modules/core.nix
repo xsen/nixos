@@ -32,7 +32,9 @@
     flatpak.enable = true;
     upower.enable = true;
     pulseaudio.enable = false;
-    journald.extraConfig = "SystemMaxUse=1G";
+    journald.settings.Journal = {
+      SystemMaxUse = "1G";
+    };
     gvfs.enable = true;
     udisks2.enable = true;
 

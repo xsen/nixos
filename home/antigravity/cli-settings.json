@@ -1,8 +1,10 @@
 {
-  "allowNonWorkspaceAccess": false,
+  "agentMode": "accept-edits",
+  "allowNonWorkspaceAccess": true,
+  "editor": "zed --wait",
+  "editorMode": "vim",
   "enableTelemetry": false,
   "notifications": true,
-  "editor": "zed --wait",
   "permissions": {
     "allow": [
       "command(cd)",

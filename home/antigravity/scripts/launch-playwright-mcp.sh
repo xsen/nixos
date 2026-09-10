@@ -23,4 +23,20 @@ else
   MCP_ARGS+=(--isolated)
 fi
 
-exec npx -y @playwright/mcp@latest "${MCP_ARGS[@]}" "$@"
+resolve_mcp_bin() {
+  local bin
+  if bin="$(command -v playwright-mcp 2>/dev/null)"; then
+    echo "$bin"
+  elif [ -x "${HOME}/.npm-packages/bin/playwright-mcp" ]; then
+    echo "${HOME}/.npm-packages/bin/playwright-mcp"
+  else
+    echo "npx"
+  fi
+}
+
+MCP_BIN=$(resolve_mcp_bin)
+if [ "$MCP_BIN" = "npx" ]; then
+  exec npx -y @playwright/mcp@latest "${MCP_ARGS[@]}" "$@"
+else
+  exec "$MCP_BIN" "${MCP_ARGS[@]}" "$@"
+fi

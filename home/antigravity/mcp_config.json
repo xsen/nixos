@@ -2,18 +2,21 @@
   "mcpServers": {
     "chrome-devtools": {
       "command": "/home/evgeny/.gemini/config/scripts/launch-chrome-mcp.sh",
-      "args": []
+      "args": [],
+      "timeoutSeconds": 45
     },
     "playwright": {
       "command": "/home/evgeny/.gemini/config/scripts/launch-playwright-mcp.sh",
-      "args": []
+      "args": [],
+      "timeoutSeconds": 30
     },
     "eve-aura": {
       "command": "bun",
       "args": [
         "run",
         "/home/evgeny/Code/eve-aura/src/index.ts"
-      ]
+      ],
+      "timeoutSeconds": 30
     },
     "dbhub": {
       "command": "npx",
@@ -22,21 +25,24 @@
         "@bytebase/dbhub@latest",
         "--transport",
         "stdio"
-      ]
+      ],
+      "timeoutSeconds": 30
     },
     "sequential-thinking": {
       "command": "npx",
       "args": [
         "-y",
         "@modelcontextprotocol/server-sequential-thinking"
-      ]
+      ],
+      "timeoutSeconds": 60
     },
     "figma": {
       "command": "npx",
       "args": [
         "-y",
         "@modelcontextprotocol/server-figma"
-      ]
+      ],
+      "timeoutSeconds": 30
     }
   }
 }

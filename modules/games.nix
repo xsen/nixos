@@ -39,6 +39,8 @@
 
   environment = {
     systemPackages = with pkgs; [
+      pyfa
+      evelens
       steam-run
 
       wineWow64Packages.stable
