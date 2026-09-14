@@ -60,4 +60,20 @@ in
         --set SDL_VIDEODRIVER x11
     '';
   };
+
+  # Fix deadlock in egl-wayland with errorcheck mutex (tdesktop#29965 / egl-wayland#194)
+  egl-wayland = prev.egl-wayland.overrideAttrs (oldAttrs: {
+    patches = (oldAttrs.patches or [ ]) ++ [
+      ./patches/egl-wayland-pr194-deadlock.patch
+    ];
+  });
+
+  # Force WebKit to use shared memory for DMA-BUF renderer to prevent NVIDIA buffer negotiation crash (tdesktop#31055)
+  telegram-desktop = prev.telegram-desktop.overrideAttrs (oldAttrs: {
+    qtWrapperArgs = (oldAttrs.qtWrapperArgs or [ ]) ++ [
+      "--set"
+      "WEBKIT_DMABUF_RENDERER_FORCE_SHM"
+      "1"
+    ];
+  });
 }

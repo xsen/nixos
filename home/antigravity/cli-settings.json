@@ -8,6 +8,7 @@
   "permissions": {
     "allow": [
       "command(cd)",
+      "command(curl -s)",
       "command(ls)",
       "command(cat)",
       "command(head)",
@@ -81,6 +82,8 @@
       "command(pytest)",
       "command(eslint)",
       "command(prettier)",
+      "mcp(chrome_devtools/*)",
+      "mcp(playwright/*)",
       "read_file(/home/evgeny/.gemini/config/skills/**)",
       "read_file(/home/evgeny/.gemini/antigravity-cli/**)"
     ],

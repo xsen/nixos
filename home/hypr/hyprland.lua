@@ -308,7 +308,7 @@ hl.window_rule({ name = "auth-dialogs", match = { title = "Authentication Requir
 
 hl.window_rule({ name = "yandex-xsen1", match = { class = "[yY]andex-browser", title = ".*xsen1.*" }, workspace = 1 })
 hl.window_rule({ name = "yandex-xsen2", match = { class = "[yY]andex-browser", title = ".*xsen2.*" }, workspace = 3 })
-hl.window_rule({ name = "app-obsidian", match = { class = "md.Obsidian" }, workspace = 2 })
+hl.window_rule({ name = "app-obsidian", match = { class = "(?i)(md\\.obsidian\\.Obsidian|md\\.Obsidian|obsidian)" }, workspace = 2 })
 hl.window_rule({ name = "app-ticktick", match = { class = "ticktick" }, workspace = 2 })
 hl.window_rule({ name = "app-telegram", match = { class = "org\\.telegram\\.desktop" }, workspace = 3 })
 hl.window_rule({ name = "app-social", match = { class = "(?i)(discord|spotify|plexamp|yandexmusic|yandex-music)" }, workspace = 4 })
@@ -325,7 +325,7 @@ hl.window_rule({ name = "eve-game", match = { class = "(?i)(steam_app_8500|exefi
 
 hl.window_rule({
     name = "transparency-tagging",
-    match = { class = "(?i)([yY]andex-browser|kitty|jetbrains-.*|obsidian|ticktick|discord|spotify|org\\.telegram\\.desktop|com\\.mitchellh\\.ghostty|dev\\.zed\\.Zed)" },
+    match = { class = "(?i)([yY]andex-browser|kitty|jetbrains-.*|obsidian|md\\.obsidian\\.Obsidian|md\\.Obsidian|ticktick|discord|spotify|org\\.telegram\\.desktop|com\\.mitchellh\\.ghostty|dev\\.zed\\.Zed)" },
     tag = "+transparent",
 })
 
