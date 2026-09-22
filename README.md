@@ -4,29 +4,43 @@
 
 [![NixOS](https://img.shields.io/badge/NixOS-unstable-blue?style=flat&logo=nixos&colorA=303446&colorB=5f92c8)](https://nixos.org)
 [![Hyprland](https://img.shields.io/badge/Hyprland-Wayland-green?style=flat&logo=hyprland&colorA=303446&colorB=38bdf8)](https://hyprland.org)
-[![Nvidia](https://img.shields.io/badge/Nvidia-Proprietary-green?style=flat&logo=nvidia&colorA=303446&colorB=76b900)](https://nvidia.com)
+[![Nvidia](https://img.shields.io/badge/Nvidia-595.99.02-green?style=flat&logo=nvidia&colorA=303446&colorB=76b900)](https://nvidia.com)
 [![Catppuccin Mocha](https://img.shields.io/badge/Theme-Catppuccin%20Mocha-pink?style=flat&logo=catppuccin&colorA=303446&colorB=f5c2e7)](https://github.com/catppuccin/catppuccin)
 [![Vim-way](https://img.shields.io/badge/Navigation-Vim--way-yellow?style=flat&logo=vim&colorA=303446&colorB=019833)](https://www.vim.org)
-[![AI-Optimized](https://img.shields.io/badge/AI--Optimized-Antigravity%20%2F%20Gemini-blue?style=flat&logo=google-gemini&colorA=303446&colorB=8ab4f8)](#-ai-agent-friendly-antigravity--gemini-optimization)
+[![Multi-Host](https://img.shields.io/badge/Hosts-Desktop%20%7C%20Laptop-purple?style=flat&colorA=303446&colorB=cba6f7)](#-architecture--hosts)
 
 </div>
 
 ## Table of Contents
 
 - [Description](#-description)
-- [Components](#-components)
-- [Installation](#-installation)
-- [Usage & Key Workflows](#-usage--key-workflows)
-- [Custom Tooling & Scripts](#-custom-tooling--scripts)
-- [AI-Agent Friendly](#-ai-agent-friendly-antigravity--gemini-optimization)
+- [Showcase](#-showcase)
+- [Components & Stack](#-components--stack)
+- [Repository Architecture](#-repository-architecture)
+- [Installation & Deployment](#-installation--deployment)
+- [Core Workflows & Productivity](#-core-workflows--productivity)
+  - [1. Hotkeys Cheatsheet (`Super + /`)](#1-hotkeys-cheatsheet-super--)
+  - [2. Smart Browser Dispatcher](#2-smart-browser-dispatcher)
+  - [3. Power & Idle Management (`hypridle`)](#3-power--idle-management-hypridle)
+  - [4. Smart Screenshots (Satty)](#4-smart-screenshots-satty)
+  - [5. Wallpaper & Appearance](#5-wallpaper--appearance)
+- [Fish Shell Helpers](#-fish-shell-helpers)
+- [Development & Gaming](#-development--gaming)
+
+---
 
 ## 📄 Description
 
-A stable NixOS, Hyprland, and Nvidia configuration (Nvidia typically causes many issues) using home-manager.
+A reliable, modular **NixOS** and **Hyprland** configuration with multi-host support (desktop workstation with proprietary Nvidia and laptop), managed declaratively through Flakes and Home Manager.
 
-All applications work natively without XWayland, including Obsidian and Discord. A vertically-oriented Waybar optimizes space for ultrawide monitors.
+- **Zero XWayland Overhead:** Key desktop applications (including Obsidian, Discord, and browsers) run natively on Wayland.
+- **Ultrawide Ergonomics:** Vertically-oriented Waybar minimizes horizontal scrolling on ultrawide monitors and preserves vertical display height.
+- **Catppuccin Mocha Everywhere:** System-wide dark palette across the compositor, Ghostty terminal, Zed editor, Spicetify, GTK, browsers, and application launchers.
+- **Vim-Centric Navigation:** Consistent HJKL modal navigation and split management across Hyprland, Ghostty, and Zed.
 
-Applications, IDEs (PhpStorm, Zed), and web browsers (using Catppuccin Dark Reader configs) are meticulously styled with the Catppuccin Mocha theme for a highly unified, distraction-free dark environment.
+---
+
+## 📸 Showcase
 
 <p align="center">
   <img src="home/images/showcase1.png" width="100%" alt="Showcase 1">
@@ -36,124 +50,186 @@ Applications, IDEs (PhpStorm, Zed), and web browsers (using Catppuccin Dark Read
   <img src="home/images/showcase3.png" width="49.5%" alt="Showcase 3">
 </p>
 
-## 🛠️ Components
+---
 
-| Component        | Description                    |
-| ---------------- | ------------------------------ |
-| Video driver     | Nvidia "595.80"                |
-| Shell            | Fish                           |
-| Shell Prompt     | Starship                       |
-| WM (Compositor)  | Hyprland                       |
-| Bar              | Waybar                         |
-| Notification     | Swaync                         |
-| Launcher         | Rofi-Wayland                   |
-| Editor           | Zed                            |
-| Terminal         | Ghostty                        |
-| Theme            | Catppuccin Mocha               |
-| Font             | JetBrains Mono Nerd Font       |
-| Player           | Spotify                        |
-| File Browser     | pcmanfm + Yazi                 |
-| Internet Browser | Yandex Browser + Google Chrome |
-| Screenshot       | Hyprshot + Satty               |
-| Idle             | Hypridle                       |
-| Lock             | Hyprlock                       |
-| Wallpaper        | Hyprpaper                      |
-| Display Manager  | SDDM                           |
-| Polkit           | lxqt-policykit                 |
-| Network          | Throne Tun mode                |
+## 🛠️ Components & Stack
 
-## 🖥️ Installation
-
-- Install NixOS
-- Clone the repository
-- Run the script: `./install.sh`
-  - **Note:** This script creates a symlink `~/.nix-config` pointing to this repository. This symlink is essential because it is used by the `NH_FLAKE` environment variable (for `nh` commands) and by the `update-hypr-stubs` alias to maintain a stable, non-hardcoded path to the dotfiles.
-- Generate a new hardware configuration:  
-  `nixos-generate-config --show-hardware-config > ./hosts/nix-desktop/hardware-configuration.nix`
-
-## ▶️ Usage & Key Workflows
-
-### 1. NixOS Deployment (Nix Helper)
-
-We use Fish functions acting as aliases for `nh` (Nix Helper) with built-in desktop notifications and privilege checks:
-
-- `nh-os` — Rebuild and switch the NixOS system configuration.
-- `nh-home` — Rebuild and switch the Home Manager configuration.
-- `nh-all` — Sequential rebuild of both system and home environments.
-- `nh-clean` — Clean up old Nix generations (`nh clean all`).
-
-### 2. Wallpaper & Theme Management
-
-- To change the wallpaper system-wide (updates SDDM, hyprpaper, and hyprlock background):  
-  `change-wallpaper /path/to/image.png`
-
-### 3. Essential Keybindings (`mainMod` is `Super`)
-
-The setup is built around a keyboard-centric, **Vim-way** navigation flow for maximum efficiency, featuring consistent Vim-keybindings and modal inputs across Hyprland, the Zed editor, and the Fish shell:
-
-| Keybinding                      | Action                                                        |
-| :------------------------------ | :------------------------------------------------------------ |
-| **System & Apps**               |                                                               |
-| `Super + Return`                | Open Terminal (Ghostty)                                       |
-| `Super + Space`                 | Open Application Launcher (Rofi)                              |
-| `Super + C`                     | Close Active Window                                           |
-| `Super + F`                     | Toggle Floating Window Mode                                   |
-| `Super + O`                     | Lock Screen (Hyprlock)                                        |
-| `Super + Shift + B`             | Switch Browser Dispatcher Profile (`Auto` / `Work` / `Chill`) |
-| `Print`                         | Take Screenshot of a Region (Satty)                           |
-| `Shift + Print`                 | Take Screenshot of the Active Window                          |
-| `Ctrl + Print`                  | Take Screenshot of the Entire Screen                          |
-| **Vim-Way Tiling & Navigation** |                                                               |
-| `Super + h / j / k / l`         | Move Focus (Left / Down / Up / Right)                         |
-| `Super + Shift + h / j / k / l` | Move Window in Layout (Left / Down / Up / Right)              |
-| `Super + [1-9]`                 | Switch Workspace                                              |
-| `Super + Shift + [1-9]`         | Move Window to Workspace                                      |
-| **Tabbed Window Groups**        |                                                               |
-| `Super + G`                     | Toggle Tabbed Window Group                                    |
-| `Super + Ctrl + h / j / k / l`  | Move Window into Group (Left / Down / Up / Right)             |
-| `Super + Ctrl + G`              | Move Window out of Group                                      |
-| `Super + N` / `Super + P`       | Cycle Tabs in Group (Next / Previous)                         |
+| Component                | Technology / Tool              | Details                                                                    |
+| :----------------------- | :----------------------------- | :------------------------------------------------------------------------- |
+| **Video Driver**         | Nvidia Proprietary             | Version **`595.99.02`**                                                    |
+| **Compositor (WM)**      | Hyprland                       | Dynamically configured via Lua with LSP autocompletion                     |
+| **Shell & Prompt**       | Fish + Starship                | Vi-mode, custom helper functions, Catppuccin prompt                        |
+| **Status Bar**           | Waybar                         | Vertical layout, Cava audio bars, browser profile, idle status, gsimplecal |
+| **Notifications**        | Swaync                         | Native notification center with do-not-disturb support                     |
+| **Launchers**            | Vicinae + Rofi-Wayland         | Vicinae (`Super + Space`), Rofi auxiliary (`Super + Shift + Space`)        |
+| **Editor**               | Zed                            | Vim mode, LSP integration, Catppuccin Mocha theme                          |
+| **Terminal**             | Ghostty                        | Vim/Zed split keybinds, truecolor, JetBrains Mono Nerd Font                |
+| **Theme**                | Catppuccin Mocha               | GTK, Kvantum, Qt, terminal, editors, and browser styling                   |
+| **Music Player**         | Spotify (Spicetify)            | Wayland-native Spotify with Catppuccin Mocha & Adblockify                  |
+| **File Managers**        | PCManFM-Qt + Yazi              | GUI file manager + high-speed terminal file manager                        |
+| **Web Browsers**         | Yandex Browser + Google Chrome | Dual-browser setup with automatic workspace link routing                   |
+| **Screenshots**          | Satty + Grim / Slurp           | Interactive annotation, region / window / monitor captures                 |
+| **Screen Lock & Idle**   | Hyprlock + Hypridle            | Wayland-native locker with debounced toggle script                         |
+| **Binary Compatibility** | Nix-LD                         | Run unpatched dynamic ELF binaries directly on NixOS                       |
+| **Network / VPN**        | Throne                         | TUN mode integration                                                       |
 
 ---
 
-## ⚙️ Custom Tooling & Scripts
+## 🏗️ Repository Architecture
 
-This setup features unique workflows for workspace navigation and integration:
+The repository is organized following clean separation of concerns: system modules, host-specific hardware definitions, and out-of-store mutable dotfiles for real-time development.
 
-### 1. Smart Browser Dispatcher (`browser-dispatcher`)
+```
+.
+├── flake.nix             # Flake inputs and system/home outputs
+├── overlays.nix          # Custom package overrides and patches
+├── hosts/                # Machine-specific configurations
+│   ├── nix-desktop/      # Workstation host (Nvidia driver, multi-monitor)
+│   │   ├── configuration.nix
+│   │   ├── hardware-configuration.nix
+│   │   └── home-manager.nix
+│   └── nix-laptop/       # Portable laptop host
+│       ├── configuration.nix
+│       ├── hardware-configuration.nix
+│       └── home-manager.nix
+├── modules/              # Reusable NixOS system modules
+│   ├── core.nix          # Base system config (boot, audio, networking, locale)
+│   ├── dev.nix           # Development stack (Docker, Nginx, PHP, Node.js, Zed)
+│   ├── dev-hosts.nix     # Local virtual hosts definitions
+│   ├── games.nix         # Steam, GameScope, and gaming optimizations
+│   ├── nix-ld.nix        # Dynamic binary execution support
+│   └── packages.nix      # Core desktop and system utilities
+└── home/                 # Home Manager user environment
+    ├── home.nix          # Main user module, wallpapers, session variables
+    ├── packages.nix      # User applications (Ghostty, Spicetify, direnv)
+    ├── files.nix         # Out-of-store symlinks to dotfiles (~/.nix-config)
+    ├── fish.nix          # Fish functions, aliases, and Starship prompt
+    ├── hypr/             # Hyprland Lua configuration and LSP stubs
+    ├── vicinae/          # Custom Vicinae extensions (Hotkeys Cheatsheet)
+    ├── zed/              # Zed settings, keymap, and tasks
+    ├── waybar/           # Waybar styling, layout, and monitor scripts
+    ├── rofi/             # Rofi configuration and Catppuccin themes
+    └── scripts/          # System helpers (screenshots, idle toggle, wallpapers)
+```
 
-We use a custom routing helper for web links, associated via `mime.nix` and set as the default `$BROWSER`:
-
-- **Auto Workspace Routing:** By default, if you open a link while on Workspaces 1 or 2 (Work Area), it automatically opens in Yandex Browser's **Work Profile (`Profile 1`)**. If you are on Workspace 3+ (Chill Area), it routes to **Personal Profile (`Profile 2`)**.
-- **Manual Override:** Press **`Super + Shift + B`** to cycle between routing modes. A notification will show the active mode:
-  - `Auto` (routes by workspace)
-  - `Work` (force routes all links to Work Profile)
-  - `Chill` (force routes all links to Personal Profile)
-- **Integration:** Current status is displayed dynamically in Waybar via `home/waybar/scripts/browser-profile.sh`.
-
-### 2. Hyprland Configuration on Lua
-
-Unlike typical static `.conf` set-ups, Hyprland is configured dynamically via Lua:
-
-- **Lua Core:** Main configuration is written in [home/hypr/hyprland.lua](./home/hypr/hyprland.lua).
-- **Nix-to-Lua Bridge:** Nix variables (like path definitions) are injected into `nix_vars.lua` on rebuilding, making configurations fully modular.
-- **Autocompletion:** We use a helper command **`update-hypr-stubs`** (configured in Fish) to grab the latest `hl.meta.lua` stubs from the Nix Store and link them to `~/.nix-config/home/hypr/stubs/`. This enables full Lua IDE autocomplete in Zed/VSCode (configured via `.luarc.json`).
-
-### 3. Nvidia Driver Auto-Update Tool
-
-Nvidia updates are historically painful on NixOS due to manual hash calculation. We solved this with a dedicated automation script:
-
-- **The Script:** Located at `.agents/skills/update-nvidia/scripts/update-nvidia.py`.
-- **Workflow:** It queries the official Nvidia Unix drivers website, detects the latest Production version, prefetches and calculates SRI hashes for all 5 required components (x86_64, aarch64, open modules, settings, persistenced), and updates the `mkDriver` block inside `hosts/nix-desktop/configuration.nix` automatically.
-- Runs safe dry-run compilation check after updating to prevent broken boot setups.
+> [!TIP]
+> Configuration files for GUI apps (Hyprland, Waybar, Zed, Vicinae) are decoupled into raw files (`.lua`, `.json`, `.css`) rather than inlined into Nix strings. This preserves native syntax highlighting, formatting, and LSP support in editors.
 
 ---
 
-## 🤖 AI-Agent Friendly (Antigravity & Gemini Optimization)
+## 🖥️ Installation & Deployment
 
-This repository is optimized for development using agentic AI coders (like Google Antigravity, Aider, or Cursor) with workspace rules defined in `.agents/`.
+### 1. Initial Setup
 
-- **Isolated Code Review:** Changes are automatically critiqued by an independent subagent (`Senior Code Reviewer`) in a clean context window to find edge-case bugs before they hit your system.
-- **Token-Efficient Diffs:** Large context reads are minimized. Diffs are filtered to exclude heavy lockfiles (`flake.lock`, `package-lock.json`), compiled files, and dependencies, feeding the agent only precise `-U5` code chunks.
-- **Plan-First Guardrails:** For complex tasks, the agent drafts a high-level architecture change-plan and halts for human approval (`Proceed`) before executing code.
-- **Self-Correction Halt:** The agent automatically aborts and prompts the user for help after 2 failed rebuild/re-plan attempts, preventing looping or credit-draining.
+1. Install NixOS on your machine.
+2. Clone this repository to your preferred location (e.g. `~/Code/nixos/xsen`):
+   ```bash
+   git clone https://github.com/xsen/nixos.git ~/Code/nixos/xsen
+   ```
+3. Run the installer script:
+   ```bash
+   cd ~/Code/nixos/xsen
+   ./install.sh
+   ```
+
+> [!NOTE]
+> `./install.sh` establishes a symlink `~/.nix-config` pointing to this repository. This symlink is used by the `NH_FLAKE` variable and by helper scripts so configurations are always referenced reliably.
+
+4. Generate your hardware configuration (for new machines):
+   ```bash
+   nixos-generate-config --show-hardware-config > ./hosts/nix-desktop/hardware-configuration.nix
+   ```
+
+### 2. Building & Switching
+
+We use Fish wrapper functions over `nh` (Nix Helper) with automatic desktop notifications:
+
+- **`nh-os`** — Rebuild and switch the NixOS system configuration (prompts with desktop alert if `sudo` credentials are required).
+- **`nh-home`** — Rebuild and switch the Home Manager configuration.
+- **`nh-all`** — Sequential rebuild of both system and home environments.
+- **`nh-clean`** — Garbage collect and clean up old Nix generations (`nh clean all`).
+
+---
+
+## ⚡ Core Workflows & Productivity
+
+### 1. Hotkeys Cheatsheet (`Super + /`)
+
+Because complex keybindings across the window manager, terminal, and editor are easy to forget, an interactive cheatsheet extension is built directly into **Vicinae**:
+
+- **Instant Access:** Press **`Super + /`** to pop up the cheatsheet.
+- **Launcher Access:** Open Vicinae (**`Super + Space`**) and type `keys`, `cheatsheet`, or `хоткеи`.
+- **Fuzzy Search:** Search shortcuts by action (`split`, `close`, `workspace`, `terminal`, `zoom`), key combination (`ctrl+w`, `alt+w`, `super`), or application.
+- **Category Filter:** Filter by **Ghostty Terminal**, **Zed Editor**, or **Hyprland WM**.
+- **Quick Copy:** Press `Enter` on any item to copy the key combination straight to the clipboard.
+
+### 2. Smart Browser Dispatcher
+
+Web links are routed automatically through a custom dispatcher configured as the default `$BROWSER`:
+
+- **Automatic Workspace Routing:**
+  - Links opened on **Workspaces 1 or 2** (Work Area) automatically open in Yandex Browser's **Work Profile (`Profile 1`)**.
+  - Links opened on **Workspace 3+** (Personal Area) route to **Personal Profile (`Profile 2`)**.
+- **Manual Mode Toggle:** Press **`Super + Shift + B`** to cycle between modes:
+  - `Auto` — dynamic routing based on active workspace.
+  - `Work` — forces all links to Work Profile.
+  - `Chill` — forces all links to Personal Profile.
+- **Waybar Indicator:** Displays current browser routing mode in the status bar.
+
+### 3. Power & Idle Management (`hypridle`)
+
+A dedicated debounced script (`home/scripts/hypridle.sh`) manages screen timeout and sleep:
+
+- **Quick Toggle:** Press **`Super + I`** or click the idle icon in Waybar to toggle idle lock on/off (ideal for watching videos or long compiles).
+- **Status Alerts:** Sends instant desktop notifications indicating whether idle mode is `Enabled` or `Disabled`.
+
+### 4. Smart Screenshots (Satty)
+
+Comprehensive screenshot tooling integrated with the **Satty** annotation tool:
+
+- **`Print`** — Interactive region screenshot (`smart-screenshot.sh region`).
+- **`Shift + Print`** — Capture the currently active window (`smart-screenshot.sh window`).
+- **`Ctrl + Print`** — Capture the entire monitor output (`smart-screenshot.sh output`).
+
+### 5. Wallpaper & Appearance
+
+A single command updates backgrounds across all display surfaces synchronously:
+
+```bash
+change-wallpaper /path/to/image.png
+```
+
+This updates **SDDM**, **Hyprpaper** (active session desktop), and **Hyprlock** (lock screen) without manual reloads.
+
+---
+
+## 🐟 Fish Shell Helpers
+
+The Fish configuration (`home/fish.nix`) comes loaded with productivity helpers:
+
+- **`done <command>`** — Runs any long-running command and triggers a desktop notification when finished with execution time and exit status:
+  ```bash
+  done cargo build --release
+  ```
+- **`ssh` Wrapper** — Automatically maps `TERM=xterm-256color` when connecting from Ghostty, preventing _"unknown terminal type: xterm-ghostty"_ errors on remote hosts.
+- **`update-hypr-stubs`** — Extracts the active Hyprland Lua typing stubs (`hl.meta.lua`) from the Nix Store and links them to the local config, enabling full Lua IDE autocomplete in Zed.
+- **`, <package>`** — Runs any uninstalled Nix package instantly via `nix-index` and `comma` without entering a subshell:
+  ```bash
+  , htop
+  ```
+- **`b "<command>"`** — Runs arbitrary commands in Bash subshell directly from Fish.
+
+---
+
+## ⚙️ Development & Gaming
+
+### Development Environment
+
+- **Nix-LD:** Allows running precompiled, unpatched dynamic Linux binaries (VSCode remote server, Node/Go binaries, language servers, JetBrains tools) out of the box.
+- **Development Services:** Docker and Nginx are configured as system services with local virtual hosts defined in `modules/dev-hosts.nix`.
+- **Direnv:** `nix-direnv` is enabled for zero-latency per-directory environment switching when navigating projects.
+
+### Gaming & Window Rules
+
+- **Optimized Steam:** Proton and GameScope support configured in `modules/games.nix`.
+- **Specialized Window Rules:** Dedicated window rules in `home/hypr/hyprland.lua` for games like EVE Online, Discord, Obsidian, and media players (preventing tearing, managing floating windows, and preserving ultrawide layouts).

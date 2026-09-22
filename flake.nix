@@ -57,7 +57,7 @@
           allowUnfree = true;
           permittedInsecurePackages = [
             "qtwebengine-5.15.19"
-            "beekeeper-studio-6.0.5"
+            "beekeeper-studio-6.1.1"
           ];
         };
         overlays = [

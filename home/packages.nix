@@ -65,7 +65,7 @@ in
         keybind = [
           # Tabs (Alt)
           "alt+n=new_tab"
-          "alt+w=close_tab:this"
+          "alt+shift+w=close_tab:this"
           "alt+h=previous_tab"
           "alt+l=next_tab"
           "alt+Digit1=goto_tab:1"
@@ -78,16 +78,37 @@ in
           "alt+Digit8=goto_tab:8"
           "alt+Digit9=last_tab"
 
-          # Splits Navigation (Alt+Shift + HJKL)
+          # Splits Navigation (Vim Ctrl+W & Alt+Shift)
+          "ctrl+w>h=goto_split:left"
+          "ctrl+w>ctrl+h=goto_split:left"
+          "ctrl+w>j=goto_split:down"
+          "ctrl+w>ctrl+j=goto_split:down"
+          "ctrl+w>k=goto_split:up"
+          "ctrl+w>ctrl+k=goto_split:up"
+          "ctrl+w>l=goto_split:right"
+          "ctrl+w>ctrl+l=goto_split:right"
           "alt+shift+h=goto_split:left"
           "alt+shift+j=goto_split:down"
           "alt+shift+k=goto_split:up"
           "alt+shift+l=goto_split:right"
 
-          # Splits Actions
+          # Splits Actions (Zed-style Alt+W & Vim Ctrl+W)
+          "alt+w=close_surface"
+          "ctrl+w>c=close_surface"
+          "ctrl+w>ctrl+c=close_surface"
+          "ctrl+w>q=close_surface"
+          "ctrl+w>ctrl+q=close_surface"
+          "ctrl+w>d=close_surface"
+          "ctrl+w>ctrl+d=close_surface"
+          "ctrl+w>s=new_split:down"
+          "ctrl+w>ctrl+s=new_split:down"
+          "ctrl+w>v=new_split:right"
+          "ctrl+w>ctrl+v=new_split:right"
+          "ctrl+w>m=toggle_split_zoom"
+          "ctrl+w>equal=equalize_splits"
+          "ctrl+w>ctrl+w=text:\\x17"
           "alt+shift+v=new_split:right"
           "alt+shift+s=new_split:down"
-          "alt+shift+w=close_surface"
           "alt+shift+m=toggle_split_zoom"
           "ctrl+shift+enter=toggle_split_zoom"
           "alt+shift+equal=equalize_splits"

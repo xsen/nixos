@@ -3,9 +3,9 @@
   programs = {
     rofi = {
       enable = true;
-      location = "center";
-      font = "JetBrainsMono Nerd Font 16";
-      extraConfig = {
+      settings = {
+        location = 0;
+        font = "JetBrainsMono Nerd Font 16";
         show-icons = true;
         kb-row-select = "";
         kb-row-tab = "";

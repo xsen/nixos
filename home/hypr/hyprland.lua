@@ -192,8 +192,9 @@ hl.bind(mainMod .. " + CTRL + k", hl.dsp.window.move({ into_group = "up" }))
 hl.bind(mainMod .. " + CTRL + j", hl.dsp.window.move({ into_group = "down" }))
 hl.bind(mainMod .. " + CTRL + G", hl.dsp.window.move({ out_of_group = true }))
 
--- Menus
+-- Menus & Cheatsheet
 hl.bind(mainMod .. " + Space", hl.dsp.exec_cmd("vicinae toggle"))
+hl.bind(mainMod .. " + slash", hl.dsp.exec_cmd("vicinae cmd launch @evgeny/cheatsheet:view"))
 hl.bind(mainMod .. " + SHIFT + Space", hl.dsp.exec_cmd(menu .. " -show drun -modes \"drun,calc,run,filebrowser,window\""))
 
 -- Workspaces

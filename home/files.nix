@@ -14,6 +14,9 @@ in
     ".config/zed/tasks.json".source =
       config.lib.file.mkOutOfStoreSymlink "${nixConfigDir}/home/zed/tasks.json";
 
+    ".local/share/vicinae/extensions/cheatsheet".source =
+      config.lib.file.mkOutOfStoreSymlink "${nixConfigDir}/home/vicinae/extensions/cheatsheet";
+
     ".gemini/config/AGENTS.md".source =
       config.lib.file.mkOutOfStoreSymlink "${nixConfigDir}/home/antigravity/AGENTS.md";
     ".gemini/config/mcp_config.json" = {
