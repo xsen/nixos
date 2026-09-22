@@ -33,7 +33,6 @@ hl.env("__GLX_VENDOR_LIBRARY_NAME", "nvidia")
 hl.env("NVD_BACKEND", "direct")
 hl.env("ELECTRON_OZONE_PLATFORM_HINT", "auto")
 hl.env("XDG_SESSION_TYPE", "wayland")
-hl.env("GBM_BACKEND", "nvidia-drm")
 
 -----------------------
 ---- LOOK AND FEEL ----
@@ -267,13 +266,6 @@ hl.define_submap("AP", function()
     hl.bind("e", function()
         hl.dispatch(hl.dsp.exec_cmd(fileManager)); hl.dispatch(hl.dsp.submap("reset"))
     end)
-    hl.bind("p", function()
-        hl.dispatch(hl.dsp.exec_cmd("phpstorm")); hl.dispatch(hl.dsp.submap("reset"))
-    end)
-    hl.bind("w", function()
-        hl.dispatch(hl.dsp.exec_cmd("webstorm")); hl.dispatch(hl.dsp.submap("reset"))
-    end)
-
     hl.bind("escape", hl.dsp.submap("reset"))
 end)
 
@@ -320,8 +312,13 @@ hl.window_rule({
     "5"
 })
 hl.window_rule({ name = "eve-tray", match = { class = "steam_app_8500", title = "^$" }, workspace = "99 silent", no_focus = true })
-hl.window_rule({ name = "eve-game", match = { class = "(?i)(steam_app_8500|exefile|eve\\.exe)", title = "(?i)^EVE.*" }, workspace =
-"6", tile = true })
+hl.window_rule({
+    name = "eve-game",
+    match = { class = "(?i)(steam_app_8500|exefile|eve\\.exe)", title = "(?i)^EVE.*" },
+    workspace =
+    "6",
+    tile = true
+})
 
 hl.window_rule({
     name = "transparency-tagging",

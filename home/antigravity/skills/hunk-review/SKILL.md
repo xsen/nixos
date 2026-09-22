@@ -1,6 +1,8 @@
 ---
 name: hunk-review
 description: Interacts with live Hunk diff review sessions via CLI. Inspects review focus, navigates files, hunks, and exact lines, reloads session contents, adds inline review comments, and paints attention marks on character ranges. Use when the user has a Hunk session running or wants to review diffs interactively.
+metadata:
+  icon: 🔍
 ---
 
 # Hunk Review

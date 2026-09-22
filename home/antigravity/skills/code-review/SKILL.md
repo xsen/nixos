@@ -1,6 +1,9 @@
 ---
 name: code-review
 description: Автоматическое ревью кода с помощью изолированного субагента-цензора перед сдачей задачи.
+metadata:
+  icon: 🧐
+disable-slash-command: true
 ---
 
 # Навык: Автоматическое ревью кода (code-review)

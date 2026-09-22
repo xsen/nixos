@@ -1,6 +1,8 @@
 ---
 name: update-nvidia
 description: Автоматическое обновление версии драйвера NVIDIA в конфигурации NixOS с автополучением и прописыванием всех хешей пакетов.
+metadata:
+  icon: 🟢
 ---
 
 # Навык: update-nvidia

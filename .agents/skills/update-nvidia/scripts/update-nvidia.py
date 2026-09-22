@@ -10,28 +10,35 @@ import argparse
 CONFIG_PATH = "hosts/nix-desktop/configuration.nix"
 
 def get_latest_nvidia_version(branch="production"):
-    url = "https://www.nvidia.com/object/unix.html"
+    import json
+    # NVIDIA Unix page now queries the GeForce Driver API dynamically
+    if branch == "production":
+        url = "https://gfwsl.geforce.com/services_toolkit/services/com/nvidia/services/AjaxDriverService.php?func=DriverManualLookup&psid=120&pfid=985&osID=12&languageCode=1033&beta=null&isWHQL=0&dltype=-1&dch=0&upCRD=null&qnf=0&ctk=null&sort1=&numberOfResults=1"
+    else:
+        url = "https://gfwsl.geforce.com/services_toolkit/services/com/nvidia/services/AjaxDriverService.php?func=DriverManualLookup&psid=133&pfid=1075&osID=12&languageCode=1033&beta=null&isWHQL=0&dltype=-1&dch=0&upCRD=null&qnf=1&ctk=null&sort1=1&numberOfResults=1"
+        
     try:
         req = urllib.request.Request(
             url, 
-            headers={'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36'}
+            headers={'User-Agent': 'Mozilla/5.0'}
         )
         with urllib.request.urlopen(req) as response:
-            html = response.read().decode('utf-8')
+            data = json.loads(response.read().decode('utf-8'))
+            
+        for item in data.get("IDS", []):
+            dl_url = item.get("downloadInfo", {}).get("DownloadURL", "")
+            match = re.search(r'Linux-x86_64/([0-9.]+)/', dl_url)
+            if match:
+                return match.group(1)
+            ver = item.get("downloadInfo", {}).get("Version")
+            if ver:
+                return ver
+                
+        print(f"Error: Could not find NVIDIA {branch} version in API response.", file=sys.stderr)
+        sys.exit(1)
     except Exception as e:
-        print(f"Error fetching NVIDIA page: {e}", file=sys.stderr)
+        print(f"Error fetching NVIDIA API: {e}", file=sys.stderr)
         sys.exit(1)
-        
-    if branch == "production":
-        match = re.search(r'Latest Production Branch Version:.*?<a[^>]*>([0-9.]+)</a>', html, re.DOTALL | re.IGNORECASE)
-    else:
-        match = re.search(r'Latest New Feature Branch Version:.*?<a[^>]*>([0-9.]+)</a>', html, re.DOTALL | re.IGNORECASE)
-        
-    if not match:
-        print(f"Error: Could not find NVIDIA {branch} version on the Unix Drivers page.", file=sys.stderr)
-        sys.exit(1)
-        
-    return match.group(1)
 
 def get_current_version(config_file):
     if not os.path.exists(config_file):

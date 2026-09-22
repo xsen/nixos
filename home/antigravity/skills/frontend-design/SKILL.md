@@ -1,6 +1,9 @@
 ---
 name: frontend-design
 description: Руководство по созданию уникального визуального дизайна интерфейсов, выбору типографики и избеганию шаблонных решений.
+metadata:
+  icon: 🎨
+disable-slash-command: true
 ---
 
 # Frontend Design

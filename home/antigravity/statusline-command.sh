@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 # Antigravity CLI statusLine — Catppuccin Mocha
 set -f
+shopt -s extglob
 
 input=$(cat)
 
@@ -17,6 +18,8 @@ input=$(cat)
   read -r active_subs
   read -r waiting_subs
   read -r task_count
+  read -r conv_title
+  read -r term_width
 } < <(
   jq -r '
     (.cwd // .workspace.current_dir // "" | gsub("[\r\n]"; " ")),
@@ -30,7 +33,9 @@ input=$(cat)
     ((.quota // {}) | .["gemini-weekly"].reset_in_seconds | if type == "number" then round else "" end),
     ([(.subagents | arrays | .[]) | select((.status // .state // "") as $s | $s != "completed" and $s != "failed" and $s != "cancelled" and $s != "done" and $s != "errored")] | length),
     ([(.subagents | arrays | .[]) | select((.status // .state // "") == "waiting_for_input")] | length),
-    (.task_count // 0)
+    (.task_count // 0),
+    (.conversation_title // "" | gsub("[\r\n]"; " ")),
+    (.terminal_width // 0)
   ' <<< "$input" 2>/dev/null
 )
 if [ -z "$state" ]; then state="idle"; fi
@@ -172,6 +177,55 @@ if [ -n "$cwd" ] && git -C "$cwd" rev-parse --git-dir >/dev/null 2>&1; then
     fi
 fi
 
+# ── Terminal width ─────────────────────────────────────────────────────────────
+term_cols="${term_width:-0}"
+if [[ ! "$term_cols" =~ ^[0-9]+$ ]] || [ "$term_cols" -le 0 ]; then
+    term_cols="${COLUMNS:-}"
+fi
+if [[ ! "$term_cols" =~ ^[0-9]+$ ]] || [ "$term_cols" -le 0 ]; then
+    term_cols=$(tput cols 2>/dev/null < /dev/tty || echo 110)
+fi
+if [[ ! "$term_cols" =~ ^[0-9]+$ ]] || [ "$term_cols" -le 0 ]; then
+    term_cols=110
+fi
+
+# ── Conversation Title ────────────────────────────────────────────────────────
+if [ -z "$conv_title" ] && [ -n "$session_id" ]; then
+    title_cache="${XDG_RUNTIME_DIR:-/tmp}/agy_title_${session_id}"
+    if [ -f "$title_cache" ]; then
+        conv_title=$(cat "$title_cache" 2>/dev/null)
+    fi
+    if [ -z "$conv_title" ]; then
+        conv_title=$(python3 -c "
+import sqlite3
+try:
+    con = sqlite3.connect('/home/evgeny/.gemini/antigravity-cli/conversation_summaries.db')
+    row = con.cursor().execute('SELECT COALESCE(NULLIF(title, \"\"), preview) FROM conversation_summaries WHERE conversation_id=\"$session_id\"').fetchone()
+    if row and row[0]:
+        print(row[0].strip())
+except Exception:
+    pass
+" 2>/dev/null)
+        if [ -n "$conv_title" ]; then
+            echo "$conv_title" > "$title_cache" 2>/dev/null
+        fi
+    fi
+fi
+
+title_part=""
+if [ -n "$conv_title" ]; then
+    clean_title="$conv_title"
+    max_title_len=30
+    if [ "$term_cols" -lt 82 ]; then
+        max_title_len=$(( term_cols - 52 ))
+        [ "$max_title_len" -lt 12 ] && max_title_len=12
+    fi
+    if [ "${#clean_title}" -gt "$max_title_len" ]; then
+        clean_title="${clean_title:0:$(( max_title_len - 1 ))}…"
+    fi
+    title_part="${subtext}💬 ${lavender}${clean_title}${reset}"
+fi
+
 # ── Model ─────────────────────────────────────────────────────────────────────
 model_part=""
 if [ -n "$model" ]; then
@@ -223,38 +277,53 @@ if [ -n "$rl_7d_pct" ]; then
     wk_part=$(printf "${subtext}wk:${col}%d%%%s${reset}" "$rl_7d_pct" "$reset_str")
 fi
 
-# ── Assemble Single Line ──────────────────────────────────────────────────────
-# Block 1: State
-printf "%s" "$state_part"
+# ── Assemble Output (Responsive 1-line or 2-line layout) ───────────────────────
+# Segment 1: Context & Workspace (State, Directory, Git, Title)
+seg1=""
+add_to_seg1() {
+    local item="$1"
+    if [ -n "$item" ]; then
+        if [ -n "$seg1" ]; then
+            seg1="${seg1} ${overlay}│${reset} ${item}"
+        else
+            seg1="${item}"
+        fi
+    fi
+}
+add_to_seg1 "$state_part"
+[ -n "$short_dir" ] && add_to_seg1 "${blue}${short_dir}${reset}"
+[ -n "$git_part" ] && add_to_seg1 "${peach}${git_part}${reset}"
+[ -n "$title_part" ] && add_to_seg1 "$title_part"
 
-# Divider + Block 2: Directory
-if [ -n "$short_dir" ]; then
-    printf " ${overlay}│${reset} ${blue}%s${reset}" "$short_dir"
+# Segment 2: Model & Quotas (Model, Context, Sprint, Weekly)
+seg2=""
+add_to_seg2() {
+    local item="$1"
+    if [ -n "$item" ]; then
+        if [ -n "$seg2" ]; then
+            seg2="${seg2} ${overlay}│${reset} ${item}"
+        else
+            seg2="${item}"
+        fi
+    fi
+}
+[ -n "$model_part" ] && add_to_seg2 "$model_part"
+[ -n "$ctx_part" ] && add_to_seg2 "$ctx_part"
+[ -n "$spr_part" ] && add_to_seg2 "$spr_part"
+[ -n "$wk_part" ] && add_to_seg2 "$wk_part"
+
+if [ -z "$seg2" ]; then
+    printf "%s\n" "$seg1"
+elif [ -z "$seg1" ]; then
+    printf "%s\n" "$seg2"
+else
+    single_line="${seg1} ${overlay}│${reset} ${seg2}"
+    no_ansi="${single_line//$'\x1b'\[*([0-9;])[a-zA-Z]/}"
+    single_len="${#no_ansi}"
+
+    if [ "$single_len" -le "$term_cols" ]; then
+        printf "%s\n" "$single_line"
+    else
+        printf "%s\n%s\n" "$seg1" "$seg2"
+    fi
 fi
-
-# Divider + Block 3: Git
-if [ -n "$git_part" ]; then
-    printf " ${overlay}│${reset} ${peach}%s${reset}" "$git_part"
-fi
-
-# Divider + Block: Model
-if [ -n "$model_part" ]; then
-    printf " ${overlay}│${reset} %s" "$model_part"
-fi
-
-# Divider + Block 4: Context
-if [ -n "$ctx_part" ]; then
-    printf " ${overlay}│${reset} %s" "$ctx_part"
-fi
-
-# Divider + Block 5: Sprint
-if [ -n "$spr_part" ]; then
-    printf " ${overlay}│${reset} %s" "$spr_part"
-fi
-
-# Divider + Block 6: Weekly
-if [ -n "$wk_part" ]; then
-    printf " ${overlay}│${reset} %s" "$wk_part"
-fi
-
-printf "\n"
